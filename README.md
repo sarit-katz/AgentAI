@@ -98,3 +98,4 @@ node tools/build-index.mjs --check   # בדיקה בלבד; יוצא 1 אם הא
 [capabilities.html](capabilities.html). הפערים הפתוחים מרוכזים ב-
 [sources.html](sources.html) ובבלוקי `מידע חסר` בתחתית כל עמוד נושא.
 "# AgentAI" 
+"# AgentAI" 
