@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>יכולות: מה הוכח בפועל — בסיס ידע AI</title>
+<meta name="description" content="ויטרינת היכולות של בסיס הידע: מה נבנה והורץ כאן בפועל, מה נבחן ולא הופעל, ומה רק נקרא — כולל מה שלא נבדק.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html" aria-current="page">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">רוחבי · יכולות</span>
+      </nav>
+      <h1 style="max-width:24ch">מה הוכח בפועל — ומה רק נקרא</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">Capabilities · shipped / assessing / read-only</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          ויטרינת יכולות שמציגה רק הצלחות היא חומר שיווקי, ואי אפשר לעבוד לפיה. לכן העמוד הזה
+          מחולק לשלוש מדרגות שלא מתערבבות: <b>מה רץ כאן בפועל</b>, <b>מה נבחן ולא הופעל</b>,
+          ו<b>מה רק נקרא</b>. לכל שורה יש עמודה אחת שקובעת — איך זה נבדק.
+        </p>
+        <p>
+          האתר עצמו הוא הפריט הראשון ברשימה. הוא לא מסמך <span dir="ltr" class="lat">about</span>
+          אייג'נטים; הוא התוצר של אותה שיטה שהוא מתאר — תכנון לפני ביצוע, קונטקסט מנוהל,
+          ואימות בדפדפן אמיתי בסוף.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>עמודים</dt><dd>13</dd>
+        <dt>רכיבי הדגמה</dt><dd>9</dd>
+        <dt>תלויות npm</dt><dd>0</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="ladder">שלוש מדרגות של «יודעים»</h2>
+        <div class="prose">
+          <p>
+            ההבדל בין השלוש הוא לא ניואנס אקדמי — הוא ההבדל בין הבטחה שאפשר לתת ללקוח לבין
+            הבטחה שאי אפשר. הצבע והניסוח באתר הזה נגזרים ממדרגה, ולא מרמת ההתלהבות.
+          </p>
+        </div>
+        <div class="grid grid-3" style="margin-top:2rem">
+          <div class="mod">
+            <span class="num">01</span>
+            <h3>רץ כאן</h3>
+            <p>
+              הופעל על המכונה הזאת, ויש תוצר שאפשר לפתוח ולבדוק. זה מה שאפשר להתחייב עליו
+              בלי הסתייגות.
+            </p>
+            <p class="label label--dim" style="margin-top:.9rem">כל מה שבטבלה הראשונה</p>
+          </div>
+          <div class="mod">
+            <span class="num">02</span>
+            <h3>בהערכה</h3>
+            <p>
+              נקרא מול המקור הרשמי, מובן לעומק, פקודות ההתקנה נלקחו מה-README — אבל
+              <b>לא הורץ</b>. אין כאן ניסיון, יש הבנה.
+            </p>
+            <p class="label label--dim" style="margin-top:.9rem">Cognee · Graphiti · Graphify · Hermes Agent</p>
+          </div>
+          <div class="mod">
+            <span class="num">03</span>
+            <h3>נקרא בלבד</h3>
+            <p>
+              הגיע כחומר מקור, נרשם, טרם נבדק מול תיעוד רשמי או מול כתובת מאומתת. נאמר
+              בגלוי ולא מוצג כידע.
+            </p>
+            <p class="label label--dim" style="margin-top:.9rem">nanoclaw · Fabric Ontology · ARTEMIS</p>
+          </div>
+        </div>
+
+        <h2 id="ran">מדרגה 01 · מה רץ כאן בפועל</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>יכולות שהופעלו על המכונה הזאת, והבדיקה שאישרה אותן</caption>
+            <thead>
+              <tr><th>היכולת</th><th>מה נבנה</th><th>איך נבדק</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>בסיס ידע סטטי לחפיפה</td>
+                <td>13 עמודים, מסלול בגרות בשלוש רמות, בלי build step ובלי תלויות</td>
+                <td>נפתח מהדיסק ב-<code class="lat">file://</code>, כל הקישורים הפנימיים נבדקו</td>
+              </tr>
+              <tr>
+                <td>הפרדת דאטה מתצוגה</td>
+                <td>כל התוכן החוזר יושב ב-<code class="lat">site-data.js</code>; העמודים צורכים אותו</td>
+                <td>הוספת נושא דורשת רשומה אחת — נבדק על נושאי 04 ו-08</td>
+              </tr>
+              <tr>
+                <td>תשע הדגמות אינטראקטיביות</td>
+                <td>מחשבון קונטקסט, דיאגרמת multi-agent, דיאל אוטונומיה, סימולטור rings ועוד</td>
+                <td>הורצו בדפדפן: כל פקד הוזז, הפלט השתנה, אפס שגיאות <code class="lat">console</code></td>
+              </tr>
+              <tr>
+                <td>עברית RTL אמיתית</td>
+                <td>תכונות לוגיות ב-CSS, בידוד דו-כיווני לכל מקטע לטיני ולכל בלוק קוד</td>
+                <td>ב-375 / 768 / 1024 / 1440: <code class="lat">scrollWidth === clientWidth</code></td>
+              </tr>
+              <tr>
+                <td>שני מצבי תצוגה</td>
+                <td>כהה כברירת מחדל, בהיר מלא, נשמר ב-<code class="lat">localStorage</code></td>
+                <td>מעבר וריענון: הבחירה שרדה. ניגודיות נבדקה בשתי הערכות</td>
+              </tr>
+              <tr>
+                <td>חיפוש מקומי</td>
+                <td>אינדקס שנטען כ-script, כולל מונחי מילון וארגז הכלים</td>
+                <td>הרצה מהמקלדת דרך <kbd>/</kbd>, כולל קישור עוגן למונח בודד</td>
+              </tr>
+              <tr>
+                <td>אימות בדפדפן אמיתי</td>
+                <td>Chrome אמיתי דרך MCP — לא צילום מסך מדומיין</td>
+                <td>ארבעה רוחבי מסך, קריאת <code class="lat">console</code>, בדיקת DOM אחרי רינדור</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:1.5rem">
+          <span class="label">מה זה מדגים מעבר לאתר</span>
+          <p>
+            שהאימות נעשה בכלי, לא בהצהרה. אייג'נט שכותב «העמוד תקין» בלי לפתוח דפדפן מייצר
+            בדיוק את סוג הביטחון שאין לו כיסוי — וזה אותו כלל שמופיע כעקרון ב<a href="01-claude-md.html#do">נושא 01</a>.
+          </p>
+        </div>
+
+        <h2 id="demos">ההדגמות, ואיפה כל אחת יושבת</h2>
+        <div class="prose">
+          <p>
+            כל אחת מהן נבנתה כדי להסביר דבר אחד שטקסט לא מסביר טוב. הן לא קישוט: אם אפשר
+            להוריד אחת מהן והעמוד לא נחלש — היא לא הייתה צריכה להיות שם.
+          </p>
+        </div>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>תשעת רכיבי ההדגמה</caption>
+            <thead>
+              <tr><th>הרכיב</th><th>העמוד</th><th>מה רואים בעיניים</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>מחשבון כלכלת קונטקסט</td>
+                <td><a href="02-context-economy.html#demo-cost">02</a></td>
+                <td>למה turn 40 משלם על 39 שלפניו, ומה <code class="lat">/clear</code> חוסך</td>
+              </tr>
+              <tr>
+                <td>גרף context rot</td>
+                <td><a href="02-context-economy.html#demo-rot">02</a></td>
+                <td>צורת הירידה בדיוק כשה-input מתארך. סכמטי ומסומן ככזה</td>
+              </tr>
+              <tr>
+                <td>דיאגרמת multi-agent</td>
+                <td><a href="03-agent-architecture.html#demo-agents">03</a></td>
+                <td>מה נכנס לקונטקסט של כל סאב-אייג'נט ומה חוזר לראשי</td>
+              </tr>
+              <tr>
+                <td>דיאל אוטונומיה</td>
+                <td><a href="03-agent-architecture.html#demo-dial">03</a></td>
+                <td>מה שולח לבד ומה רק מכין, משבוע 1 עד חודש 3</td>
+              </tr>
+              <tr>
+                <td>עץ תיקיות נפתח</td>
+                <td><a href="03-agent-architecture.html#demo-tree">03</a> · <a href="07-company-brain.html#tree">07</a></td>
+                <td>מה נכנס לכל קובץ ולמה — שני מבנים שונים</td>
+              </tr>
+              <tr>
+                <td>סימולטור rings</td>
+                <td><a href="07-company-brain.html#demo-rings">07</a></td>
+                <td>אילו קבצים נטענים למשימה, ומה חוסם דגל <code class="lat">confidential</code></td>
+              </tr>
+              <tr>
+                <td>ארגז כלים מסונן</td>
+                <td><a href="05-toolbox.html#list">05</a></td>
+                <td>40 תוספות בחמש קטגוריות, כולל סינון חופשי</td>
+              </tr>
+              <tr>
+                <td>כרטיסי ספריות מומלצות</td>
+                <td><a href="05-toolbox.html#libs">05</a></td>
+                <td>מה הספרייה עושה, למה היא נבחרה, ופקודת ההתקנה להעתקה</td>
+              </tr>
+              <tr>
+                <td>רדאר מעקב</td>
+                <td>כאן, למטה</td>
+                <td>מה נמצא במעקב ובאיזה מצב — לפי אותו שדה דאטה</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="radar">מדרגה 02 · מה במעקב</h2>
+        <div class="prose">
+          <p>
+            חמישה פרויקטים שנכנסו למעקב אחרי שרשימת ארגז הכלים נסגרה. אף אחד מהם לא הופעל
+            כאן — הכרטיס אומר את זה במצב שלו, ולא בהערת שוליים.
+          </p>
+        </div>
+        <div data-radar="all" style="margin-top:2rem"></div>
+        <p class="source-note" style="margin-top:1.25rem">
+          שלוש הכרטיסיות של רמה 3 מפורטות ב<a href="08-memory-graphs.html#radar">נושא 08</a>,
+          ושתי כרטיסיות ה-runtime ב<a href="04-runtimes.html#radar">נושא 04</a>.
+        </p>
+
+        <h2 id="notran">מדרגה 03 · מה מוצג ולא נבדק</h2>
+        <div class="prose">
+          <p>
+            החלק שאת מסתכלת עליו ראשונה כשאת מקבלת תיעוד ממישהו אחר, ושברוב התיעודים לא כתוב
+            בכלל. כאן הוא כתוב.
+          </p>
+        </div>
+        <ol class="check">
+          <li>
+            <b>ARTEMIS — לא הורץ, ואין כתובת מאומתת</b>
+            <span>
+              המדדים (99%+ על AndroidWorld, 44% אצל Shopify) הם דיווח היצרן ומסומנים
+              <span class="claim">דיווח של Google · לא מדידה עצמאית</span>. כתובת ה-repo נמצאת
+              ברשימת <a href="sources.html#gaps">הקישורים להשלמה</a>.
+            </span>
+          </li>
+          <li>
+            <b>Fabric Ontology — תיאור מחומר מקור בלבד</b>
+            <span>
+              כל <a href="09-ontology.html">נושא 09</a> נגזר מהחומר שהובא, בלי אף קישור לתיעוד
+              רשמי. גם התיאור של Rayfin מוצג כציטוט ולא כעובדה.
+            </span>
+          </li>
+          <li>
+            <b>nanoclaw — שם ברשימה, לא יותר</b>
+            <span>
+              אין רישיון, אין בגרות, אין תיעוד שנקרא. הוא מופיע כדי שלא ייעלם, ומסומן
+              <code class="lat">unverified</code> בדאטה עצמו.
+            </span>
+          </li>
+          <li>
+            <b>מחירים בדולרים — לא נכתבו בכלל</b>
+            <span>
+              מחירון שנכתב מהזיכרון נראה אמין ומטעה חשבון שלם. מחשבון הקונטקסט עובד ביחידות
+              יחסיות של «טוקנים שנקראו», והמסקנה שלו — היכן העלות נוצרת — נשמרת בלי אף מספר דולרי.
+            </span>
+          </li>
+          <li>
+            <b>ה-skill של העיצוב — לפי הכללים, לא לפי הסקריפטים</b>
+            <span>
+              <code class="lat">ui-ux-pro-max</code> לא הותקן כאן: סקריפטי החיפוש שלו דורשים
+              Python 3 שאינו מותקן על המכונה. העיצוב נבנה לפי ה-checklist המפורסם שלו, וכל
+              בדיקה בו אומתה ידנית בדפדפן.
+            </span>
+          </li>
+        </ol>
+
+        <h2 id="stack">מה מרכיב את האתר</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>החלטות טכניות והמחיר של כל אחת</caption>
+            <thead>
+              <tr><th>ההחלטה</th><th>למה</th><th>מה זה עלה</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>בלי framework ובלי npm</td>
+                <td>שהאתר ייפתח בעוד שלוש שנים בלי <code class="lat">install</code> שנשבר</td>
+                <td>הכל נכתב ידנית — CSS, DOM, מצב</td>
+              </tr>
+              <tr>
+                <td>בלי <code class="lat">fetch()</code></td>
+                <td>Chrome חוסם קריאת קבצים מקומיים; הדאטה נטענת כ-script</td>
+                <td>אין טעינה מדורגת, הכל נטען מראש</td>
+              </tr>
+              <tr>
+                <td>קובץ CSS אחד</td>
+                <td>טוקנים במקום אחד, בלי ערך גלם מפוזר בעמודים</td>
+                <td>קובץ ארוך שדורש משמעת בסדר הסעיפים</td>
+              </tr>
+              <tr>
+                <td>דאטה אחת, שימוש מרובה</td>
+                <td>מילון, חיפוש, רדאר וארגז הכלים יונקים מאותו מקור</td>
+                <td>שינוי בסכמה מחייב בדיקה בכמה עמודים</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="next">מה הצעד הבא של מי שממשיך</h2>
+        <div class="prose">
+          <p>
+            לפי סדר תשואה, לא לפי סדר עניין. הראשון זול וחוסם את השאר; האחרון הוא פרויקט
+            שדורש החלטה על פלטפורמה.
+          </p>
+        </div>
+        <ol class="check">
+          <li>
+            <b>להשלים את שמונת הקישורים החסרים</b>
+            <span>
+              שעה של עבודה שמעלה את כל האתר מדרגה. הרשימה מוכנה ב<a href="sources.html#gaps">עמוד המקורות</a>.
+            </span>
+          </li>
+          <li>
+            <b>להקים מוח ארגוני מינימלי</b>
+            <span>
+              <code class="lat">CORE.md</code>, <code class="lat">MANIFEST.yaml</code> ו-validator אחד.
+              זה הצעד הזול ביותר עם ההשפעה הגדולה ביותר — <a href="07-company-brain.html#do">נושא 07</a>.
+            </span>
+          </li>
+          <li>
+            <b>להריץ Cognee או Graphiti על תחום אחד</b>
+            <span>
+              עם שלוש שאילתות אמיתיות שנבחרו מראש. בלעדיהן ההשוואה תהיה על הרגשה
+              — <a href="08-memory-graphs.html#do">נושא 08</a>.
+            </span>
+          </li>
+          <li>
+            <b>לסגור את שאלת ה-runtime</b>
+            <span>
+              Hermes Agent מול הרכבה ידנית. זו ההחלטה שהכי קשה להחליף אחר כך
+              — <a href="04-runtimes.html">נושא 04</a>.
+            </span>
+          </li>
+        </ol>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר</span>
+          <p>
+            <b>מה שאין:</b> העמוד הזה מתעד את מה שהוכח <b>בבניית בסיס הידע</b>, ולא את מדדי
+            ההרצה בסביבת הארגון — מספרי שימוש, חיסכון בפועל או הצלחות פרויקטליות לא נמדדו כאן
+            ולכן לא מופיעים.
+            <b>מה צריך להשלים:</b> (1) איזה מהנושאים כבר רץ בפרודקשן אצלנו ומי הבעלים;
+            (2) מדדים אמיתיים אם נמדדו — ומול איזה בסיס השוואה; (3) תקציב וגבולות רישוי;
+            (4) מי ממשיך להחזיק את האתר הזה אחרי החפיפה.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין עמודים">
+        <a href="09-ontology.html">
+          <span class="label label--dim">← הנושא האחרון</span>
+          <strong>09 · Fabric Ontology</strong>
+        </a>
+        <a href="glossary.html">
+          <span class="label label--dim">רוחבי</span>
+          <strong>מילון מונחים →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

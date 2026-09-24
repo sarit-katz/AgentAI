@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ארכיטקטורת multi-agent — בסיס ידע AI</title>
+<meta name="description" content="איך בונים chief-of-staff אישי: סאב-אייג'נט לכל מקור, אייג'נט מאחד אחד, ואוטונומיה שהיא דיאל ולא מפסק. כולל דיאגרמה חיה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 02 · בונים מערכות</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 03</span>
+      </nav>
+      <h1 style="max-width:20ch">ארכיטקטורת multi-agent</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">sub-agents · synthesizer · constitution.md · autonomy dial</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          לא אייג'נט אחד שעושה הכל, אלא סאב-אייג'נט לכל מקור, עם תפקיד צר אחד, שרצים במקביל —
+          ואייג'נט אחד שמאחד את הפלטים לתדריך אחד מתועדף. אם אי אפשר לצייר את החלוקה הזאת,
+          עוד לא הגיע הזמן לבנות.
+        </p>
+        <p>
+          הדוגמה כאן היא chief-of-staff אישי: אייג'נט שקורא דואר, יומן, משימות, מקורות חוץ ומערכות
+          פרטיות, ומגיש תדריך אחד במקום חמישה-עשר טאבים פתוחים. אבל המבנה עצמו כללי, וזה העיקר.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>02 / Systems</dd>
+        <dt>זמן קריאה</dt><dd>14 min</dd>
+        <dt>מה צריך לדעת קודם</dt><dd>01 + 02</dd>
+        <dt>הדגמה חיה</dt><dd>3 components</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            אייג'נט אחד שמנסה לקרוא דואר, לסרוק יומן, לבדוק משימות ולסכם חדשות מייצר שתי בעיות
+            באותו הרגע: הקונטקסט שלו מתמלא בדברים שלא קשורים אחד לשני, והפלט שלו הופך לסיכום
+            ארוך שאף אחד לא קורא. חלוקה לסאב-אייג'נטים פותרת את שתיהן — כל אחד רואה רק את מה
+            שהוא צריך, והפלט שלו קצר כי התפקיד שלו צר.
+          </p>
+          <p>
+            החלק השני, וזה מה שמבדיל מערכת שעובדת ממערכת שנשארת הדגמה, הוא <b>האוטונומיה</b>.
+            רוב האנשים מתייחסים אליה כמפסק: או שהאייג'נט שולח לבד, או שהוא רק מכין. בגלל זה
+            האייג'נטים שלהם נשארים סיכומים לנצח. זה בעצם דיאל — ומי שמסובב אותו קטגוריה בכל
+            פעם מגיע למקום אחר לגמרי אחרי שלושה חודשים.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>sub-agent · סאב-אייג'נט</dt>
+            <dd>אייג'נט משני עם מקור אחד ותפקיד אחד. רצים במקביל, ומחזירים פלט מובנה וקצר.</dd>
+          </div>
+          <div>
+            <dt>synthesizer agent · אייג'נט מאחד</dt>
+            <dd>
+              האייג'נט היחיד שרואה את כל הפלטים. התפקיד שלו הוא לא לאסוף אלא <b>לתעדף</b> —
+              להפוך חמישה דוחות לתדריך אחד עם סדר.
+            </dd>
+          </div>
+          <div>
+            <dt>constitution.md</dt>
+            <dd>
+              התפקיד שלך, העדיפויות, פרטי הארגון ומה להתעלם ממנו. בלי הקובץ הזה מקבלים פלט גנרי
+              — לא כי המודל חלש, אלא כי הוא לא יודע בשביל מי הוא עובד.
+            </dd>
+          </div>
+          <div>
+            <dt>autonomy dial · דיאל אוטונומיה</dt>
+            <dd>
+              אוטונומיה כדרגה, לא כמפסק. בשבוע הראשון כמעט הכל מחכה לאישור, ואחר כך משתחררת
+              קטגוריה אחת בכל פעם.
+            </dd>
+          </div>
+          <div>
+            <dt>MCP · Model Context Protocol</dt>
+            <dd>
+              מה שמחבר את האייג'נט למקורות אמיתיים: דואר, יומן, Notion, CRM, Stripe. כל server
+              פתוח צורך קונטקסט גם כשלא משתמשים בו.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="how">איך זה עובד</h2>
+        <div class="prose">
+          <p>
+            מתחילים מהארכיטקטורה, לא מהקוד. הדיאגרמה למטה היא בדיוק מה שצריך להיות מצויר על
+            הנייר לפני שנכתבת שורה אחת. לחיצה על צומת מראה מה התפקיד שלו, מה נכנס לקונטקסט שלו,
+            ומה חוזר לאייג'נט הראשי.
+          </p>
+        </div>
+
+        <div class="demo" style="margin-top:1.75rem" id="demo-agents">
+          <div class="demo__head">
+            <div>
+              <span class="label">הדגמה 01</span>
+              <h3>מי רואה מה</h3>
+            </div>
+            <span class="mono mono-dim" dir="ltr">click a node</span>
+          </div>
+          <div class="demo__body">
+            <div class="grid grid-2" style="align-items:start">
+              <div data-demo-agents><p class="muted">טוען…</p></div>
+              <div data-demo-agents-note class="tree-note"></div>
+            </div>
+          </div>
+          <div class="demo__foot">
+            הנקודה שהדיאגרמה מנסה להראות: לאף סאב-אייג'נט אין את הקונטקסט של האחרים, ולאייג'נט
+            הראשי לא חוזר המחקר — רק המסקנה. זו אותה הלוגיקה של
+            <a href="02-context-economy.html">כלכלת הקונטקסט</a>, בקנה מידה של מערכת.
+          </div>
+        </div>
+
+        <h2 id="build">מה עושים בפועל: שישה שלבים</h2>
+
+        <div class="grid grid-2" style="margin-top:2rem">
+          <div class="mod">
+            <span class="num">01</span>
+            <h3>מה האייג'נט עושה</h3>
+            <p>
+              מתחילים בארכיטקטורה ולא בקוד. סאב-אייג'נט אחד לכל מקור או משימה, כל אחד עם עבודה
+              צרה, במקביל. ואז אייג'נט מאחד אחד שמייצר תדריך אחד ומעביר אותו לאן שאת קוראת בפועל.
+              אם אי אפשר לצייר את החלוקה — לא בונים עדיין.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">02</span>
+            <h3>מבנה הפרויקט</h3>
+            <p>
+              הכל יושב בתיקייה קטנה: CLAUDE.md, constitution.md, skills תחת
+              <code>.claude/skills/</code>, ותיקיית <code>memory/</code>. CLAUDE.md טוען את ההוראות
+              לבד, כך שאין מה לחבר ידנית. מבנה משעמם הוא מה שהופך את זה לניתן לשחזור.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">03</span>
+            <h3>קבצי הליבה</h3>
+            <p>
+              שלושה קבצים עושים את העבודה: constitution.md (תפקיד, עדיפויות, פרטי הארגון, ומה
+              להתעלם ממנו), SKILL.md (איך אוספים, מאחדים ומעבירים), וחיבורי MCP לכלים. מדלגים
+              על החלק הזה — מקבלים ג'יבריש גנרי במקום פלט שימושי.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">04</span>
+            <h3>להריץ ידנית ולקרוא</h3>
+            <p>
+              פותחים את התיקייה, מחברים את הכלים, מריצים, וקוראים את הטיוטה לפני שמשהו יוצא.
+              האייג'נט יכול לנסח תשובות ולהכין פעולות — אבל את מחליטה, פריט אחר פריט, מה הוא
+              שולח לבד ומה הוא רק מכין.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">05</span>
+            <h3>לתזמן</h3>
+            <p>
+              רק אחרי שההרצות הידניות הרוויחו את האמון: ידני בזמן הבנייה, אחר כך cron מקומי,
+              ואחר כך רוטינה בענן שרצה בבוקר גם כשהלפטופ כבוי. מכאן הלופ עובד לבד — תדריך,
+              פידבק שלך, תדריך קצת יותר טוב מחר.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">06</span>
+            <h3>לשפר לאורך זמן</h3>
+            <p>
+              כאן זה מצטבר. נותנים לו זיכרון כדי שיזכור על מה את מדלגת, נותנים לו לעקוב אחרי
+              מה שאת מתעלמת ממנו, לנסח תשובות ולחסום זמן למעקב. הגרסה של חודש שלישי טובה יותר
+              לא כי המודל השתפר — אלא כי היא ראתה איך את מחליטה.
+            </p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:3rem">מבנה התיקייה</h3>
+        <div class="demo" style="margin-top:1.25rem" id="demo-tree">
+          <div class="demo__head">
+            <div>
+              <span class="label">הדגמה 02</span>
+              <h3>מה נכנס לכל קובץ, ולמה</h3>
+            </div>
+            <span class="mono mono-dim" dir="ltr">click a file</span>
+          </div>
+          <div class="demo__body">
+            <div class="grid grid-2" style="align-items:start">
+              <div class="tree" data-tree="chief"></div>
+              <div class="tree-note" data-tree-note="chief"></div>
+            </div>
+          </div>
+          <div class="demo__foot">
+            החלוקה בין CLAUDE.md ל-skills היא לא סגנון — היא כלכלה. CLAUDE.md נשלח בכל turn,
+            skill נטען כשהוא רלוונטי.
+          </div>
+        </div>
+
+        <div class="code" style="margin-top:2.5rem">
+          <div class="code__head">
+            <span class="code__label">constitution.md — השלד</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code># Constitution
+
+## Role
+Who I am, what I am accountable for, who I answer to.
+
+## Priorities, in order
+1. ...
+2. ...
+3. ...
+Anything not on this list is not urgent by default.
+
+## Organisation
+Teams, who owns what, who decides on what.
+
+## Ignore
+- Newsletters, unless they name one of the priorities above.
+- Internal FYI threads with no ask.
+- Anything already handled by someone named here.
+
+## Tone
+How I write to clients. How I write internally.
+Two real examples pasted below, not a description.</code></pre>
+        </div>
+
+        <h2 id="dial">הדגמה: האוטונומיה היא דיאל</h2>
+        <div class="demo" style="margin-top:1.5rem" id="demo-dial">
+          <div class="demo__head">
+            <div>
+              <span class="label">הדגמה 03</span>
+              <h3>מה רץ לבד, ומה מחכה לך</h3>
+            </div>
+            <span class="mono mono-dim" dir="ltr">drag the dial</span>
+          </div>
+          <div class="demo__body" data-demo-dial><p class="muted">טוען…</p></div>
+          <div class="demo__foot">
+            הקריטריון להזזת הדיאל הוא לא "כמה זמן זה חוסך" אלא <b>כמה יקר לבטל את הפעולה</b>.
+            תיוג דואר אפשר לבטל בקליק, מייל שיצא ללקוח — לא.
+          </div>
+        </div>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מה שובר מערכות multi-agent בפועל</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>להתחיל מהקוד</td>
+                <td>נבנית מערכת שקשה להסביר, ואי אפשר לדעת איפה היא טועה</td>
+                <td>לצייר את החלוקה קודם. אם אי אפשר לצייר — הבעיה עוד לא מוגדרת</td>
+              </tr>
+              <tr>
+                <td>בלי constitution.md</td>
+                <td>הפלט גנרי ונכון־בכלליות. שימושי לאף אחד</td>
+                <td>תפקיד, עדיפויות, פרטי ארגון, ומה להתעלם ממנו — במפורש</td>
+              </tr>
+              <tr>
+                <td>אייג'נט מאחד שמסכם במקום לתעדף</td>
+                <td>מקבלים חמישה סיכומים מודבקים. זה לא תדריך</td>
+                <td>להגדיר לו סדר תעדוף מפורש, ותקרה: מה המספר המקסימלי של פריטים</td>
+              </tr>
+              <tr>
+                <td>לתזמן לפני שההרצה הידנית עבדה</td>
+                <td>הוא רץ כל בוקר ומייצר משהו שאת לא קוראת</td>
+                <td>ידני עד שאת סומכת. אחר כך cron. אחר כך ענן</td>
+              </tr>
+              <tr>
+                <td>אוטונומיה כמפסק</td>
+                <td>או שהוא נשאר סיכום לנצח, או שהוא שולח משהו שלא היה צריך לצאת</td>
+                <td>קטגוריה בכל פעם, לפי כמה יקר לבטל</td>
+              </tr>
+              <tr>
+                <td>בלי <code>memory/</code></td>
+                <td>הוא מציע כל שבוע את מה שדחית שלוש פעמים</td>
+                <td>לתעד מה נדחה. זה מה שמייצר את השיפור בחודש השלישי</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <ol class="check">
+          <li>
+            <b>את יכולה לצייר את החלוקה בלי להסביר במילים?</b>
+            <span>מקורות, סאב-אייג'נטים, מאחד, מסירה. אם הציור לא יוצא, הבעיה עוד לא מוגדרת — וזה לא שלב הבנייה.</span>
+          </li>
+          <li>
+            <b>מה הפורמט של הפלט, במדויק?</b>
+            <span>"תדריך מתועדף" זו לא הגדרה. כמה פריטים, באיזה סדר, ומה נכנס לכל פריט — זו הגדרה.</span>
+          </li>
+          <li>
+            <b>איזו פעולה יהיה זול לבטל?</b>
+            <span>זה הסדר שבו הדיאל מסתובב. לא מהחוסך ביותר — מהזול ביותר לתקן.</span>
+          </li>
+          <li>
+            <b>איפה נשמר מה שהוא למד עליך?</b>
+            <span>אם התשובה היא "בשיחה" — זה נעלם. <code>memory/</code> הוא מה שהופך אותו למשתפר ולא רק לקבוע.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>כמה סאב-אייג'נטים זה יותר מדי?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              הגבול הוא לא מספר אלא חפיפה: אם לשני סאב-אייג'נטים יש אותו מקור או אותה החלטה,
+              הם צריכים להיות אחד. ולהיפך — סאב-אייג'נט שצריך שני מקורות כדי לענות הוא בעצם שניים.
+              בפועל, מקור אחד לכל אחד עובד טוב.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>המאחד לא הופך לצוואר בקבוק?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              הוא נקודת ריכוז בכוונה, וזה בסדר כל עוד הפלטים שמגיעים אליו קצרים ומובנים. אם הוא
+              נחנק — הבעיה כמעט תמיד למעלה: סאב-אייג'נט שמחזיר טקסט חופשי ארוך במקום רשימה
+              מובנית קצרה.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אפשר להריץ סאב-אייג'נטים על מודל זול יותר?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              כן, וזה אחד מהמנופים מ<a href="02-context-economy.html">נושא 02</a>: שורה
+              <code>model: haiku</code> בקובץ של הסאב-אייג'נט עצמו. אוספים ומסננים לא חייבים את
+              המודל החזק; התעדוף — כן.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אם כל הידע הארגוני נדרש לכמה אייג'נטים, איפה הוא יושב?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              לא ב-constitution.md של כל אייג'נט, כי אז אותן עובדות מועתקות לכמה מקומות שנפרדים
+              בהדרגה. זה בדיוק מה שמוח ארגוני נועד לפתור —
+              <a href="07-company-brain.html">נושא 07</a>.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">מדריך בניית chief-of-staff אישי</p>
+            <p class="source-note">ששת השלבים והתפיסה של האוטונומיה כדיאל. הקישור המדויק להשלמה.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">Claude Code prompt library · Anthropic</p>
+            <p class="source-note"><a class="lat" href="https://code.claude.com/docs/en/prompt-library" target="_blank" rel="noopener">code.claude.com/docs/en/prompt-library</a></p>
+          </li>
+        </ul>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר</span>
+          <p>
+            ההערכה "3—5 שעות בשבוע" הופיעה במקור כטענה של מי שבנה את המערכת, ולכן היא לא מופיעה
+            כאן כמדד. <b>מה צריך להשלים:</b> מדידה אחת שלנו — כמה זמן באמת חסך התדריך בחודש
+            הראשון, ועל בסיס איזו השוואה. בלי זה זו תחושה, לא נתון.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="02-context-economy.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>02 · כלכלת קונטקסט</strong>
+        </a>
+        <a href="04-runtimes.html">
+          <span class="label label--dim">הנושא הבא · רמה 02</span>
+          <strong>04 · Agent runtimes →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

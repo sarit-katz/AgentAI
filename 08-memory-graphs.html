@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>זיכרון ארגוני וגרפי ידע: Cognee, Graphiti ו-Graphify — בסיס ידע AI</title>
+<meta name="description" content="מתי ידע בקבצים לא מספיק: גרף ידע נותן קשרים, גרף טמפורלי מוסיף ציר זמן, וגרף מהקוד עונה מה מחובר למה. Cognee, Graphiti ו-Graphify — מה כל אחד עושה, ומה צריך לבדוק לפני החלטה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 03 · רמה ארגונית</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 08</span>
+      </nav>
+      <h1 style="max-width:22ch">כשהידע צריך גם קשרים וגם ציר זמן</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">knowledge graph · temporal · AST · Cognee · Graphiti · Graphify</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          מוח ארגוני בקבצים נותן דבר אחד שאין לו תחליף: <b>דטרמיניזם</b> — אותה משימה מקבלת אותו
+          קונטקסט, ואפשר לעשות על זה code review. מה שאין לו זה קשרים («מי מחובר למה») ותנועה
+          בזמן («מתי זה היה נכון»).
+        </p>
+        <p>
+          <b>Cognee</b> בונה גרף ידע מהדאטה שלך ומגיש אותו לאייג'נט דרך MCP. <b>Graphiti</b>
+          מוסיף את הממד שחסר בזיכרון ארגוני: חלון תוקף לכל עובדה. <b>Graphify</b> עושה את אותו
+          דבר על הקוד והמסמכים — בפרסינג AST מקומי, בלי אחזור וקטורי. שלושתם משלימים את המוח
+          בקבצים, לא מחליפים אותו — וכרגע שלושתם <b>בהערכה אצלנו, לא בהרצה</b>.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>03 / Organizational</dd>
+        <dt>זמן קריאה</dt><dd>13 דקות</dd>
+        <dt>מה צריך לדעת קודם</dt><dd><a href="07-company-brain.html">נושא 07</a></dd>
+        <dt>מצב</dt><dd>בהערכה</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            החפיפה הזאת היא ההדגמה הטובה ביותר לבעיה. הידע שעובר בה הוא לא רשימת קבצים — הוא רשת
+            של קשרים: מי הגיש את ההצעה ההיא, למה נבחר הספק הזה ולא האחר, איזו החלטה בוטלה בגלל
+            איזו התנגדות, ומי האדם שאם לא שואלים אותו הפרויקט נתקע. קובץ markdown מחזיק עובדה.
+            הוא לא מחזיק את השאלה «מה עוד קשור לזה».
+          </p>
+          <p>
+            הבעיה השנייה חמורה יותר, ופחות מדברים עליה: <b>עובדות בארגון לא נכונות לנצח</b>. הן
+            נכונות עד שמשהו השתנה. מערכת שמחזיקה רק את המצב הנוכחי לא יודעת להבדיל בין «זה
+            השתנה בחודש שעבר» לבין «זה היה לא נכון מהתחלה» — וההבדל הזה הוא בדיוק מה שמכריע אם
+            אפשר לסמוך על תשובה של אייג'נט. גרף ידע עונה על הראשונה. גרף טמפורלי עונה על השנייה.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>knowledge graph · גרף ידע</dt>
+            <dd>
+              ייצוג של ישויות והקשרים ביניהן, במקום טקסט חופשי או טבלאות. מאפשר לשאול «מה מחובר
+              למה», ולא רק «מה דומה למה» כמו באחזור וקטורי.
+            </dd>
+          </div>
+          <div>
+            <dt>temporal knowledge graph · גרף עם ציר זמן</dt>
+            <dd>
+              גרף שכל עובדה בו נושאת גם את הזמן שבו הייתה נכונה. זה מה שמאפשר לענות «מה היה
+              המחירון במרץ» ולא רק «מה המחירון».
+            </dd>
+          </div>
+          <div>
+            <dt>bi-temporal · שני צירי זמן</dt>
+            <dd>
+              הפרדה בין <b>מתי הדבר היה נכון בעולם</b> לבין <b>מתי המערכת למדה עליו</b>. ההפרדה
+              הזאת היא מה שמאפשר לתקן היסטוריה בלי לשקר לגביה.
+            </dd>
+          </div>
+          <div>
+            <dt>provenance · מקוריות</dt>
+            <dd>
+              שמירת המסלול מהעובדה בגרף חזרה למקור שממנו נגזרה. בלי זה, גרף ידע הוא עוד מקום
+              שאפשר לצטט ממנו בלי לדעת על מה זה מבוסס.
+            </dd>
+          </div>
+          <div>
+            <dt>organizational memory · זיכרון ארגוני</dt>
+            <dd>
+              הידע שהארגון מחזיק מעבר לראש של אדם אחד: החלטות, הקשרים, ומה שנוסה ולא עבד. זה
+              בדיוק מה שנשבר כשאדם עובר תפקיד.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="how">איך זה עובד: ארבע שכבות, לא ארבע אפשרויות</h2>
+        <div class="prose">
+          <p>
+            הדרך הנכונה להסתכל על זה היא לא «קבצים או גרף» אלא שכבות שעונות על שאלות שונות.
+            הטבלה הזאת היא ההחלטה המעשית — איזו שאלה שואלים, ומי אמור לענות עליה.
+          </p>
+        </div>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>ארבע שכבות זיכרון והשאלה שכל אחת עונה עליה</caption>
+            <thead>
+              <tr><th>השכבה</th><th>השאלה שהיא עונה</th><th>מה היא לא נותנת</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>מוח בקבצים · <a href="07-company-brain.html">rings</a></td>
+                <td>מה נכון עכשיו, ומה צריך להיכנס לקונטקסט למשימה הזאת</td>
+                <td>קשרים בין ישויות, והיסטוריה מעבר ל-git log</td>
+              </tr>
+              <tr>
+                <td>גרף ידע · Cognee</td>
+                <td>מה מחובר למה: לקוח, פרויקט, החלטה, אדם, מסמך</td>
+                <td>דטרמיניזם מוכרז — מה שנטען נגזר משאילתה, לא מחוזה</td>
+              </tr>
+              <tr>
+                <td>גרף טמפורלי · Graphiti</td>
+                <td>מה היה נכון מתי, ומה השתנה מאז</td>
+                <td>תחליף למוח: הוא מודל נתונים, לא מקור האמת הכתוב</td>
+              </tr>
+              <tr>
+                <td>גרף מהקוד ומהמסמכים · Graphify</td>
+                <td>מה קורא למה בקוד שלנו, ואיזה מסמך או סכמה קשור לאיזה רכיב</td>
+                <td>ידע ארגוני שלא כתוב באף קובץ — החלטות, הקשרים ואנשים</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cognee">Cognee: גרף ידע שהאייג'נט מחפש בו</h2>
+        <div class="prose">
+          <p>
+            Cognee היא פלטפורמת זיכרון בקוד פתוח (רישיון Apache-2.0) שממירה מסמכים, קוד ושיחות
+            לגרף ידע <b>self-hosted</b>, שהאייג'נט מחפש בו ומאחזר ממנו בין שיחות. מה שהופך אותה
+            רלוונטית מיד ולא בעוד שנה: היא חושפת <b>MCP server</b>, ולכן היא נכנסת לאייג'נט
+            הקיים כחיבור — ולא כשכתוב מחדש של המערכת.
+          </p>
+          <p>
+            בהקשר של החפיפה הזאת היא בעצם הגרסה הגרפית של אותה בעיה שהמוח הארגוני פותר בקבצים:
+            להביא לאייג'נט את הידע <b>הארגוני</b>, ולא רק את הקוד.
+          </p>
+        </div>
+        <div class="code" style="margin-top:1.75rem">
+          <div class="code__head">
+            <span class="code__label">cognee · install</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code>uv pip install "cognee[gliner]"</code></pre>
+        </div>
+        <p class="source-note" style="margin-top:.85rem">
+          הפקודה, הרישיון והתיאור נלקחו מה-README של
+          <a class="lat" href="https://github.com/topoteretes/cognee" target="_blank" rel="noopener">github.com/topoteretes/cognee</a>
+          ב-22.09.2026.
+        </p>
+        <div class="note" style="margin-top:1.5rem">
+          <span class="label">מה ש-self-hosted אומר בפועל</span>
+          <p>
+            שהגרף שלך נשאר אצלך — וגם שהתחזוקה שלו שלך: בסיס נתונים, גרסאות, גיבוי ושדרוגים.
+            זו לא הערה טכנית קטנה, זו ההחלטה: <b>מי אצלנו יחזיק את זה בעוד חצי שנה</b>.
+          </p>
+        </div>
+
+        <h2 id="graphiti">Graphiti: הזמן כחלק ממודל הנתונים</h2>
+        <div class="prose">
+          <p>
+            Graphiti (גם היא Apache-2.0) היא framework לגרפי קונטקסט <b>טמפורליים</b>
+            לאייג'נטים. שני הדברים שמייחדים אותה, לפי התיעוד שלה: כל עובדה מוחזקת עם
+            <b>חלון תוקף דו-זמני</b>, ולכל עובדה יש <b>provenance</b> שמחזיר אותה לאפיזודת המקור
+            שממנה נגזרה. יש בה תמיכה ב-Neo4j, ב-FalkorDB וב-Amazon Neptune, וה-repo כולל תיקיית
+            <code>mcp_server</code>.
+          </p>
+          <p>
+            זה הרכיב היחיד בשתי הרשימות שמודל הנתונים שלו <b>מכיר בכך שעובדות מתיישנות</b> —
+            וזה בדיוק מה שחסר בזיכרון ארגוני. אצלנו זה מופיע כבר במוח בקבצים בצורה מינימלית, כ-
+            <code>verified_on</code> ו-<code>review_every</code>; Graphiti מעבירה את הרעיון הזה
+            מהערת מטא לתוך השאילתה.
+          </p>
+        </div>
+        <div class="code" style="margin-top:1.75rem">
+          <div class="code__head">
+            <span class="code__label">graphiti-core · install</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code>pip install graphiti-core</code></pre>
+        </div>
+        <p class="source-note" style="margin-top:.85rem">
+          מתוך ה-README של
+          <a class="lat" href="https://github.com/getzep/graphiti" target="_blank" rel="noopener">github.com/getzep/graphiti</a>
+          ב-22.09.2026. שם גם מסומן ש-Kuzu הוא deprecated. הנתון של 31.1K כוכבים שהגיע בחומר
+          המקור נבדק באותו יום מול GitHub API והוא נכון: 31,076.
+        </p>
+
+        <h2 id="graphify">Graphify: גרף מהקוד ומהמסמכים, בלי אחזור וקטורי</h2>
+        <div class="prose">
+          <p>
+            שלוש הראשונות עוסקות בידע <b>ארגוני</b>. Graphify (Apache-2.0) עוסקת בידע שכבר קיים
+            אצלנו כטקסט ואף אחד לא מצליח לתחקר אותו: הקוד עצמו, יחד עם ה-docs, סכמות ה-SQL,
+            קובצי הקונפיג וה-PDF-ים שסביבו. היא ממפה את כל אלה לגרף ידע שאפשר לשאול אותו שאלות,
+            והיא נכנסת כ-<code>/graphify</code> skill ל-Claude Code, Cursor, Codex ו-Gemini CLI,
+            או כ-MCP server.
+          </p>
+          <p>
+            שני הדברים שמייחדים אותה לפי התיעוד שלה הם דווקא מה שהיא <b>לא</b> עושה. הפרסינג הוא
+            <b>AST מקומי ודטרמיניסטי</b> ולא הסקה של מודל — כלומר אותו repo מחזיר אותו גרף, ואפשר
+            לעשות על זה code review. ו<b>אין vector store</b>: כל קשת בגרף מגיעה עם הסבר למה היא
+            שם, במקום ציון דמיון שאי אפשר לערער עליו. זו אותה העדפה לדטרמיניזם שמופיעה כאן לאורך
+            כל המסלול — הפעם על הקוד.
+          </p>
+          <p>
+            למה זה רלוונטי לחפיפה ולא רק לפיתוח: מי שמקבל repo שלא הוא כתב שואל «מה יישבר אם אשנה
+            את זה», ולזה אחזור וקטורי לא עונה — הוא מחזיר קטעים דומים, לא מסלול קריאות.
+          </p>
+        </div>
+        <div class="code" style="margin-top:1.75rem">
+          <div class="code__head">
+            <span class="code__label">graphify · install &amp; MCP</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code>pip install graphifyy
+graphify install
+
+# MCP stdio server, scoped to one folder
+graphify ./raw --mcp</code></pre>
+        </div>
+        <p class="source-note" style="margin-top:.85rem">
+          הפקודות, הרישיון והתיאור נלקחו מה-README ומ-GitHub API של
+          <a class="lat" href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener">Graphify-Labs/graphify</a>
+          ב-22.09.2026: Apache-2.0, Python, 120,433 כוכבים, דורש Claude Code ו-Python 3.10 ומעלה.
+          בהתקנה הידנית שב-README מופיעה כתובת אחרת (<code>safishamsi/graphify</code>) — כנראה
+          הבעלים הקודם של ה-repo, ולכן לא העתקתי אותה לכאן כפקודה.
+        </p>
+        <div class="note note--gap" style="margin-top:1.5rem">
+          <span class="label">מידע חסר · Graphify</span>
+          <p>
+            <b>מה שאין:</b> הפרויקט נקרא ולא הורץ, ולכן אין לנו נתון על זמן הפרסינג, על גודל הגרף
+            או על איכות התשובות בקוד שלנו. <b>מה צריך להשלים:</b> (1) האם המדיניות שלנו מתירה
+            להרשות ל-skill לקרוא repo שלם; (2) איזה repo נבחר לבדיקה הראשונה; (3) מה קורה לקוד
+            חסוי — כמו בשאר הגרפים בעמוד הזה, מה שלא הוחלט במפורש ייכנס.
+          </p>
+        </div>
+
+        <h2 id="watch">מה במעקב</h2>
+        <div class="prose">
+          <p>
+            שלוש השורות האלה נגזרות מאותו קובץ דאטה של כל האתר, כדי שמצב ההערכה יהיה כתוב במקום
+            אחד ולא בשלושה עמודים.
+          </p>
+        </div>
+        <div id="radar" data-radar="08-memory-graphs.html" style="margin-top:1.75rem"></div>
+
+        <h2 id="do">מה עושים בפועל</h2>
+        <div class="prose">
+          <p>
+            הטעות הצפויה כאן היא להתחיל בהתקנה. גרף ידע מרשים תוך יומיים ומחליד תוך חודש, אם אין
+            שאילתה אמיתית שמישהו צריך תשובה עליה. הסדר הזה הופך הערכה לבדיקה עם פסק דין.
+          </p>
+        </div>
+        <ol class="check">
+          <li>
+            <b>לכתוב שלוש שאלות אמיתיות לפני כל התקנה</b>
+            <span>
+              שאלות שנשאלו בפועל בחודש האחרון ושהמוח בקבצים לא עונה עליהן — למשל «מה הבטחנו
+              ללקוח הזה לפני שנה, ומי אישר». אם אין שלוש כאלה, אין מה להעריך עדיין.
+            </span>
+          </li>
+          <li>
+            <b>להריץ על קורפוס מוגבל</b>
+            <span>
+              תחום אחד, לא הארגון. מספיק כדי שהגרף יהיה מעניין, קטן מספיק כדי שאפשר לבדוק ידנית
+              אם התשובה נכונה. בלי הבדיקה הידנית אין דרך לדעת אם הגרף צודק.
+            </span>
+          </li>
+          <li>
+            <b>לבדוק את שאלת הזמן במפורש</b>
+            <span>
+              לשנות עובדה, ואז לשאול גם על המצב הנוכחי וגם על המצב הקודם. זה המבחן שמפריד בין
+              גרף טמפורלי לגרף שרק מעדכן את עצמו.
+            </span>
+          </li>
+          <li>
+            <b>לחבר דרך MCP ולא לכתוב מחדש</b>
+            <span>
+              שלוש המערכות נכנסות כ-server. זו הדרך היחידה לבדוק אותן בלי להתחייב ארכיטקטונית
+              לפני שיש תשובה — וזה גם מה שמאפשר להוציא אותן בלי שריטה.
+            </span>
+          </li>
+          <li>
+            <b>לכתוב פסק דין בקובץ</b>
+            <span>
+              נשאר או יוצא, ולמה. מי שמגיע אחרייך צריך לדעת שהדבר הזה נבחן ומה נמצא — אחרת
+              הבדיקה תיעשה שוב מאפס.
+            </span>
+          </li>
+        </ol>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>איפה פרויקטי גרף ידע נתקעים</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>גרף בלי שאלה</td>
+                <td>נבנה גרף מרשים, ואף אחד לא שואל אותו כלום. אחרי חודש הוא לא מעודכן</td>
+                <td>שלוש שאילתות אמיתיות לפני ההתקנה</td>
+              </tr>
+              <tr>
+                <td>הגרף כמקור האמת</td>
+                <td>אמת שנגזרה אוטומטית הופכת למקור שמצטטים, בלי אישור אנושי</td>
+                <td>מקור האמת נשאר הקבצים בגרסאות. הגרף הוא שכבת שאילתה</td>
+              </tr>
+              <tr>
+                <td>ידע חסוי שנכנס לגרף</td>
+                <td>הדגלים שהוכרזו ב-MANIFEST לא עוברים לגרף, והחסוי נשלף בשאילתה</td>
+                <td>להחליט מה לא נכנס לגרף בכלל — לפני ההזנה הראשונה</td>
+              </tr>
+              <tr>
+                <td>self-hosted בלי בעל בית</td>
+                <td>בסיס נתונים שרץ בלי גיבוי ובלי שדרוגים, עד התקלה הראשונה</td>
+                <td>שם של אדם, או שלא מריצים. זה תנאי, לא המלצה</td>
+              </tr>
+              <tr>
+                <td>להחליף את המוח בגרף</td>
+                <td>מאבדים דטרמיניזם וביקורת, ומקבלים תשובות שקשה לשחזר</td>
+                <td>גרף מעל ring 2 — הארכיון. לא מתחת ל-ring 0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <ol class="check">
+          <li>
+            <b>יש שאלה שהמוח בקבצים לא עונה עליה?</b>
+            <span>אם כל השאלות הן «מה נכון עכשיו» — לא צריך גרף. הגרף מתחיל להשתלם בשאלות של קשרים ושל היסטוריה.</span>
+          </li>
+          <li>
+            <b>הזמן הוא ממד אמיתי אצלכם?</b>
+            <span>אם צריך לדעת מה היה נכון מתי — זה מפנה ל-Graphiti. אם רק «מה מחובר למה» — Cognee מספיקה. ואם השאלה היא על הקוד והמסמכים ולא על הארגון — Graphify.</span>
+          </li>
+          <li>
+            <b>מי מריץ את בסיס הנתונים?</b>
+            <span>self-hosted הוא החלטת תחזוקה. בלי שם של אדם זה פרויקט שמסתיים בשקט.</span>
+          </li>
+          <li>
+            <b>מה קורה לידע החסוי?</b>
+            <span>הדגלים מה-MANIFEST לא עוברים לבד לשכבה החדשה. מה שלא הוחלט במפורש — ייכנס.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אז מה עדיף — Cognee או Graphiti?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              הן לא עונות על אותה שאלה. Cognee היא פלטפורמת זיכרון: קולטת מסמכים, קוד ושיחות,
+              ובונה מהם גרף שהאייג'נט מחפש בו. Graphiti היא framework לגרף שהזמן הוא חלק ממודל
+              הנתונים שלו. אם השאלה היא «מה מחובר למה» — Cognee. אם השאלה היא «מה היה נכון
+              מתי» — Graphiti. בשלב ההערכה אין סיבה לבחור לפני שיש שלוש שאילתות אמיתיות.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>Graphify ו-Graphiti — זה לא אותו פרויקט?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              לא, ושתי הכתובות נבדקו בנפרד ב-22.09.2026. <b>Graphiti</b> הוא
+              <a class="lat" href="https://github.com/getzep/graphiti" target="_blank" rel="noopener">getzep/graphiti</a>
+              — גרף קונטקסט טמפורלי לאייג'נטים, מעל Neo4j או FalkorDB.
+              <b>Graphify</b> הוא
+              <a class="lat" href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener">Graphify-Labs/graphify</a>
+              — skill שהופך codebase ומסמכים לגרף בפרסינג AST מקומי, בלי vector store. שניהם
+              Apache-2.0, שניהם פעילים, ואף אחד מהם לא שינה שם או עבר לאחר. דמיון השם הוא בדיוק
+              סוג הטעות שבגללה אין באתר הזה כתובת שנכתבה מהזיכרון.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>זה לא בסך הכל RAG עם שם אחר?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              לא. RAG מחזיר קטעי טקסט דומים סמנטית לשאילתה. גרף ידע מחזיק ישויות וקשרים, ולכן
+              אפשר לעבור בו מסלול — מלקוח להחלטה, מהחלטה למי שאישר אותה. בפועל השילוב נפוץ:
+              הגרף לקשרים, אחזור וקטורי לטקסט עצמו. ההשוואה המלאה בין חוזה טעינה לבין אחזור
+              נמצאת ב<a href="07-company-brain.html#vs-rag">נושא 07</a>.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אפשר להתחיל בלי גרף בכלל?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              כן, וזו גם ההמלצה כאן. ארבעה קבצי עובדות עם <code>verified_on</code> פותרים את רוב
+              הכאב בשבריר המאמץ. גרף נכנס כשמצטברות שאלות שאי אפשר לענות עליהן בקובץ — ואז הוא
+              נכנס עם שאילתה מוגדרת ועם בעל בית.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>מה הסטטוס אצלנו, בלי עיגולי פינות?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              שלושתן נקראו ונותחו. <b>אף אחת מהן לא הורצה כאן.</b> מה שכתוב בעמוד הזה נלקח
+              מהתיעוד של הפרויקטים ב-22.09.2026, ולא ממדידה שלנו. עמוד
+              <a href="capabilities.html">היכולות</a> מחזיק את אותה הפרדה בצורה מסודרת.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">cognee · topoteretes · Apache-2.0</p>
+            <p class="source-note">
+              <a class="lat" href="https://github.com/topoteretes/cognee" target="_blank" rel="noopener">github.com/topoteretes/cognee</a>
+              — פלטפורמת זיכרון וגרף ידע self-hosted, חושפת MCP server.
+            </p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">graphiti · getzep · Apache-2.0</p>
+            <p class="source-note">
+              <a class="lat" href="https://github.com/getzep/graphiti" target="_blank" rel="noopener">github.com/getzep/graphiti</a>
+              — גרף קונטקסט טמפורלי עם חלונות תוקף דו-זמניים; כולל <code>mcp_server</code>.
+              31,076 כוכבים לפי GitHub API ב-22.09.2026.
+            </p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">graphify · Graphify-Labs · Apache-2.0</p>
+            <p class="source-note">
+              <a class="lat" href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener">github.com/Graphify-Labs/graphify</a>
+              — גרף ידע מקוד וממסמכים בפרסינג AST מקומי, בלי vector store; skill ו-MCP server.
+              120,433 כוכבים לפי GitHub API ב-22.09.2026. אתר הפרויקט:
+              <a class="lat" href="https://www.graphify.com" target="_blank" rel="noopener">graphify.com</a>
+            </p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">המוח הארגוני בקבצים</p>
+            <p class="source-note">ההשוואה בעמוד הזה נשענת על <a href="07-company-brain.html">נושא 07</a> ועל הטמפלייט שמצוין שם.</p>
+          </li>
+        </ul>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר</span>
+          <p>
+            <b>מה שלא נעשה:</b> אף אחת מהמערכות לא הורצה, ולכן אין כאן שום נתון ביצועים, עלות או
+            איכות מדידה שלנו. <b>מה צריך להשלים:</b> (1) שלוש השאילתות האמיתיות שההערכה תיבחן
+            מולן; (2) מי מחזיק את בסיס הנתונים; (3) האם ידע חסוי נכנס לגרף בכלל — החלטה שדורשת
+            אישור; (4) גרסאות מדויקות שנבדקו, ותאריך הבדיקה, כדי שהפסק דין יהיה בר-שחזור.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="07-company-brain.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>07 · Company Brain</strong>
+        </a>
+        <a href="09-ontology.html">
+          <span class="label label--dim">הנושא הבא · רמה 03</span>
+          <strong>09 · Fabric Ontology →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

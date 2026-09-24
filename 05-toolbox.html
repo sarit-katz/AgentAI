@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ארגז הכלים: 40 תוספות — בסיס ידע AI</title>
+<meta name="description" content="40 תוספות ל-Claude Code בחמש קטגוריות, עם סינון וחיפוש, והכלל שחוזר: אחד בכל פעם, על משימה אמיתית, לפני שמוסיפים את הבא.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 02 · בונים מערכות</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 05</span>
+      </nav>
+      <h1 style="max-width:20ch">ארגז הכלים: מה מוסיפים, ובאיזה סדר</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">40 additions · skills · MCP · plugins · memory</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          ארבעים תוספות ל-Claude Code, בחמש קטגוריות: בניית workflow, הוספת skills, שמירת קונטקסט,
+          חיבור כלים, ופרומפטים ושימוש. הרשימה עצמה שימושית, אבל הכלל שמלווה אותה חשוב ממנה:
+          <b>אחד בכל פעם, על משימה אמיתית, לפני שמוסיפים את הבא</b>.
+        </p>
+        <p>
+          הסיבה לכלל היא לא משמעת אלא מדידה. אם מתקינים שישה דברים בערב אחד, ואז העבודה מרגישה
+          טובה יותר, אין דרך לדעת מי מהם עשה את זה — ומי מהם רק מוסיף קונטקסט לכל turn.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>02 / Systems</dd>
+        <dt>זמן קריאה</dt><dd>9 min</dd>
+        <dt>מה צריך לדעת קודם</dt><dd><a href="01-claude-md.html">נושא 01</a></dd>
+        <dt>פריטים</dt><dd>40 / 5 categories</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            התקנה ברירת המחדל של Claude Code היא בסיס, לא תקרה. הפער בין מי שעובד איתו שנה למי
+            שהתחיל אתמול הוא בעיקר הפער הזה: skills שמכילים את הדרך שבה עובדים כאן, MCP servers
+            שמחברים למקורות אמיתיים, וכלים שמצמצמים את מה שהמודל צריך לקרוא.
+          </p>
+          <p>
+            אבל לכל תוספת יש מחיר, וברוב המקרים הוא נמדד בקונטקסט. MCP server פתוח תופס מקום גם
+            כשלא משתמשים בו. skill שנטען תמיד הוא בעצם CLAUDE.md מורחב. לכן הרשימה הזאת היא לא
+            רשימת קניות — היא תפריט שממנו בוחרים לפי בעיה שקיימת, לא לפי מה שנשמע חדש.
+          </p>
+        </div>
+
+        <h2 id="rule">הכלל: אחד בכל פעם</h2>
+        <div class="grid grid-3" style="margin-top:2rem">
+          <div class="mod">
+            <span class="num">01</span>
+            <h3>לבחור לפי בעיה</h3>
+            <p>
+              לא "מה חסר לי" אלא "מה עצבן אותי השבוע". אם אין תשובה לשאלה הזאת, אין מה להתקין.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">02</span>
+            <h3>לנסות על משימה אמיתית</h3>
+            <p>
+              לא על דוגמה. משימה שהייתה בכל מקרה, כדי שיהיה למה להשוות — זמן, איכות, וכמה קונטקסט
+              זה עלה.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">03</span>
+            <h3>להחליט, ורק אז להוסיף</h3>
+            <p>
+              נשאר או יוצא. תוספת שנשארה "כי אולי" היא עלות קבועה בכל turn, בלי תועלת מוכחת.
+            </p>
+          </div>
+        </div>
+
+        <h2 id="list">הרשימה</h2>
+        <div class="prose">
+          <p>
+            כל 40 הפריטים, כפי שהגיעו, לפי קטגוריה. הסינון למעלה מצמצם לפי קטגוריה או לפי מילה
+            בשם ובתיאור.
+          </p>
+        </div>
+
+        <div data-toolbox style="margin-top:2rem"><p class="muted">טוען את הרשימה…</p></div>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר · קישורים</span>
+          <p>
+            הרשימה הגיעה כשמות ותיאורים בלבד, בלי כתובות. <b>לא ייצרתי כתובות GitHub מהזיכרון</b>,
+            כי שם שגוי בכתובת שולח את מי שקורא למקום אחר לגמרי — ובמקרה של repo שמריצים ממנו קוד,
+            זו טעות עם מחיר. פריט אחד כבר הושלם כך שצריך: הכתובת של <code>graphify</code> נמסרה,
+            נבדקה מול GitHub ב-22.09.2026, ונכנסה לדאטה. <b>מה צריך להשלים:</b> שדה
+            <code>url</code> לשאר הפריטים בקובץ
+            <code>assets/site-data.js</code>. הרשימה כאן תתעדכן לבד, כי היא נגזרת מאותו קובץ.
+          </p>
+        </div>
+
+        <h2 id="libs">ספריות מומלצות</h2>
+        <div class="prose">
+          <p>
+            הרשימה למעלה היא <b>תפריט</b>: ארבעים שמות, כמעט כולם בלי כתובת, כפי שהגיעו. הרשימה הזאת היא
+            ההיפך — קצרה בכוונה, וכל שורה בה אומתה. לכל פריט יש כתובת repo, רישיון ופקודת התקנה
+            שנלקחו מה-README עצמו ב-22.09.2026, ולא מהזיכרון. זה גם התנאי להיכנס לכאן.
+          </p>
+          <p>
+            הקריטריון השני הוא שהפריט פותר בעיה שכבר מופיעה באתר הזה: עיצוב שלא מתפרק, תכנון
+            ששורד איפוס קונטקסט, וזיכרון ארגוני שלא נעלם בסוף השיחה.
+          </p>
+        </div>
+
+        <div data-libs style="margin-top:1.75rem"><p class="muted">טוען את הרשימה…</p></div>
+
+        <div class="note" style="margin-top:2rem">
+          <span class="label">מה עוד צריך לבדוק לפני התקנה</span>
+          <p>
+            רישיון וכתובת הם תנאי סף, לא אישור. skill ו-MCP server רצים בהרשאות שלך ועל הקבצים
+            שלך — ולכן גם כאן הכלל הוא <b>אחד בכל פעם, על משימה אמיתית, עם פסק דין כתוב</b>.
+            המספרים בתיאור של <code>ui-ux-pro-max</code> הם דיווח ה-repo, לא מדידה שלנו.
+          </p>
+        </div>
+
+        <h2 id="how">איך מחליטים בין הקטגוריות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מאיפה להתחיל, לפי מה שכואב</caption>
+            <thead>
+              <tr><th>הסימן אצלך</th><th>הקטגוריה</th><th>למה</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>הפלט טוב, אבל את מסבירה כל פעם מחדש איך עובדים כאן</td>
+                <td><a href="#cat-skills">הוספת skills</a></td>
+                <td>זה בדיוק מה ש-skill הוא: ידע שנטען כשהוא רלוונטי, ולא נכתב מחדש בשיחה</td>
+              </tr>
+              <tr>
+                <td>השיחות נגמרות באמצע, או שהעלות מרגישה גבוהה</td>
+                <td><a href="#cat-context">שמירת קונטקסט</a></td>
+                <td>הקטגוריה היחידה שמשפיעה ישירות על שני הדברים — ראי <a href="02-context-economy.html">נושא 02</a></td>
+              </tr>
+              <tr>
+                <td>האייג'נט מצוין בקוד, אבל לא מחובר למקומות שהעבודה בהם</td>
+                <td><a href="#cat-tools">חיבור כלים</a></td>
+                <td>MCP הוא הגשר. זו גם הקטגוריה שהכי כדאי להוסיף ממנה אחד בכל פעם</td>
+              </tr>
+              <tr>
+                <td>אין דרך קבועה לעבור ממשימה לתכנית ולביקורת</td>
+                <td><a href="#cat-workflow">בניית workflow</a></td>
+                <td>מסגרת שלמה שמחליפה זרימת עבודה מאולתרת. הקטגוריה הכי פולשנית — להיכנס בזהירות</td>
+              </tr>
+              <tr>
+                <td>אין לך מושג לאן הולך השימוש</td>
+                <td><a href="#cat-prompts">פרומפטים ושימוש</a></td>
+                <td>ניטור וצמצום פלט. זול להתקין, ומייד נותן תמונה</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="do">מה עושים בפועל</h2>
+        <div class="prose">
+          <p>
+            קובץ אחד בתיקיית הפרויקט, שמתעד מה נכנס, למה, ומה החלטת. בלי זה הארגז הופך לשכבה
+            שאף אחד לא יודע להסביר — וזה בדיוק מה שמקבל מי שיבוא אחרייך.
+          </p>
+        </div>
+        <div class="code" style="margin-top:1.75rem">
+          <div class="code__head">
+            <span class="code__label">tools-log.md</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code># Tools log
+
+One in at a time. Nothing stays without a verdict.
+
+## 2026-09-15 — context7
+Problem:   the agent kept using an old API shape from memory.
+Tried on:  the auth refactor (a task we had anyway).
+Cost:      one MCP server open in every session.
+Verdict:   keep. It removed a whole class of wrong-version bugs.
+
+## 2026-09-18 — &lt;next one&gt;
+Problem:
+Tried on:
+Cost:
+Verdict:   keep / out / still testing</code></pre>
+        </div>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>איך ארגז כלים טוב הופך לעומס</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>להתקין חמישה בערב אחד</td>
+                <td>משהו השתפר, ואי אפשר לדעת מה. גם אי אפשר לדעת מה החמיר</td>
+                <td>אחד, על משימה אמיתית, עם פסק דין כתוב</td>
+              </tr>
+              <tr>
+                <td>להשאיר MCP servers פתוחים</td>
+                <td>כל server צורך קונטקסט בכל turn, גם בשיחה שלא נוגעת בו</td>
+                <td><code>/mcp</code> — לסגור מה שלא בשימוש עכשיו</td>
+              </tr>
+              <tr>
+                <td>להריץ קוד מ-repo שלא נבדק</td>
+                <td>skill או plugin הוא קוד שרץ אצלך, עם ההרשאות שלך</td>
+                <td>לקרוא מה שהוא עושה לפני התקנה. ריפו בלי תחזוקה — לא נכנס</td>
+              </tr>
+              <tr>
+                <td>להפוך workflow לחוק לפני שהוא הוכח</td>
+                <td>כל הצוות עובד לפי מסגרת שאף אחד לא בדק על עבודה אמיתית</td>
+                <td>אדם אחד, שבועיים, ואז להחליט אם זה נכנס ל-CLAUDE.md</td>
+              </tr>
+              <tr>
+                <td>לדחוף workflows ל-CLAUDE.md</td>
+                <td>הקובץ שנשלח בכל turn מתנפח, והמודל קורא אותו גם כשאין צורך</td>
+                <td>CLAUDE.md להוראות, skills ל-workflows — <a href="01-claude-md.html">נושא 01</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <ol class="check">
+          <li>
+            <b>איזו בעיה מהשבוע האחרון זה פותר?</b>
+            <span>אם אין בעיה קונקרטית, התשובה היא לא להתקין. עניין הוא לא בעיה.</span>
+          </li>
+          <li>
+            <b>מה זה עולה בקונטקסט?</b>
+            <span>נטען תמיד או לפי הצורך? <code>/context</code> בשיחה טרייה נותן את התשובה במספרים.</span>
+          </li>
+          <li>
+            <b>קראת מה הקוד עושה?</b>
+            <span>skill ו-MCP server רצים בהרשאות שלך, על הקבצים שלך. זה לא תוסף דפדפן.</span>
+          </li>
+          <li>
+            <b>מי יתחזק את זה כשלא תהיי כאן?</b>
+            <span>בחפיפה זו השאלה המכריעה. מה שאף אחד לא יודע להסביר — צריך לצאת לפני המסירה.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>מה ההבדל בין skill, plugin ו-MCP server?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              skill הוא הוראות — טקסט שנטען כשהוא רלוונטי. MCP server הוא חיבור לכלי או למקור
+              חיצוני. plugin הוא אריזה שיכולה להכיל את שניהם ועוד. המשמעות המעשית: skill עולה
+              קונטקסט, MCP server עולה קונטקסט וגם פותח דלת למערכת אמיתית.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אם אין קישורים, מה הערך של הרשימה?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              המיפוי. חמש הקטגוריות מראות אילו סוגי בעיות בכלל נפתרים בתוספת, וזה מה שמכריע לפני
+              הבחירה. את השם עצמו אפשר לחפש; קישור שגוי — לא. לכן שדה הקישור נשאר ריק ומסומן
+              ככזה, ומתמלא כשכתובת נמסרת ונבדקת — כמו שקרה עם <code>graphify</code>.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>יש כאן משהו שכבר בשימוש אצלנו?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              זה בדיוק מה שצריך להיות מסומן לפני החפיפה. הרשימה כרגע היא תפריט חיצוני, לא מצב
+              קיים. מיפוי מה מותקן, אצל מי, ומה הפסק דין — נמצא ברשימת ההשלמות בעמוד
+              <a href="capabilities.html">היכולות</a>.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">רשימת 40 התוספות</p>
+            <p class="source-note">כפי שהגיעה: חמש קטגוריות, שמות ותיאורים. הקישור למקור וכתובות הפריטים להשלמה.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">Claude Code prompt library · Anthropic</p>
+            <p class="source-note"><a class="lat" href="https://code.claude.com/docs/en/prompt-library" target="_blank" rel="noopener">code.claude.com/docs/en/prompt-library</a></p>
+          </li>
+        </ul>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="04-runtimes.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>04 · Agent runtimes</strong>
+        </a>
+        <a href="06-artemis.html">
+          <span class="label label--dim">הנושא הבא · רמה 02</span>
+          <strong>06 · ARTEMIS →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

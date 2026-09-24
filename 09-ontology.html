@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fabric Ontology: הארגון כגרף שאייג'נט מבין — בסיס ידע AI</title>
+<meta name="description" content="רכיב Ontology ב-Microsoft Fabric, שכבת ה-IQ, ואפליקציה מעל Rayfin: מיפוי ישויות וקשרים בארגון — לא בשביל בני אדם, בשביל אייג'נטים.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 03 · רמה ארגונית</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 09</span>
+      </nav>
+      <h1 style="max-width:21ch">הארגון כגרף — ולא בשביל בני אדם</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">Microsoft Fabric · Ontology · IQ layer · Rayfin</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          ל-Microsoft Fabric יצא רכיב בשם <b>Ontology</b>, והנקודה המעניינת בו היא למי הוא נבנה:
+          לא לבני אדם. הוא נבנה כדי שאייג'נטים יבינו איך הארגון <b>באמת</b> עובד — מי מדבר עם מי,
+          אילו צוותים אחראים על מה, ואיך מתקבלות החלטות.
+        </p>
+        <p>
+          כלומר לא רק מה יש בטבלאות ובמסמכים, אלא <b>איך כל המידע הזה קשור אחד לשני</b>. זו אותה
+          שאלה שבה עוסקים נושאים 07 ו-08, רק שהפעם היא מגיעה מצד פלטפורמת הדאטה ולא מצד האייג'נט.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>03 / Organizational</dd>
+        <dt>זמן קריאה</dt><dd>7 דקות</dd>
+        <dt>מה צריך לדעת קודם</dt><dd><a href="07-company-brain.html">נושא 07</a></dd>
+        <dt>מצב</dt><dd>נקרא, לא הורץ</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            כל ארגון שעובד עם דאטה יודע לענות על השאלה «מה יש לנו». יש warehouse, יש דשבורדים,
+            יש מסמכים. השאלה שאף אחת מהשכבות האלה לא עונה עליה היא <b>איך הדברים קשורים</b>: מי
+            הבעלים של התהליך הזה, איזה צוות מאשר את ההחלטה הזאת, ומה נשבר בהמשך כשמשנים כאן שדה.
+            בן אדם ותיק יודע את זה בלי לחשוב. אייג'נט לא יודע את זה בכלל — וגם לא יודע שהוא לא
+            יודע.
+          </p>
+          <p>
+            לכן הכיוון שהרכיב הזה מייצג חורג מעוד פיצ'ר בפלטפורמת דאטה: זו הודאה שכדי שאייג'נט
+            יהיה שימושי בארגון, צריך לתת לו לא רק גישה לנתונים אלא <b>מודל של הארגון</b>. וזו
+            בדיוק אותה מסקנה שהגיעה מהכיוון ההפוך ב<a href="07-company-brain.html">נושא 07</a>:
+            המוח הארגוני עושה את זה ב-markdown, ואונטולוגיה עושה את זה כגרף מעל שכבת הדאטה.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>Ontology · אונטולוגיה</dt>
+            <dd>
+              השכבה שממפה את הישויות והקשרים בעסק. לא סכמת טבלאות — מודל של מה קיים בארגון ומה
+              היחס בין הדברים.
+            </dd>
+          </div>
+          <div>
+            <dt>IQ layer · שכבת ה-IQ</dt>
+            <dd>
+              השכבה שדרכה אייג'נטים מתחברים לכל הדאטה והמידע הארגוני, ומבינים את הקשרים בייצוג
+              גרפי. זו נקודת החיבור של האייג'נט — לא האונטולוגיה עצמה.
+            </dd>
+          </div>
+          <div>
+            <dt>Rayfin</dt>
+            <dd>
+              השכבה שמעליה נבנית האפליקציה. בחומר המקור היא מתוארת כגרסה האנטרפרייזית של
+              Microsoft ל-Vercel: להקים אפליקציות במהירות, עם חיבור לדאטה שלכם.
+              <span class="claim">תיאור מחומר המקור · לא ניסוח רשמי של Microsoft שאומת כאן</span>
+            </dd>
+          </div>
+          <div>
+            <dt>entity · ישות</dt>
+            <dd>
+              הדבר שהגרף מדבר עליו: לקוח, פרויקט, צוות, החלטה, מוצר. הקשרים ביניהן הם מה שהופך
+              רשימות למודל.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="how">איך זה נראה בפועל: שלוש שכבות</h2>
+        <div class="prose">
+          <p>
+            כך תואר המימוש שנבנה בלייב. שלוש שכבות שיושבות אחת על השנייה, וכל אחת עונה על שאלה
+            אחרת.
+          </p>
+        </div>
+        <div class="grid grid-3" style="margin-top:2rem">
+          <div class="mod">
+            <span class="num">01</span>
+            <h3>Ontology — המודל</h3>
+            <p>
+              מיפוי הישויות והקשרים בעסק. זו השכבה שמחזיקה את מה שאף טבלה לא מחזיקה: מה קשור
+              למה, ומי אחראי על מה.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">02</span>
+            <h3>IQ layer — החיבור</h3>
+            <p>
+              האייג'נטים מתחברים דרכה לכל הדאטה והמידע הארגוני, ומבינים את הקשרים בייצוג גרפי.
+              כאן האייג'נט הופך ממי ששולף שורות למי שמבין הקשר.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">03</span>
+            <h3>Rayfin — האפליקציה</h3>
+            <p>
+              אפליקציה שמוקמת במהירות מעל אותה דאטה. זו השכבה שהופכת את כל הבנייה הזאת למשהו
+              שמישהו בארגון פותח בבוקר.
+            </p>
+          </div>
+        </div>
+
+        <h2 id="compare">איפה זה נפגש עם המוח הארגוני</h2>
+        <div class="prose">
+          <p>
+            שתי הגישות פותרות את אותה בעיה משני כיוונים, ולכן קל לבלבל ביניהן. ההבדל המעשי הוא
+            מאיפה הידע מגיע ומי מתחזק אותו.
+          </p>
+        </div>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>אונטולוגיה מעל דאטה מול מוח ארגוני בקבצים</caption>
+            <thead>
+              <tr><th>הממד</th><th>Fabric Ontology</th><th>מוח ארגוני · <a href="07-company-brain.html">נושא 07</a></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>מה הוא ממדל</td>
+                <td>ישויות וקשרים מעל הדאטה הקיים</td>
+                <td>עובדות, החלטות וטון — מה שלא יושב בטבלאות</td>
+              </tr>
+              <tr>
+                <td>מאיפה הידע</td>
+                <td>מהמערכות: warehouse, מסמכים, מטא-דאטה</td>
+                <td>מאדם שכותב, מאשר ומתחזק</td>
+              </tr>
+              <tr>
+                <td>מי מתחזק</td>
+                <td>דאטה ופלטפורמה</td>
+                <td>בעל בית לכל תיקייה, דרך pull requests</td>
+              </tr>
+              <tr>
+                <td>תלות בספק</td>
+                <td>רכיב בפלטפורמה — נכנס עם כל מה שמסביבו</td>
+                <td>markdown ו-git. אפשר לקחת ולעבור</td>
+              </tr>
+              <tr>
+                <td>מתי זה הדבר הנכון</td>
+                <td>כשהדאטה כבר ב-Fabric ויש צוות שמחזיק אותו</td>
+                <td>כמעט תמיד, וגם לפני כן — זה הצעד הזול</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:1.5rem">
+          <span class="label">איך לקרוא את הטבלה הזאת</span>
+          <p>
+            לא כ«במקום». אונטולוגיה מעל דאטה ומוח ארגוני בקבצים מכסים שני סוגי ידע שונים —
+            <b>מה שהמערכות יודעות</b> מול <b>מה שרק אנשים יודעים</b>. הנקודה החשובה לחפיפה: את
+            השני אף פלטפורמה לא תייצר לבד, ולכן הוא הראשון שנעלם כשאדם עובר תפקיד.
+          </p>
+        </div>
+
+        <h2 id="do">מה עושים בפועל</h2>
+        <div class="prose">
+          <p>
+            כאן אין runbook, כי הרכיב לא הורץ אצלנו — ובמצב כזה הדבר הישר הוא לכתוב מה הייתי
+            בודקת, ולא להעמיד פנים שיש ניסיון.
+          </p>
+        </div>
+        <ol class="check">
+          <li>
+            <b>לבדוק מה בכלל ב-Fabric אצלנו</b>
+            <span>
+              אונטולוגיה מעל דאטה שלא נמצא שם היא פרויקט הגירה, לא פרויקט אייג'נטים. זו השאלה
+              שמכריעה אם הנושא רלוונטי עכשיו או בשנה הבאה.
+            </span>
+          </li>
+          <li>
+            <b>לבחור שאלה אחת שחוצה מערכות</b>
+            <span>
+              שאלה שהתשובה עליה דורשת שתי מערכות ואדם שיודע לחבר ביניהן. זה המקרה שבו אונטולוגיה
+              מחזירה משהו שדשבורד לא מחזיר.
+            </span>
+          </li>
+          <li>
+            <b>למפות ישויות לפני כלים</b>
+            <span>
+              חמש עד עשר ישויות מרכזיות והקשרים ביניהן, על דף. אם זה לא מצליח על דף, הרכיב לא
+              יסדר את זה.
+            </span>
+          </li>
+          <li>
+            <b>לשאול מי מחזיק את המודל</b>
+            <span>
+              מודל של ארגון מתיישן כמו כל עובדה. בלי בעל בית זה עוד artifact נכון-לרגע-שנבנה.
+            </span>
+          </li>
+        </ol>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מה משתבש בשכבות סמנטיות</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>למדל את הארגון «כמו שהוא אמור להיות»</td>
+                <td>הגרף מתאר את התרשים הארגוני, לא את איך שהעבודה נעשית</td>
+                <td>לתעד את המסלול האמיתי, כולל העקיפות. שם נמצא הידע</td>
+              </tr>
+              <tr>
+                <td>אונטולוגיה לפני ניקיון דאטה</td>
+                <td>קשרים מדויקים מעל שדות לא עקביים — תשובה מוסמכת ושגויה</td>
+                <td>תחום אחד, דאטה נקי, ואז להרחיב</td>
+              </tr>
+              <tr>
+                <td>להתייחס אליה כתחליף למוח</td>
+                <td>הידע שלא יושב בשום מערכת פשוט לא נכנס</td>
+                <td>שתי השכבות במקביל. הזולה קודם</td>
+              </tr>
+              <tr>
+                <td>הרשאות שמתפוגגות בשכבת החיבור</td>
+                <td>אייג'נט שמחובר דרך שכבה אחת רואה יותר ממה שהמשתמש שלו רשאי</td>
+                <td>לבדוק הרשאות מנקודת המבט של האייג'נט, לא של האדם</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <ol class="check">
+          <li>
+            <b>הדאטה שלנו ב-Fabric?</b>
+            <span>אם לא — זה נושא למעקב, לא לפעולה. הגירה לפלטפורמה היא החלטה אחרת לגמרי.</span>
+          </li>
+          <li>
+            <b>יש שאלה שחוצה מערכות ושחוזרת?</b>
+            <span>בלעדיה זה מודל יפה שאף אחד לא שואל. עם אחת כזאת יש מה למדוד.</span>
+          </li>
+          <li>
+            <b>מי בעל הבית של המודל?</b>
+            <span>אותה שאלה שמוח ארגוני נשבר בה, בסקאלה גדולה יותר.</span>
+          </li>
+          <li>
+            <b>מה עושים עם הידע שלא במערכות?</b>
+            <span>אם התשובה היא «נטפל בזה אחר כך» — מתחילים מנושא 07, שהוא בשליטתך ובעלות נמוכה.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>זו לא בסך הכל שכבה סמנטית בשם חדש?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              יש חפיפה, אבל הצרכן שונה, וזה משנה את התכנון. שכבה סמנטית קלאסית נבנתה כדי שאדם
+              יבין דשבורד. כאן הצרכן הוא אייג'נט, ולכן חשובים דברים שלאדם היו מובנים מאליהם:
+              מי אחראי, מה מותר לגלות, ואיך מתקבלת החלטה. זה גם מה שנאמר במקור במפורש — הרכיב
+              «לא נבנה בשביל בני אדם».
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>ומה היחס לגרפי הידע מנושא 08?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              אותו רעיון בשתי נקודות מבט. Cognee ו-Graphiti הן ספריות שאת מרכיבה בעצמך מעל מה
+              שיש לך, עם השליטה והתחזוקה שזה גורר. Ontology היא רכיב מנוהל בתוך פלטפורמה — פחות
+              עבודה, יותר תלות בספק ובמקום שבו הדאטה כבר יושב. ההחלטה ביניהן היא כמעט תמיד
+              החלטה על הפלטפורמה, לא על הגרף.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אפשר לראות את זה נבנה?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              כן — המימוש נבנה בלייב והוקלט ל-YouTube יחד עם Aleksi Partanen. הקישור המדויק
+              הוא אחד הפערים המסומנים בעמוד <a href="sources.html">המקורות</a>, ולא הומצא כאן.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">Microsoft Fabric · Ontology ושכבת ה-IQ</p>
+            <p class="source-note">תיעוד הרכיב עצמו. הקישור להשלמה — התיאור בעמוד הזה נגזר מחומר המקור, לא מהתיעוד הרשמי.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">הקלטת הבנייה · עם Aleksi Partanen</p>
+            <p class="source-note">בנייה בלייב של מוח ארגוני בתוך Fabric, כולל שלוש השכבות. קישור YouTube להשלמה.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">Rayfin</p>
+            <p class="source-note">התיאור כאן הוא ציטוט מחומר המקור. תיעוד רשמי וכתובת — להשלמה.</p>
+          </li>
+        </ul>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר</span>
+          <p>
+            <b>מה שאין:</b> הרכיב לא הורץ אצלנו, ואין כאן אף קישור לתיעוד רשמי — כל התיאור נגזר
+            מחומר המקור שהובא, ולכן גם התיאור של Rayfin מוצג כציטוט ולא כעובדה מאומתת.
+            <b>מה צריך להשלים:</b> (1) קישור לתיעוד Ontology ולתיעוד Rayfin; (2) קישור להקלטה;
+            (3) מה מצב הדאטה שלנו ב-Fabric בכלל; (4) האם יש רישוי או preview שמגביל שימוש.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="08-memory-graphs.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>08 · זיכרון וגרפי ידע</strong>
+        </a>
+        <a href="capabilities.html">
+          <span class="label label--dim">סוף המסלול · רוחבי</span>
+          <strong>מה הוכח בפועל →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company Brain: מוח ארגוני עם חוזה טעינה — בסיס ידע AI</title>
+<meta name="description" content="מוח ארגוני אחד לבני אדם ולאייג'נטים: טבעות טעינה, MANIFEST.yaml כחוזה, validators שהופכים כללי כתיבה לבדיקה שרצה, ולמה זה לא RAG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 03 · רמה ארגונית</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 07</span>
+      </nav>
+      <h1 style="max-width:22ch">מוח ארגוני: מקור ידע אחד, עם חוזה טעינה</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">rings · MANIFEST.yaml · validators · freshness</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          <code>CLAUDE.md</code> פותר קונטקסט לפרויקט אחד. ברגע שאותן עובדות נדרשות בארבעה repos,
+          בשני אייג'נטים ואצל עובד חדש — צריך מקור ידע <b>אחד</b>, מנוהל בגרסאות, שבני אדם
+          ואייג'נטים קוראים ממנו את אותו דבר.
+        </p>
+        <p>
+          שני הרכיבים שהופכים את זה ממאגר מסמכים למערכת: <b>חוזה טעינה</b> שמכריז מה נכנס
+          לקונטקסט ומתי, ו-<b>validators</b> שהופכים כללי כתיבה מכוונה טובה לבדיקה שרצה בקומיט.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>03 / Organizational</dd>
+        <dt>זמן קריאה</dt><dd>16 דקות</dd>
+        <dt>מה צריך לדעת קודם</dt><dd><a href="02-context-economy.html">נושא 02</a></dd>
+        <dt>הדגמה</dt><dd><a href="#demo-rings">סימולטור rings</a></dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            הידע הארגוני קיים — הוא פשוט מפוזר. חלק בראש של שלושה אנשים, חלק בשרשור סלאק מלפני
+            שנה, חלק בהצעת מחיר שהוגשה ונשכחה. כל עוד העבודה נעשית בידי אנשים, הפיזור הזה עולה
+            זמן. ברגע שאייג'נט כותב הצעה, מנסח תשובה ללקוח או מקבל החלטה, הפיזור הופך לבעיה
+            אחרת לגמרי: האייג'נט לא יודע שהוא לא יודע. הוא יכתוב משהו סביר, בביטחון מלא, על בסיס
+            מה שהיה בקונטקסט — וזה יהיה מה שהיה זמין, לא מה שנכון.
+          </p>
+          <p>
+            הפתרון האינטואיטיבי — לדחוף הכל לתוך <code>CLAUDE.md</code> — נשבר משתי סיבות בבת
+            אחת. ראשית עלות: הקובץ הזה נשלח בכל turn, ולכן כל שורה בו היא מנוי חודשי ולא קנייה
+            חד-פעמית (<a href="02-context-economy.html">נושא 02</a>). שנית איכות: ככל שה-input
+            מתארך, הדיוק יורד — גם לפני שמגיעים לגבול החלון. מוח ארגוני הוא התשובה לשתיהן:
+            <b>הרבה ידע במקום אחד, ומעט ידע בקונטקסט בכל פעם</b>. מה שמכריע איזה מעט — זה החוזה.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>ring 0 / 1 / 2 · טבעות טעינה</dt>
+            <dd>
+              ring 0 נטען בכל session של כל אייג'נט. ring 1 נטען לפי סוג המשימה. ring 2 לא נטען
+              כלל — הוא נחפש כשצריך. זו התשובה המעשית ל-context rot.
+            </dd>
+          </div>
+          <div>
+            <dt>MANIFEST.yaml · חוזה הטעינה</dt>
+            <dd>
+              קובץ אחד שמכריז לכל קובץ במוח: איזה ring, מתי הוא נטען
+              (<code>load_when</code>), ומה אסור להוציא ממנו הלאה. מה שלא מוכרז — לא נטען.
+            </dd>
+          </div>
+          <div>
+            <dt>validator · מאמת</dt>
+            <dd>
+              סקריפט שהופך כלל כתיבה לבדיקה שרצה. «לכתוב טוב» אינו כלל. «לא להשתמש בקו מפריד
+              ארוך» הוא כלל, ואפשר לבדוק אותו בקומיט.
+            </dd>
+          </div>
+          <div>
+            <dt>freshness · טריות</dt>
+            <dd>
+              תאריך אימות (<code>verified_on</code>) ותדירות ביקורת (<code>review_every</code>)
+              לכל קובץ עובדות. אחרי שהתאריך עובר, התוכן חוזר להיות השערה שצריך לבדוק — לא אמת
+              שבונים עליה הצעת מחיר.
+            </dd>
+          </div>
+          <div>
+            <dt>confidential · <span dir="ltr">never_in</span></dt>
+            <dd>
+              דגל שמסמן ידע שנטען לאייג'נט אבל אסור שיצא בפלט לצד שלישי. מחירים הם המקרה הקלאסי:
+              האייג'נט צריך אותם כדי לכתוב הצעה, ואסור לו להזכיר אותם בפוסט.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="how">איך זה עובד: שלוש טבעות</h2>
+        <div class="prose">
+          <p>
+            הטבעות הן לא סיווג תיאורטי — הן החלטה על עלות. ring 0 הוא הדבר היחיד ששולם עליו
+            בכל turn של כל אייג'נט, ולכן הוא צריך להיות קצר בצורה שכואבת. הכלל שעובד: כדי להוסיף
+            שורה ל-ring 0, צריך להוציא שורה אחרת. ring 1 הוא כל השאר — נטען לפי סוג המשימה, לא
+            לפי «אולי יהיה שימושי». ring 2 קיים כדי שלא נמחק דברים: החלטות ישנות, דוגמאות,
+            ארכיון. הוא נחפש, לא נטען.
+          </p>
+          <p>
+            הסימולטור למטה מריץ את הלוגיקה הזאת על מוח ארגוני לדוגמה. בחרי משימה, וראי אילו
+            קבצים באמת נכנסים לקונטקסט. שימי לב במיוחד למשימה האחרונה: אותו קובץ מחירים שנטען
+            בשמחה כשכותבים הצעה, נחסם במפורש כשהפלט יוצא לצד שלישי.
+          </p>
+        </div>
+
+        <div class="demo" style="margin-top:1.75rem" id="demo-rings">
+          <div class="demo__head">
+            <div>
+              <span class="label">הדגמה 01</span>
+              <h3>מה נטען בפועל</h3>
+            </div>
+            <span class="mono mono-dim" dir="ltr">pick a task</span>
+          </div>
+          <div class="demo__body" data-demo-rings><p class="muted">טוען…</p></div>
+          <div class="demo__foot">
+            תשע שורות בסימולטור, וכבר רואים את העיקר: רוב המוח לא בקונטקסט ברוב הזמן. זה לא
+            באג — זו כל התכנית. מוח ארגוני מודד את עצמו בכמה ידע הוא מצליח <b>לא</b> לטעון.
+          </div>
+        </div>
+
+        <h2 id="tree">המבנה על הדיסק</h2>
+        <div class="prose">
+          <p>
+            המוח יושב ב-repository נפרד, והפרויקטים מצרפים אותו כ-submodule. כך יש לו היסטוריה,
+            pull requests וביקורת — ככל repo אחר. לחיצה על קובץ בעץ מסבירה מה נכנס בו ולמה.
+          </p>
+        </div>
+
+        <div class="demo" style="margin-top:1.25rem" id="demo-tree">
+          <div class="demo__head">
+            <div>
+              <span class="label">הדגמה 02</span>
+              <h3>מה יושב בכל קובץ</h3>
+            </div>
+            <span class="mono mono-dim" dir="ltr">click a file</span>
+          </div>
+          <div class="demo__body">
+            <div class="grid grid-2" style="align-items:start">
+              <div class="tree" data-tree="brain"></div>
+              <div class="tree-note" data-tree-note="brain"></div>
+            </div>
+          </div>
+          <div class="demo__foot">
+            המבנה משעמם בכוונה. מוח ארגוני שמצריך הסבר איך הוא בנוי לא ישרד את האדם שבנה אותו —
+            וזה בדיוק המבחן שחפיפה מייצרת.
+          </div>
+        </div>
+
+        <h2 id="manifest">החוזה: מה נכנס לקונטקסט ומתי</h2>
+        <div class="prose">
+          <p>
+            זה הרכיב שמפריד בין תיקיית markdown לבין מערכת. בלי חוזה, הבחירה מה לטעון נופלת על
+            מי שכותב את הפרומפט — כלומר על הזיכרון של בן אדם בשעה שש בערב. עם חוזה, היא מוכרזת
+            פעם אחת ונבדקת. המבנה למטה הוא <b>דוגמה להמחשה</b>, לא תקן: השדות שחוזרים בכל
+            מימוש הם ring, load_when, confidential ותאריכי אימות.
+          </p>
+        </div>
+        <div class="code" style="margin-top:1.75rem">
+          <div class="code__head">
+            <span class="code__label">MANIFEST.yaml · illustrative</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code>files:
+  - path: CORE.md
+    ring: 0                      # loaded in every session, every agent
+    verified_on: 2026-09-01
+    review_every: 90d
+
+  - path: company/offering.md
+    ring: 1
+    load_when: [proposal, reply]
+    owner: chief-of-ai          # a person, not a team
+    status: active
+    verified_on: 2026-08-20
+    review_every: 60d
+
+  - path: company/pricing.md
+    ring: 1
+    load_when: [proposal, negotiation]
+    confidential: true
+    never_in: [public_content, third_party_output]
+    verified_on: 2026-09-10
+    review_every: 30d
+
+  - path: examples/won-proposal-2026-03.md
+    ring: 2                      # searched, never auto-loaded</code></pre>
+        </div>
+
+        <h2 id="validators">Validators: כלל שאי אפשר לבדוק אינו כלל</h2>
+        <div class="prose">
+          <p>
+            כל ארגון כותב מדריך טון, ואף אחד לא קורא אותו בפעם השנייה. מה שכן עובד: להפוך את
+            החלק הבדיק של המדריך לסקריפט. שני הסקריפטים שמחזיקים את הרוב —
+            <code>brand-lint</code> שבודק <b>איך</b> נכתב, ו-<code>freshness</code> שבודק
+            <b>מה פג</b>.
+          </p>
+          <p>
+            שתי החלטות מעשיות שמכריעות אם זה נשאר בחיים. הראשונה: <code>brand-lint</code> במצב
+            <code>--diff</code> בודק רק שורות שנוספו, ולכן אפשר לאמץ אותו על repo עם אלפי שורות
+            קיימות בלי לתקן אותן קודם. השנייה: <code>freshness</code> רץ בתזמון ולא בכל push —
+            עובדה שהתיישנה היא סיבה להזכיר למישהו, לא להפיל build.
+          </p>
+        </div>
+        <div class="code" style="margin-top:1.75rem">
+          <div class="code__head">
+            <span class="code__label">validators · how they run</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code># pre-commit: only the lines this commit adds
+git diff --cached -U0 | node validators/brand-lint.mjs --diff
+
+# scheduled, not on push: what has expired
+node validators/freshness.mjs --manifest MANIFEST.yaml --warn-only</code></pre>
+        </div>
+        <div class="note" style="margin-top:1.5rem">
+          <span class="label">למה זה גם מדגים את הנקודה</span>
+          <p>
+            הכללים שמגיעים בטמפלייט הם נקודת התחלה, לא תקן. הערך אינו ברשימת הכללים אלא במעבר
+            עצמו: <b>מכלל שאדם אמור לזכור, לכלל שמכונה בודקת</b>. כל כלל שלא עבר את המעבר הזה
+            יתקיים בדיוק עד הדדליין הראשון.
+          </p>
+        </div>
+
+        <h2 id="never">מה לעולם לא נכנס</h2>
+        <div class="prose">
+          <p>
+            לחוזה טעינה יש צד שני, ובו הוא מעניין לא פחות: מה שמוכרז כאסור. שלוש קטגוריות שלא
+            נכנסות למוח בשום ring — <b>סודות והרשאות</b> (credentials, טוקנים, מפתחות),
+            <b>מסמכי מקור של לקוחות</b>, ו<b>כל דבר שלא אומת</b>. השתיים הראשונות הן סיכון;
+            השלישית היא מה שהופך מוח ארגוני ממקור אמת למקור ביטחון מופרז.
+          </p>
+          <p>
+            נגזרת מעשית מאותה שורה: ה-repository של המוח נשאר <b>פרטי</b>. גם כשהשלד עצמו
+            בקוד פתוח, התוכן הוא הארגון.
+          </p>
+        </div>
+        <div class="note" style="margin-top:1.5rem">
+          <span class="label">מספרים שנמסרו, ולא נמדדו כאן</span>
+          <p>
+            מי שתיאר את המימוש דיווח על <b>88 קבצים וכ-70,000 מילים בשבוע אחד</b>, והדגיש שזה
+            התאפשר כי התוכן <b>נאסף ולא נכתב</b> — הועבר ממקומות שבהם הוא כבר היה. לצד זה תואר
+            <b>מבחן של שתי דקות</b>: session טרי, משימה אמיתית, ובודקים אם הפלט הראשון שמיש.
+            <span class="claim">דיווח של מחבר המימוש · לא מדידה שלנו</span>
+          </p>
+        </div>
+
+        <h2 id="vs-rag">מה זה לא: ההבדל מ-RAG</h2>
+        <div class="prose">
+          <p>
+            השאלה הזאת עולה תמיד, ובצדק: הרי גם RAG מביא ידע ארגוני לאייג'נט. ההבדל הוא לא
+            בטכנולוגיה אלא בשאלה מי מחליט.
+          </p>
+        </div>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>חוזה טעינה מול אחזור סמנטי</caption>
+            <thead>
+              <tr><th>הממד</th><th>חוזה טעינה (rings)</th><th>RAG</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>מי מחליט מה נכנס</td>
+                <td>אדם, מראש, בקובץ שנמצא בגרסאות</td>
+                <td>דמיון וקטורי, בזמן ריצה</td>
+              </tr>
+              <tr>
+                <td>מה מקבלים</td>
+                <td>את הקובץ שהוכרז</td>
+                <td>את הקטע שנכון-כנראה</td>
+              </tr>
+              <tr>
+                <td>שחזור של תוצאה</td>
+                <td>דטרמיניסטי — אותה משימה, אותו קונטקסט</td>
+                <td>תלוי אינדקס, embedding ו-chunking</td>
+              </tr>
+              <tr>
+                <td>ידע חסוי</td>
+                <td>דגל מוכרז שחוסם בפלט</td>
+                <td>צריך שכבת סינון נפרדת מעל האחזור</td>
+              </tr>
+              <tr>
+                <td><b>ביקורת על שינוי בידע</b></td>
+                <td>pull request, reviewer, היסטוריה. אפשר לראות מי שינה עובדה ומתי</td>
+                <td>אין מה לבקר: האינדקס מתעדכן, והתוכן לא עבר אישור אנושי</td>
+              </tr>
+              <tr>
+                <td>איפה הוא מנצח</td>
+                <td>ידע קבוע שחוזר: זהות, הצעה, מחירון, נהלים</td>
+                <td>ארכיון גדול שאי אפשר להכריז עליו מראש</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose">
+          <p>
+            השורה שמכריעה בטבלה הזאת היא <b>הביקורת</b> — וזה גם מה שהדגיש מי שתיאר את המימוש.
+            לא מהירות ולא איכות אחזור: היכולת שאדם יאשר שינוי בעובדה לפני שאייג'נט בונה עליה
+            הצעת מחיר.
+          </p>
+          <p>
+            המסקנה המעשית היא לא לבחור. ring 0 ו-ring 1 הם חוזה; ring 2 הוא בדיוק המקום שבו
+            אחזור הגיוני. מי שרוצה את זה עם קשרים וציר זמן ולא רק קבצים — זה
+            <a href="08-memory-graphs.html">נושא 08</a>.
+          </p>
+        </div>
+
+        <h2 id="do">מה עושים בפועל</h2>
+        <div class="prose">
+          <p>
+            הסדר חשוב. מי שמתחיל מ-MANIFEST לפני שיש תוכן מקבל חוזה על קבצים ריקים; מי שמתחיל
+            מהכל-בבת-אחת מקבל 40 קבצים שאף אחד לא מתחזק.
+          </p>
+        </div>
+        <ol class="check">
+          <li>
+            <b>לכתוב CORE.md אחד, קצר</b>
+            <span>
+              מה הארגון, איך הוא נשמע, מה הוא לא. הכלל שמחזיק אותו קצר: שורה חדשה נכנסת רק
+              כשיוצאת שורה אחרת.
+            </span>
+          </li>
+          <li>
+            <b>ארבעה קבצי עובדות, לא יותר</b>
+            <span>
+              זהות, מה נמכר, למי מתאים, ומחירון. את השלושה הראשונים גוזרים מעשר ההצעות האחרונות
+              — לא מהקטלוג התיאורטי, כי שם כתוב מה שהיינו רוצים למכור.
+            </span>
+          </li>
+          <li>
+            <b>להכריז ring ו-load_when</b>
+            <span>
+              רק עכשיו החוזה. לכל קובץ: מתי הוא נטען, ומה אסור להוציא ממנו. מה שחסוי מקבל
+              <code>confidential</code> ו-<code>never_in</code> באותו רגע, לא אחר כך.
+            </span>
+          </li>
+          <li>
+            <b>שני validators, ו-CI שמריץ אותם</b>
+            <span>
+              brand-lint על diff בקומיט, freshness בתזמון. בלי הרצה אוטומטית שני הקבצים האלה הם
+              עוד שני מסמכים שאף אחד לא קורא.
+            </span>
+          </li>
+          <li>
+            <b>מבחן השיחה הטרייה</b>
+            <span>
+              session חדש לגמרי, משימה אמיתית, בלי הסברים בצ'אט. אם הפלט הראשון שמיש — המוח
+              עובד. אם צריך שלושה תיקונים — חסרה עובדה, ועכשיו ידוע איזו.
+            </span>
+          </li>
+          <li>
+            <b>submodule בפרויקטים, לא העתקה</b>
+            <span>
+              העתקה נראית זולה ביום הראשון ומייצרת שלוש גרסאות של האמת עד סוף החודש.
+            </span>
+          </li>
+        </ol>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>איך מוח ארגוני מתנוון</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CORE.md שמתנפח</td>
+                <td>הקובץ שנשלח בכל turn של כל אייג'נט הופך למסמך של 400 שורות</td>
+                <td>תקרה מוצהרת, ושורה יוצאת בכל שורה שנכנסת</td>
+              </tr>
+              <tr>
+                <td>עובדות בלי תאריך</td>
+                <td>מחירון מלפני שנה נקרא כאמת, ונכנס להצעה שיוצאת מחר</td>
+                <td><code>verified_on</code> ו-<code>review_every</code> לכל קובץ עובדות</td>
+              </tr>
+              <tr>
+                <td>חסוי שנשען על «האייג'נט לא יגיד»</td>
+                <td>מחיר מופיע בפוסט. אין דרך לקחת את זה אחורה</td>
+                <td>דגל מוכרז, וטסט שמריץ פלט לצד שלישי ומחפש את המספרים</td>
+              </tr>
+              <tr>
+                <td>הכל ring 0 «כדי שיהיה»</td>
+                <td>עלות מלאה בכל turn, ואיכות שיורדת דווקא במשימות הפשוטות</td>
+                <td>ring 0 = מה שנכון לכל משימה בלי יוצא מן הכלל. השאר ring 1</td>
+              </tr>
+              <tr>
+                <td>המוח כפרויקט של אדם אחד</td>
+                <td>הוא מתעדכן בזמן שהאדם שם, ומתאבן ביום שהוא עובר תפקיד</td>
+                <td>pull request, reviewer, ובעלות מוצהרת לכל תיקייה</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <ol class="check">
+          <li>
+            <b>יש עובדה שכבר נכתבה שלוש פעמים בשלושה מקומות?</b>
+            <span>אם כן, זו ההצדקה. אם לא — <code>CLAUDE.md</code> מספיק, ומוח ארגוני הוא תקורה.</span>
+          </li>
+          <li>
+            <b>מי בעל הבית של התוכן?</b>
+            <span>לא מי כתב את הסקריפטים. מי מאשר שעובדה נכונה, ומי מקבל את התזכורת כשהיא פגה.</span>
+          </li>
+          <li>
+            <b>מה חסוי, ואיפה זה מוכרז?</b>
+            <span>אם התשובה היא «כולם יודעים» — זה לא מוכרז, וזה ייצא בפלט. השאלה הזאת חוסמת יותר תקלות מכל השאר.</span>
+          </li>
+          <li>
+            <b>מה מריץ את ה-validators?</b>
+            <span>בלי CI אלה שני קבצים דקורטיביים. עם CI זה הדבר שמחזיק את האיכות בלי אדם ששומר.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>זה לא בסך הכל תיקיית markdown?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              במידה רבה כן — וזו התכונה, לא החיסרון. markdown בגרסאות הוא הפורמט היחיד שגם בן
+              אדם קורא, גם אייג'נט קורא, גם אפשר לעשות עליו code review וגם אפשר לדעת מי שינה מה
+              ומתי. מה שהופך אותו למערכת הם שני הדברים שלא נמצאים בתיקייה רגילה: החוזה
+              וה-validators.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>כמה גדול CORE.md צריך להיות?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              במימוש שתיארו המחברים הוא נשאר בסדר גודל של 85 שורות גם אחרי חודשי עבודה. המספר
+              המדויק פחות חשוב מהמכניזם שמייצר אותו: תקרה מוצהרת, וכלל שכל שורה נכנסת על חשבון
+              שורה אחרת. בלי המכניזם הזה כל קובץ ring 0 גדל.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>איך זה מסתדר עם CLAUDE.md של פרויקט?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              הם עונים על שתי שאלות שונות. <code>CLAUDE.md</code> אומר איך עובדים <b>בפרויקט
+              הזה</b>: איך מריצים, מה הקונבנציות, מה אסור לגעת. המוח אומר מה נכון <b>בארגון</b>:
+              מה אנחנו מוכרים, למי, באילו תנאים ובאיזה טון. בפועל <code>CLAUDE.md</code> מפנה
+              אל המוח שצורף כ-submodule, ולא מעתיק ממנו.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>ומה עם גרף ידע במקום קבצים?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              זה לא «במקום». קבצים נותנים דטרמיניזם וביקורת; גרף נותן קשרים וציר זמן. השילוב
+              הסביר הוא מוח בקבצים ל-ring 0 ו-1, וגרף מעל הארכיון. שתי המערכות שבחנו לשם כך —
+              Cognee ו-Graphiti — הן <a href="08-memory-graphs.html">נושא 08</a>, וגם שם מסומן
+              במפורש מה נבדק אצלנו ומה לא.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">company-brain-template · Castaldo Solutions</p>
+            <p class="source-note">
+              <a class="lat" href="https://github.com/Castaldo-Solutions/company-brain-template" target="_blank" rel="noopener">github.com/Castaldo-Solutions/company-brain-template</a>
+              — רישיון MIT: markdown ושני סקריפטי Node בלי תלויות.
+            </p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">המאמר שתיאר את המימוש</p>
+            <p class="source-note">ממנו נלקחו הטבעות, החוזה ותפיסת ה-validators. הקישור המדויק להשלמה.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">הקלטת בנייה של Company Brain ב-Fabric · עם Aleksi Partanen</p>
+            <p class="source-note">סרטון. הקישור להשלמה — ראי גם <a href="09-ontology.html">נושא 09</a>.</p>
+          </li>
+        </ul>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר</span>
+          <p>
+            המימוש שמתואר כאן <b>לא הורץ אצלנו</b> — הוא נקרא, נותח, והוגש כאן כמתכונת עבודה.
+            <b>מה צריך להשלים:</b> (1) האם מאמצים את הטמפלייט או כותבים גרסה משלנו; (2) מי בעל
+            הבית של כל תיקייה; (3) מה בדיוק מסומן <code>confidential</code> אצלנו, וזו החלטה
+            שדורשת אישור ולא ניחוש; (4) איפה ה-repo יושב ומי מאשר pull requests בו.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="06-artemis.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>06 · ARTEMIS</strong>
+        </a>
+        <a href="08-memory-graphs.html">
+          <span class="label label--dim">הנושא הבא · רמה 03</span>
+          <strong>08 · זיכרון וגרפי ידע →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

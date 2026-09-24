@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARTEMIS: אייג'נטים על מובייל — בסיס ידע AI</title>
+<meta name="description" content="Google פתחה בקוד פתוח כלי שמאפשר לאייג'נט להפעיל טלפון אמיתי: רואה מסך, מקיש, גולל ומאמת. מתחבר דרך MCP, והמדדים מתויגים כדיווח יצרן.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 02 · בונים מערכות</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 06</span>
+      </nav>
+      <h1 style="max-width:22ch">אייג'נטים עם ידיים על מובייל</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">ARTEMIS · Android · MCP · accessibility + OCR + vision</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          Google פתחה בקוד פתוח כלי שמאפשר לאייג'נט להפעיל טלפון אמיתי כמו שאדם מפעיל אותו: לראות
+          את המסך, לזהות אלמנטים, להקיש, לגלול, לאמת את התוצאה ולדווח מה קרה. לא סימולציה של
+          מכשיר — מכשיר.
+        </p>
+        <p>
+          מבחינתנו זה מעניין בגלל החיבור: הכלי מתחבר לאייג'נט הקיים דרך MCP, ולכן אותו אייג'נט
+          שכותב קוד יכול גם לבדוק את האפליקציה שהוא כתב על מכשיר, ולהחזיר צילומי מסך ועקבות
+          כהוכחה.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>02 / Systems</dd>
+        <dt>זמן קריאה</dt><dd>8 min</dd>
+        <dt>מה צריך לדעת קודם</dt><dd><a href="03-agent-architecture.html">נושא 03</a></dd>
+        <dt>מצב אצלנו</dt><dd>לא הורץ</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            הפער הגדול ביותר באוטומציה של אייג'נטים הוא לא הקוד אלא <b>הידיים</b>. אייג'נט יכול
+            לכתוב מסך שלם באפליקציה ולא לדעת אם הכפתור בכלל נלחץ על מכשיר אמיתי. כל מה שאין לו
+            API — אפליקציה של ספק, טופס במובייל, זרימת הרשמה — נשאר מחוץ להישג ידו.
+          </p>
+          <p>
+            זה גם המקום שבו האוטונומיה מפסיקה להיות תיאורטית. אייג'נט שמקיש על מסך אמיתי יכול
+            לשלוח הודעה, לאשר תשלום או למחוק משהו. הדיאל מ<a href="03-agent-architecture.html">נושא 03</a>
+            נעשה כאן קריטי, ולא עניין של סגנון עבודה.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>accessibility tree · עץ נגישות</dt>
+            <dd>
+              המבנה הסמנטי שמערכת ההפעלה חושפת לכלי נגישות: אילו אלמנטים יש על המסך, מה הם, ומה
+              אפשר לעשות בהם. מדויק כשהוא קיים — ולא קיים בכל מסך.
+            </dd>
+          </div>
+          <div>
+            <dt>OCR</dt>
+            <dd>קריאת טקסט מתוך תמונת המסך. מה שמאפשר לזהות טקסט שלא נחשף בעץ הנגישות.</dd>
+          </div>
+          <div>
+            <dt>vision</dt>
+            <dd>
+              זיהוי חזותי של מה שנראה על המסך. השכבה שמכסה מה ששתי הקודמות מפספסות — אייקון בלי
+              תיאור, מסך שצויר כתמונה אחת.
+            </dd>
+          </div>
+          <div>
+            <dt>trace · עקבה</dt>
+            <dd>
+              רצף הצעדים שהאייג'נט ביצע, עם צילומי מסך ודיאגנוסטיקה. זה מה שהופך ריצה מ"עבד /
+              לא עבד" לראיה שאפשר לבדוק.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="how">איך זה עובד</h2>
+        <div class="prose">
+          <p>
+            הרעיון המרכזי בזיהוי האלמנטים הוא <b>שילוב של שלוש שכבות</b> ולא בחירה ביניהן: עץ
+            הנגישות, OCR ו-vision. לכל אחת מהן יש עיוורון משלה, והשילוב הוא מה שמאפשר לפעול גם
+            על מסכים שלא נבנו כדי להיות נגישים.
+          </p>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:2rem">
+          <div class="mod">
+            <span class="num">01</span>
+            <h3>לראות</h3>
+            <p>
+              צילום מסך ופענוח מה יש עליו, בשילוב שלוש השכבות. הפלט הוא רשימת אלמנטים שאפשר
+              לפעול עליהם, ולא תמונה.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">02</span>
+            <h3>לפעול</h3>
+            <p>
+              הקשה, גלילה, הקלדה — ברצף, לפי מטרה שנוסחה בשפה חופשית. הכלי מתרגם מטרה לצעדים על
+              המכשיר.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">03</span>
+            <h3>לאמת ולדווח</h3>
+            <p>
+              בדיקה שהתוצאה קרתה בפועל, וחזרה עם צילומי מסך, עקבה ודיאגנוסטיקה. זהו ה-verification
+              מ<a href="01-claude-md.html">נושא 01</a>, בגרסת מכשיר.
+            </p>
+          </div>
+        </div>
+
+        <h2 id="claims">מה מדווח, ומי מדווח</h2>
+        <div class="prose">
+          <p>
+            כל המספרים בטבלה הזאת הם <b>דיווח של Google</b>, לא מדידה שלנו. לא הרצנו את הכלי, ולכן
+            אין לנו מה להשוות אליו. הפרדת המדדים לטבלה נפרדת היא בכוונה: כך רואים בבירור מה
+            טענה של יצרן ומה ניסיון שלנו.
+          </p>
+        </div>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מדדים מדווחים <span class="claim">דיווח היצרן · לא מדידה עצמאית</span></caption>
+            <thead>
+              <tr><th>המדד</th><th>מה נמסר</th><th>מה זה אומר בפועל</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>השלמת משימות ב-AndroidWorld</td>
+                <td>99%+</td>
+                <td>ציון על benchmark מוגדר. לא תחזית להתנהגות באפליקציה שלנו</td>
+              </tr>
+              <tr>
+                <td>היקף המשימות</td>
+                <td>יותר מ-100 משימות מרובות צעדים</td>
+                <td>הכלי לא נבחן רק על לחיצה אחת — אלא על רצפים</td>
+              </tr>
+              <tr>
+                <td>זמן לצעד במצב Flash</td>
+                <td>בסביבות 3—5 שניות</td>
+                <td>זרימה של עשרים צעדים היא דקה עד שתיים. סביר לבדיקות, לא לזמן אמת</td>
+              </tr>
+              <tr>
+                <td>זיהוי אלמנטים</td>
+                <td>שילוב של עץ נגישות, OCR ו-vision</td>
+                <td>הגישה שמאפשרת לעבוד גם על מסכים לא נגישים</td>
+              </tr>
+              <tr>
+                <td>אינטגרציה</td>
+                <td>MCP, ו-SDK ל-Python</td>
+                <td>נכנס למערכת הקיימת כשרת MCP, בלי לכתוב הכל מחדש</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="connect">למה זה מתחבר</h2>
+        <div class="prose">
+          <p>
+            החיבור הוא דרך MCP, ולכן הכלי אינו קשור לסביבת פיתוח אחת. לפי מה שנמסר הוא מתחבר
+            לאייג'נטים ולעורכים הנפוצים — ביניהם Claude Code, Codex, Cursor, Windsurf, Antigravity
+            ו-VS Code. המשמעות המעשית: לא צריך לבחור כלי חדש כדי להשתמש בו, רק לחבר server.
+          </p>
+        </div>
+        <div class="note" style="margin-top:1.5rem">
+          <span class="label">מה זה אומר עלינו</span>
+          <p>
+            אם יש לנו אפליקציית מובייל או זרימה במובייל שנבדקת ידנית — זה המקום להתחיל. אם אין,
+            הערך העיקרי הוא עקרוני: זו הדגמה של אייג'נט שמאמת את עצמו מול המציאות, ולא מול
+            התיאור של עצמו.
+          </p>
+        </div>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מה לשקול לפני שמחברים אייג'נט למכשיר</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>להריץ על מכשיר אישי</td>
+                <td>לאייג'נט יש גישה לדואר, להודעות ולאפליקציות תשלום שעל אותו מכשיר</td>
+                <td>מכשיר בדיקות מוקדש, חשבון בדיקות, בלי אמצעי תשלום אמיתיים</td>
+              </tr>
+              <tr>
+                <td>לתת ציון benchmark כהבטחה</td>
+                <td>99%+ על AndroidWorld אינו 99% על האפליקציה שלנו</td>
+                <td>למדוד על חמש זרימות משלנו לפני שמישהו מסתמך על זה</td>
+              </tr>
+              <tr>
+                <td>לוותר על אישור לפעולות יוצאות</td>
+                <td>הקשה על "שלח" או "אשר" היא פעולה אמיתית בעולם</td>
+                <td>פעולות שמייצרות התחייבות — תמיד באישור אדם</td>
+              </tr>
+              <tr>
+                <td>לוותר על שמירת עקבות</td>
+                <td>כשריצה נכשלת אין דרך לדעת באיזה צעד ולמה</td>
+                <td>צילומי מסך ועקבה נשמרים לכל ריצה. זה כל הערך בבדיקות</td>
+              </tr>
+              <tr>
+                <td>לצפות לזמן אמת</td>
+                <td>3—5 שניות לצעד הן דקות לזרימה שלמה</td>
+                <td>לתכנן כבדיקה מתוזמנת או כשלב ב-CI, לא כתגובה לאירוע</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <ol class="check">
+          <li>
+            <b>יש לנו זרימת מובייל שנבדקת ידנית יותר מפעם בשבוע?</b>
+            <span>אם כן, זה מקרה שימוש מובהק. אם לא, זה עניין מקצועי ולא צורך.</span>
+          </li>
+          <li>
+            <b>יש מכשיר שאפשר להקריב?</b>
+            <span>מכשיר בדיקות עם חשבונות בדיקות. לא הטלפון של אף אחד.</span>
+          </li>
+          <li>
+            <b>מה קורה כשהאייג'נט מקיש על משהו שלא התכוון אליו?</b>
+            <span>צריכה להיות תשובה שלא מסתמכת על כך שזה לא יקרה. הוא יקיש.</span>
+          </li>
+          <li>
+            <b>מי קורא את העקבות?</b>
+            <span>כלי שמייצר מאות צילומי מסך שאף אחד לא בודק הוא רעש יקר, לא בדיקה.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>במה זה שונה מכלי אוטומציה ל-UI?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              בכלי אוטומציה קלאסי כותבים סלקטורים ומתחזקים אותם. כאן מגדירים מטרה בשפה חופשית,
+              והכלי מזהה את האלמנטים בעצמו — שילוב של עץ נגישות, OCR ו-vision. היתרון הוא בדיוק
+              בזה: מסך שמשתנה לא שובר סלקטור. החיסרון הוא שהתוצאה פחות דטרמיניסטית, ולכן העקבות
+              חשובות כל כך.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>זה מחליף QA?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              לא. זה מחליף את ההרצה החוזרת של אותה זרימה. ההחלטה מה בכלל צריך להיבדק, ומה נחשב
+              תקין, נשארת אנושית — ואת זה הכלי לא מתיימר לעשות.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>איך מתחילים, בפועל?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              בצורה הזהירה: מכשיר בדיקות, זרימה אחת שקיימת, הרצה במצב קריאה ואימות בלבד, ומעבר
+              לפעולות רק אחרי שהעקבות נראות נכונות. הצעדים המדויקים תלויים בתיעוד הרשמי — ראי את
+              בלוק המידע החסר למטה.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">ARTEMIS · Google</p>
+            <p class="source-note">הכלי בקוד פתוח והמדדים המדווחים. כתובת ה-repo והתיעוד להשלמה.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">AndroidWorld</p>
+            <p class="source-note">ה-benchmark שעליו מדווח הציון 99%+. הקישור להשלמה.</p>
+          </li>
+        </ul>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר</span>
+          <p>
+            <b>מה צריך להשלים לפני שמישהו מריץ:</b> כתובת ה-repo והרישיון, הוראות ההתקנה וחיבור
+            ה-MCP, דרישות המכשיר (גרסת Android, מצב מפתחים, ADB), מה נשמר בעקבות ואיפה, והאם יש
+            תמיכה ב-iOS. את כל אלה לא כתבתי מהזיכרון — שם פקודה שגוי בכלי שמפעיל מכשיר הוא לא
+            אי-נוחות.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="05-toolbox.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>05 · ארגז הכלים</strong>
+        </a>
+        <a href="07-company-brain.html">
+          <span class="label label--dim">הנושא הבא · רמה 03</span>
+          <strong>07 · Company Brain →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

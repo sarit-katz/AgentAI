@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLAUDE.md, plan mode ו-verification — בסיס ידע AI</title>
+<meta name="description" content="ששת העקרונות שלפיהם נכתב CLAUDE.md, למה plan mode הוא ברירת המחדל, מה סאב-אייג'נט באמת חוסך, ולמה אימות הוא הדבר שהכי לא עושים נכון.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== כותרת + תשובה ===== -->
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 01 · יסודות</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 01</span>
+      </nav>
+      <h1 style="max-width:20ch">תכנון, קונטקסט נקי ואימות</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">CLAUDE.md · plan mode · subagents · verification</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          הכוח עבר מהביצוע לתכנון ולאימות. המודל כבר כותב קוד סביר לבד, ולכן מה שמבדיל
+          עבודה טובה מעבודה בינונית הוא שני דברים: כמה מדויקת התכנית שנתת לו, ומי בודק את התוצאה
+          אחרי שהוא סיים.
+        </p>
+        <p>
+          העמוד הזה מתרגם את ששת העקרונות שלפיהם היוצר של Claude Code כותב את קובץ ההוראות שלו
+          לשיטת עבודה: מה נכנס ל-CLAUDE.md ומה לא, מתי נכנסים ל-plan mode, מה סאב-אייג'נט באמת חוסך,
+          ואיך נראה אימות אמיתי.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>01 / Foundations</dd>
+        <dt>זמן קריאה</dt><dd>11 min</dd>
+        <dt>מה צריך לדעת קודם</dt><dd>—</dd>
+        <dt>הבא בתור</dt><dd>02 / Context economy</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== גוף ===== -->
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            כשהביצוע היה החלק הקשה, איש טוב היה מי שכתב קוד מהר ונכון. זה כבר לא המצב. השלב הזה
+            נעשה זול ומהיר, והוא באחריות המודל. מה שנשאר באחריות שלנו זה שני הקצוות: מה בדיוק ביקשנו,
+            ואיך אנחנו יודעים שמה שחזר נכון.
+          </p>
+          <p>
+            הטעות הנפוצה היא לדלג על שני הקצוות האלה בדיוק כי הם לא מרגישים כמו עבודה. מבקשים משימה
+            בשורה אחת, מקבלים משהו שנראה סביר, קוראים אותו בעין, ומאשרים. זה עובד עד שזה לא עובד —
+            ואז מגלים את הבאג שבועיים אחר כך, אחרי שכבר נבנו עליו עוד שלושה דברים. שיטת העבודה כאן
+            בנויה כדי שזה לא יקרה: תכנית לפני בנייה, וגורם בודק נפרד לפני שחותמים.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>CLAUDE.md</dt>
+            <dd>
+              קובץ ההוראות שנטען אוטומטית בכל session בפרויקט. <b>הוראות בלבד.</b>
+              workflows שייכים ל-skills, לא לכאן — כל שורה בקובץ הזה משלמים עליה בכל שיחה.
+            </dd>
+          </div>
+          <div>
+            <dt>plan mode · מצב תכנון</dt>
+            <dd>
+              מצב שבו האייג'נט חוקר, קורא קבצים וכותב תכנית — ולא נוגע בכלום. ברירת המחדל לכל משימה
+              של שלושה צעדים ומעלה.
+            </dd>
+          </div>
+          <div>
+            <dt>subagent · סאב-אייג'נט</dt>
+            <dd>
+              אייג'נט משני עם משימה אחת צרה, שמחזיר רק את התשובה. הערך שלו הוא לא חלוקת עבודה אלא
+              <b>שמירת חלון הקונטקסט הראשי נקי</b> ממחקר ומבדיקות שאין סיבה שיישארו בו.
+            </dd>
+          </div>
+          <div>
+            <dt>verification · אימות</dt>
+            <dd>
+              בדיקה של התוצר בידי אייג'נט אחר, עם הגדרות אחרות, שלא ראה את השיחה המלאה אלא קונטקסט
+              נקודתי שהאייג'נט הראשי נתן לו. לא "תבדוק את עצמך".
+            </dd>
+          </div>
+          <div>
+            <dt>self-improvement loop · לולאת שיפור</dt>
+            <dd>
+              כל תיקון שאת עושה לאייג'נט הופך מיד לחוק כתוב, כדי שהטעות לא תחזור. אם תיקנת את אותו
+              דבר שלוש פעמים — הבעיה היא לא האייג'נט.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="how">איך זה עובד: ששת העקרונות</h2>
+        <div class="prose">
+          <p>
+            ששת הסעיפים האלה הם המבנה של קובץ ההוראות, לא רשימת טיפים. הסדר ביניהם משנה: הראשונים
+            קובעים איך מתחילים משימה, האחרונים קובעים איך סוגרים אותה.
+          </p>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:2.25rem">
+          <div class="mod">
+            <span class="num">01</span>
+            <h3>plan mode כברירת מחדל</h3>
+            <p>
+              כל משימה עם שלושה צעדים ומעלה מתחילה בתכנון, לא בבנייה. ומכיוון שהתכנון הוא עכשיו
+              עיקר הכוח שלנו — מתכננים שוב ושוב עד שהתכנית מושלמת מבחינתנו, ורק אז מריצים.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">02</span>
+            <h3>אסטרטגיית סאב-אייג'נטים</h3>
+            <p>
+              מחקר, בדיקות וניתוח במקביל עוברים לסאב-אייג'נט ולא נשארים בשיחה הראשית. משימה אחת
+              לכל סאב-אייג'נט. לבעיות קשות באמת — יותר סאב-אייג'נטים, לא דחיסה של הכל לתהליך אחד.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">03</span>
+            <h3>לולאת self-improvement</h3>
+            <p>
+              כל דבר שמתקנים הופך מיד לחוק כתוב, כדי שהמערכת תלמד אותו לפעם הבאה. זה מה שמונע
+              מאותה טעות לחזור בכל שיחה חדשה.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">04</span>
+            <h3>verification לפני שחותמים</h3>
+            <p>
+              הבודק הוא לא מי שעשה את העבודה, וההגדרות שלו שונות. הוא לא רואה את השיחה המלאה
+              אלא קונטקסט נקודתי שקיבל. זה הסעיף החדש יחסית, וזה הסעיף שהכי מדלגים עליו.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">05</span>
+            <h3>יעילות ואלגנטיות</h3>
+            <p>
+              לפני שינוי מורכב — עוצרים ושואלים אם יש דרך אלגנטית יותר. לא על כל שורה, ולא כדי
+              להתפלסף: רק לפני שינויים שיהיה יקר לבטל.
+            </p>
+          </div>
+          <div class="mod">
+            <span class="num">06</span>
+            <h3>תיקון תקלות באוטונומיה</h3>
+            <p>
+              במידת האפשר, לתת לאייג'נט לתקן דברים עד הסוף בלי התערבות אנושית באמצע. התערבות
+              באמצע מחזירה את הכל להתחלה.
+            </p>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:2.5rem">
+          <span class="label">הציטוט שמסביר את סעיף 04</span>
+          <p class="lat" dir="ltr" style="font-family:var(--font-disp);font-size:1.2rem;line-height:1.5;color:var(--ink)">
+            “Verification is probably the single most important thing that people do not get right.”
+          </p>
+          <p><span class="claim">בוריס צ'רני, אוגוסט · ציטוט מראיון</span></p>
+        </div>
+
+        <div class="prose" style="margin-top:2.5rem">
+          <h3>שני הבלוקים שמדלגים עליהם</h3>
+          <p>
+            מתחת לששת העקרונות יש שני חלקים קצרים שכמעט כולם מדלגים עליהם, והם מה שמחזיק אותם בפועל:
+          </p>
+          <ul>
+            <li><b>ניהול משימות</b> — תכנית כתובה, מעקב אחרי מה נעשה, ותיעוד לקחים. לא בראש, בקובץ.</li>
+            <li><b>שלושה עקרונות ליבה</b> — פשטות, אפס עצלות, שינוי מינימלי. שלושתם קיימים כדי לעצור
+              את אותו דחף: לעשות יותר ממה שביקשו, בדרך מסובכת יותר מהנדרש.</li>
+          </ul>
+        </div>
+
+        <h2 id="do">מה עושים בפועל</h2>
+        <div class="prose">
+          <p>
+            הסדר כאן הוא סדר ההרצה. אם יש לך רק עשר דקות — עשי את שלב 1 ואת שלב 4.
+          </p>
+        </div>
+
+        <div class="stack" style="margin-top:2rem">
+          <div>
+            <p class="label">שלב 01 · קובץ הוראות רזה</p>
+            <div class="prose">
+              <p>
+                CLAUDE.md מכיל הוראות, לא נהלים. אם משהו הוא תהליך עם שלבים — הוא skill. הבדיקה:
+                האם השורה הזאת נכונה בכל משימה בפרויקט? אם לא, היא לא שייכת לכאן.
+              </p>
+            </div>
+            <div class="code">
+              <div class="code__head">
+                <span class="code__label">CLAUDE.md</span>
+                <button class="copy" type="button">העתקה</button>
+              </div>
+<pre><code># CLAUDE.md
+
+## Commands
+- test:  npm test -- --silent
+- build: npm run build
+- lint:  npm run lint -- --quiet
+
+## Conventions
+- TypeScript strict. No `any`.
+- Minimal diffs: change what was asked, nothing else.
+- Errors are handled where they can be acted on.
+
+## Do not
+- Do not add dependencies without asking.
+- Do not reformat files you were not asked to touch.
+
+## Compact instructions
+When compacting, keep: the task, the file list already
+touched, and open decisions. Drop: tool output, logs.</code></pre>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">שלב 02 · plan mode לכל משימה מורכבת</p>
+            <div class="prose">
+              <p>
+                נכנסים ל-plan mode, מבקשים תכנית, קוראים אותה, ומתקנים. הסבב הזה זול — הוא לא נוגע
+                בקבצים. סבב תיקונים על קוד שנכתב מתכנית שגויה יקר בהרבה.
+              </p>
+            </div>
+            <div class="code">
+              <div class="code__head">
+                <span class="code__label">session</span>
+                <button class="copy" type="button">העתקה</button>
+              </div>
+<pre><code># נכנסים לתכנון לפני כל שינוי מרובה-צעדים
+/model          # קובעים מודל מראש — לכל אחד cache נפרד
+/effort         # גם עליו ה-cache ממופתח
+
+# ואז, בתוך plan mode:
+# "תכנן בלבד. אל תיגע בקבצים. החזר: קבצים שיושפעו,
+#  סדר הצעדים, ואיך נדע שכל צעד עבד."</code></pre>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">שלב 03 · סאב-אייג'נט לכל מה שלא צריך להישאר בשיחה</p>
+            <div class="prose">
+              <p>
+                מחקר, סריקת קבצים, הרצת בדיקות וניתוח מקביל — כולם בסאב-אייג'נט. רק התשובה חוזרת
+                לשיחה הראשית. זה גם מה שמאפשר להריץ סאב-אייג'נט על מודל זול יותר.
+              </p>
+            </div>
+            <div class="code">
+              <div class="code__head">
+                <span class="code__label">.claude/agents/researcher.md</span>
+                <button class="copy" type="button">העתקה</button>
+              </div>
+<pre><code>---
+name: researcher
+description: Read-only investigation. Returns findings only.
+model: haiku
+tools: Read, Grep, Glob
+---
+
+One question per run. Do not edit files.
+Return: the answer, the files it came from, and what you
+could not determine. No narration of the search itself.</code></pre>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">שלב 04 · בודק נפרד לפני שמאשרים</p>
+            <div class="prose">
+              <p>
+                האייג'נט הבודק מקבל את התוצר ואת הדרישה — לא את השיחה. ההגדרות שלו שונות מאלה של
+                מי שעשה את העבודה, וזה בכוונה: מי שכתב את הקוד כבר משוכנע שהוא נכון.
+              </p>
+            </div>
+            <div class="code">
+              <div class="code__head">
+                <span class="code__label">.claude/agents/verifier.md</span>
+                <button class="copy" type="button">העתקה</button>
+              </div>
+<pre><code>---
+name: verifier
+description: Adversarial review of a finished change.
+tools: Read, Grep, Glob, Bash
+---
+
+You did not write this code and you did not see the
+conversation. You get: the requirement, and the diff.
+
+Check, in this order:
+1. Does it do what was asked — no more, no less?
+2. Name a concrete input that breaks it.
+3. What did the change miss: tests, edge cases, callers?
+
+Report findings only. Do not fix anything.</code></pre>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">שלב 05 · כל תיקון הופך לחוק</p>
+            <div class="prose">
+              <p>
+                ברגע שתיקנת משהו, שורה אחת נכנסת לקובץ ההוראות. ההבדל בין צוות שמשתפר לצוות שמתקן
+                את אותו דבר כל שבוע הוא הרגל אחד: לכתוב את זה עכשיו, לא "אחר כך".
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מה נשבר בפועל, ומה עושים במקום</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CLAUDE.md שהופך לתיעוד</td>
+                <td>הקובץ גדל ל-300 שורות, נשלח בכל turn, והאייג'נט מתחיל להתעלם מחלקים ממנו</td>
+                <td>אינדקס קצר. נהלים ל-skills. להוסיף שורה — רק אם מוציאים אחת</td>
+              </tr>
+              <tr>
+                <td>אישור תכנית בקריאה מרפרפת</td>
+                <td>התכנית נראית סבירה, אבל היא פותרת בעיה אחרת. הבנייה נכונה — והתוצר לא מה שרצו</td>
+                <td>לקרוא את התכנית כמו שקוראים חוזה. שלוש סבבי תיקון על תכנית זולים מסבב אחד על קוד</td>
+              </tr>
+              <tr>
+                <td>"תבדוק את עצמך"</td>
+                <td>אותו קונטקסט מייצר אותה הטיה. האייג'נט מאשר את מה שכתב</td>
+                <td>אייג'נט בודק נפרד, הגדרות אחרות, בלי היסטוריית השיחה</td>
+              </tr>
+              <tr>
+                <td>סאב-אייג'נט עם כמה משימות</td>
+                <td>הקונטקסט שלו מתמלא, והתשובה שחוזרת מטושטשת</td>
+                <td>משימה אחת לכל סאב-אייג'נט. שלושה צרים עדיפים על אחד רחב</td>
+              </tr>
+              <tr>
+                <td>התערבות באמצע תיקון אוטונומי</td>
+                <td>האייג'נט זונח את המסלול שהתחיל, ומתחיל מחדש עם קונטקסט מבולבל</td>
+                <td>להגדיר מראש את הגבול, ואז לתת לו לסיים. לעצור רק אם הוא יוצא מהגבול</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <div class="prose">
+          <p>ארבע שאלות. אם התשובה לאחת מהן היא "לא" — שם נמצאת הבעיה, לא במודל.</p>
+        </div>
+        <ol class="check">
+          <li>
+            <b>יש תכנית כתובה למשימה הזאת?</b>
+            <span>אם התכנית קיימת רק בשיחה, היא תיעלם ב-<code>/compact</code> הראשון. תכנית נכתבת לקובץ.</span>
+          </li>
+          <li>
+            <b>מה בדיוק צריך להיכנס ל-CLAUDE.md, ומה ל-skill?</b>
+            <span>נכון בכל משימה בפרויקט → CLAUDE.md. תהליך עם שלבים → skill. נכון לכל החברה → מוח ארגוני (<a href="07-company-brain.html">נושא 07</a>).</span>
+          </li>
+          <li>
+            <b>מי הגורם שבודק, והאם הוא ראה את השיחה?</b>
+            <span>אם אין תשובה לשאלה הראשונה — אין אימות. אם התשובה לשנייה היא "כן" — זה לא אימות, זה אישור עצמי.</span>
+          </li>
+          <li>
+            <b>התיקון האחרון שעשית הפך לשורה בקובץ?</b>
+            <span>אם לא, תעשי אותו שוב. שלוש פעמים על אותו דבר זה סימן שחסרה הוראה, לא שחסרה סבלנות.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>plan mode בכל משימה? גם על תיקון של שורה?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              לא. הגבול הוא שלושה צעדים. תיקון שורה, שינוי טקסט, הוספת בדיקה אחת — ישר לעבודה.
+              הכלל קיים בשביל המשימות שנראות קטנות ומתגלות כשלושה קבצים וארבעה callers.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>סאב-אייג'נט לא מייקר את העבודה? זו עוד שיחה שלמה.</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              בדרך כלל להפך. המחקר עצמו עולה פעם אחת בשיחה של הסאב-אייג'נט, ולשיחה הראשית חוזרת
+              רק התשובה — שנשלחת מחדש בכל turn. בלי סאב-אייג'נט, כל הפלט של החיפוש נשלח שוב ושוב.
+              ההסבר המלא ב<a href="02-context-economy.html">נושא 02</a>.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>מה ההבדל בין CLAUDE.md ל-constitution.md?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              CLAUDE.md הוא הוראות עבודה לפרויקט: פקודות, קונבנציות, מה אסור. constitution.md הוא
+              הקשר: התפקיד, העדיפויות, פרטי הארגון ומה להתעלם ממנו. הראשון אומר <em>איך</em> לעבוד,
+              השני אומר <em>בשביל מי</em>. הפירוט ב<a href="03-agent-architecture.html">נושא 03</a>.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>איפה מוצאים פרומפטים מוכנים להתחיל מהם?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              בספריית הפרומפטים הרשמית:
+              <a class="lat" href="https://code.claude.com/docs/en/prompt-library" target="_blank" rel="noopener">code.claude.com/docs/en/prompt-library</a>.
+              זה גם מקור טוב ללמוד מבנה של פרומפט טוב, לא רק להעתיק ממנו.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">ראיון עם בוריס צ'רני, אוגוסט</p>
+            <p class="source-note">המקור לציטוט על verification. הקישור המדויק להשלמה — ראו <a href="sources.html">עמוד המקורות</a>.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">Claude Code prompt library · Anthropic</p>
+            <p class="source-note"><a class="lat" href="https://code.claude.com/docs/en/prompt-library" target="_blank" rel="noopener">code.claude.com/docs/en/prompt-library</a></p>
+          </li>
+        </ul>
+
+        <div class="note note--gap" style="margin-top:2.5rem">
+          <span class="label">מידע חסר</span>
+          <p>
+            הקישור לראיון שממנו הציטוט טרם אומת, והוא רשום כאן בלי כתובת בכוונה.
+            <b>מה צריך להשלים:</b> כתובת הראיון או ההקלטה, והתאריך המדויק — כדי שמי שקורא יוכל
+            לבדוק את ההקשר ולא רק את המשפט.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="index.html#map">
+          <span class="label label--dim">חזרה</span>
+          <strong>מפת השטח</strong>
+        </a>
+        <a href="02-context-economy.html">
+          <span class="label label--dim">הנושא הבא · רמה 01</span>
+          <strong>02 · כלכלת קונטקסט →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- חיפוש -->
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

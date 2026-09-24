@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בסיס ידע AI — חפיפה ותיעוד יכולות</title>
+<meta name="description" content="בסיס ידע לחפיפה בתחום ה-AI: שלוש רמות בגרות, מיסודות העבודה עם Claude Code ועד ידע ארגוני משותף לבני אדם ולאייג'נטים.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== Hero ===== -->
+  <section class="section hero">
+    <svg class="aufbau" viewBox="0 0 300 300" aria-hidden="true">
+      <defs>
+        <linearGradient id="orbit" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" style="stop-color:var(--violet-3)"/>
+          <stop offset="1" style="stop-color:var(--brand)"/>
+        </linearGradient>
+      </defs>
+      <circle cx="150" cy="150" r="146" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="150" cy="150" r="104" fill="none" stroke="url(#orbit)" stroke-width="19"
+              stroke-linecap="round" stroke-dasharray="400 260" transform="rotate(-42 150 150)"/>
+      <circle cx="150" cy="150" r="62" fill="none" stroke="url(#orbit)" stroke-width="11"
+              stroke-linecap="round" stroke-dasharray="205 190" transform="rotate(118 150 150)"/>
+      <circle cx="150" cy="150" r="21" fill="url(#orbit)"/>
+    </svg>
+    <div class="wrap">
+      <p class="mono">AI Knowledge Base · Chief of AI · Handover</p>
+      <div class="hero__grid">
+        <div>
+          <h1>הידע לא עובר בשיחה.<br>הוא עובר במערכת.</h1>
+          <p class="hero__lead">
+            זה בסיס הידע של התפקיד: מה למדתי על עבודה עם אייג'נטים, מה מכל זה עובד בפועל,
+            ומה עוד לא נבדק. שלוש רמות בגרות, תשעה נושאים, וכל עמוד נגמר במה שעושים מחר בבוקר.
+          </p>
+          <div class="flow" style="margin-top:2rem">
+            <a class="btn-pill" href="01-claude-md.html">להתחיל ברמה 1 →</a>
+            <a class="btn-ghost" href="capabilities.html">מה הוכח בפועל</a>
+          </div>
+        </div>
+        <aside class="hero__aside">
+          <dl class="facts" style="margin-top:0;border-top:0">
+            <dt>נושאים</dt><dd>09</dd>
+            <dt>רמות בגרות</dt><dd>03</dd>
+            <dt>זמן קריאה מלא</dt><dd>90 דקות</dd>
+            <dt>עודכן</dt><dd>22.09.2026</dd>
+            <dt>פורמט</dt><dd>HTML סטטי</dd>
+          </dl>
+          <p class="label label--dim" style="line-height:1.85">
+            האתר עצמו הוא הדגמה: אותם עקרונות שהוא מתאר — קונטקסט מנוהל, תוכן מתוחזק,
+            טענות מסומנות במקור — מיושמים בו.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== איך לקרוא ===== -->
+  <section class="section paper tight">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">01 / איך לקרוא את האתר</span>
+        <h2>שלוש רמות, בסדר הזה.</h2>
+        <p>אפשר להיכנס לכל עמוד ישירות, אבל הסדר לא שרירותי: כל רמה מניחה את מה שמעליה.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="mod">
+          <span class="num">01</span>
+          <h3>קודם יסודות, גם אם זה מרגיש מובן מאליו</h3>
+          <p>ניהול קונטקסט ותכנון הם לא טיפים. הם מה שקובע אם כל השאר עובד או מייצר בלגן יקר.</p>
+        </div>
+        <div class="mod">
+          <span class="num">02</span>
+          <h3>כל עמוד באותו מבנה</h3>
+          <p>תשובה בשלוש שורות, מושגי יסוד, איך זה עובד, מה עושים בפועל, מלכודות, ומדריך החלטה.</p>
+        </div>
+        <div class="mod">
+          <span class="num">03</span>
+          <h3>מה שלא נבדק — מסומן</h3>
+          <p>כל נתון שאינו מדידה שלנו מתויג במקורו, וכל פער מסומן כ«מידע חסר» עם השאלה המדויקת.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== המסלול ===== -->
+  <section class="section" id="map">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">02 / מפת השטח</span>
+        <h2>המסלול</h2>
+        <p>תשעה נושאים, מסודרים לפי מה שצריך לדעת קודם.</p>
+      </div>
+
+      <!-- רמה 1 -->
+      <div style="margin-bottom:4rem">
+        <div class="sec-head hairline-top" style="margin-bottom:1.75rem">
+          <span class="label">רמה 01 · יסודות · ~25 דקות</span>
+          <h3 style="font-size:clamp(1.4rem,2.4vw,2rem)">לעבוד נכון עם אייג'נט קודינג</h3>
+          <p>שתי היכולות שכל השאר נשען עליהן: לנהל את הקונטקסט של האייג'נט, ולנהל את מה שאת מבקשת ממנו.</p>
+        </div>
+        <div class="grid grid-3">
+          <a class="topic" href="01-claude-md.html">
+            <span class="topic__top"><span class="num">01</span><span class="tag tag--l1">Level 1</span></span>
+            <h3>תכנון, קונטקסט נקי ואימות</h3>
+            <p>ששת העקרונות של מי שבנה את Claude Code, ולמה אימות הוא הדבר שהכי לא עושים נכון.</p>
+            <span class="topic__meta"><span class="tag">11 דק'</span><span class="tag">subagents</span></span>
+          </a>
+          <a class="topic" href="02-context-economy.html">
+            <span class="topic__top"><span class="num">02</span><span class="tag tag--l1">Level 1</span></span>
+            <h3>כלכלת קונטקסט</h3>
+            <p>איך החיוב עובד באמת, 21 מנופים להוזלה, ולמה חלון גדול אינו שם נרדף לתוצאה טובה.</p>
+            <span class="topic__meta"><span class="tag">13 דק'</span><span class="tag">מחשבון חי</span></span>
+          </a>
+          <div class="mod" style="border-top-color:var(--line)">
+            <span class="num">→</span>
+            <h3>אחרי הרמה הזאת</h3>
+            <p>את יודעת למה turn 40 יקר, מתי ללחוץ <code>/clear</code>, ומי בודק את העבודה של האייג'נט.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- רמה 2 -->
+      <div style="margin-bottom:4rem">
+        <div class="sec-head hairline-top" style="margin-bottom:1.75rem">
+          <span class="label">רמה 02 · בונים מערכות · ~45 דקות</span>
+          <h3 style="font-size:clamp(1.4rem,2.4vw,2rem)">מאייג'נט בודד למערכת אייג'נטים</h3>
+          <p>מכאן זה ארכיטקטורה: כמה אייג'נטים מתמחים במקביל, אחד שמאחד, וגבול ברור בין מה שרץ לבד לבין מה שמחכה לאישור.</p>
+        </div>
+        <div class="grid grid-4">
+          <a class="topic" href="03-agent-architecture.html">
+            <span class="topic__top"><span class="num">03</span><span class="tag tag--l2">Level 2</span></span>
+            <h3>ארכיטקטורת multi-agent</h3>
+            <p>בניית chief-of-staff: סאב-אייג'נט לכל מקור, אייג'נט מאחד, ודיאל אוטונומיה.</p>
+            <span class="topic__meta"><span class="tag">14 דק'</span><span class="tag">דיאגרמה חיה</span></span>
+          </a>
+          <a class="topic" href="04-runtimes.html">
+            <span class="topic__top"><span class="num">04</span><span class="tag tag--l2">Level 2</span></span>
+            <h3>Agent runtimes</h3>
+            <p>Hermes Agent ו-nanoclaw: מה runtime נותן, ומה לבדוק לפני שמתחייבים לאחד.</p>
+            <span class="topic__meta"><span class="tag">10 דק'</span><span class="tag">במעקב</span></span>
+          </a>
+          <a class="topic" href="05-toolbox.html">
+            <span class="topic__top"><span class="num">05</span><span class="tag tag--l2">Level 2</span></span>
+            <h3>ארגז הכלים</h3>
+            <p>40 תוספות בחמש קטגוריות, והכלל היחיד שמונע כאוס: אחד בכל פעם.</p>
+            <span class="topic__meta"><span class="tag">9 דק'</span><span class="tag">40 פריטים</span></span>
+          </a>
+          <a class="topic" href="06-artemis.html">
+            <span class="topic__top"><span class="num">06</span><span class="tag tag--l2">Level 2</span></span>
+            <h3>ARTEMIS</h3>
+            <p>אייג'נט שמפעיל טלפון אמיתי כמו אדם, ומה זה פותח ל-QA ולבדיקות מובייל.</p>
+            <span class="topic__meta"><span class="tag">8 דק'</span><span class="tag">Google</span></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- רמה 3 -->
+      <div>
+        <div class="sec-head hairline-top" style="margin-bottom:1.75rem">
+          <span class="label">רמה 03 · רמה ארגונית · ~35 דקות</span>
+          <h3 style="font-size:clamp(1.4rem,2.4vw,2rem)">ידע משותף לבני אדם ולאייג'נטים</h3>
+          <p>כשאותן עובדות נדרשות בארבעה repos, שני אייג'נטים ועובד חדש — הבעיה הופכת להנדסת קונטקסט ארגונית.</p>
+        </div>
+        <div class="grid grid-3">
+          <a class="topic" href="07-company-brain.html">
+            <span class="topic__top"><span class="num">07</span><span class="tag tag--l3">Level 3</span></span>
+            <h3>Company Brain</h3>
+            <p>מקור ידע אחד, טבעות טעינה, חוזה ב-MANIFEST ו-validators שהופכים כללים לבדיקה שרצה.</p>
+            <span class="topic__meta"><span class="tag">16 דק'</span><span class="tag">סימולטור rings</span></span>
+          </a>
+          <a class="topic" href="08-memory-graphs.html">
+            <span class="topic__top"><span class="num">08</span><span class="tag tag--l3">Level 3</span></span>
+            <h3>זיכרון ארגוני וגרפי ידע</h3>
+            <p>Cognee, Graphiti ו-Graphify: כשהידע צריך גם קשרים וגם ציר זמן, ולא רק קבצים.</p>
+            <span class="topic__meta"><span class="tag">12 דק'</span><span class="tag">במעקב</span></span>
+          </a>
+          <a class="topic" href="09-ontology.html">
+            <span class="topic__top"><span class="num">09</span><span class="tag tag--l3">Level 3</span></span>
+            <h3>Fabric Ontology</h3>
+            <p>הארגון כגרף שאייג'נט מבין: ישויות, קשרים, ושכבת IQ מעל הדאטה.</p>
+            <span class="topic__meta"><span class="tag">7 דק'</span><span class="tag">Microsoft</span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== checklist ===== -->
+  <section class="section paper" id="progress">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">03 / מעקב</span>
+        <h2>מה כבר עשית</h2>
+        <p>הסימון נשמר בדפדפן הזה בלבד. הוא לא נשלח לשום מקום, והוא לא נעלם ברענון.</p>
+      </div>
+      <div class="grid grid-3">
+        <div>
+          <p class="label">רמה 01 · יסודות <span class="mono mono-dim" data-progress-badge="l1"></span></p>
+          <div data-checklist="l1"></div>
+        </div>
+        <div>
+          <p class="label">רמה 02 · מערכות <span class="mono mono-dim" data-progress-badge="l2"></span></p>
+          <div data-checklist="l2"></div>
+        </div>
+        <div>
+          <p class="label">רמה 03 · ארגוני <span class="mono mono-dim" data-progress-badge="l3"></span></p>
+          <div data-checklist="l3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== מה האתר מדגים ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">04 / הדגמות חיות</span>
+        <h2>לא רק הסבר. הדגמה.</h2>
+        <p>ארבעה רכיבים באתר עושים את מה שהטקסט מתאר, כדי שאפשר יהיה לראות את ההתנהגות ולא לקרוא עליה.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="decide">
+          <caption>הדגמות והיכולת שהן מוכיחות</caption>
+          <thead>
+            <tr><th>רכיב</th><th>איפה</th><th>מה רואים</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>מחשבון כלכלת קונטקסט</td>
+              <td><a href="02-context-economy.html#demo-cost">רמה 1 · עמוד 02</a></td>
+              <td>איך העלות המצטברת מתנהגת לפי מספר turns, ומה קורה לה כשמאפסים באמצע</td>
+            </tr>
+            <tr>
+              <td>דיאגרמת multi-agent ודיאל אוטונומיה</td>
+              <td><a href="03-agent-architecture.html#demo-agents">רמה 2 · עמוד 03</a></td>
+              <td>מה נכנס לקונטקסט של כל סאב-אייג'נט, ומה משתחרר לאוטונומיה בכל שלב</td>
+            </tr>
+            <tr>
+              <td>סימולטור טבעות טעינה</td>
+              <td><a href="07-company-brain.html#demo-rings">רמה 3 · עמוד 07</a></td>
+              <td>אילו קבצים באמת נטענים לכל משימה, ומה נשאר בחוץ — כולל מה שחסוי</td>
+            </tr>
+            <tr>
+              <td>עץ פרויקט נפתח</td>
+              <td><a href="03-agent-architecture.html#demo-tree">עמודים 03 ו-07</a></td>
+              <td>מבנה התיקיות, ומה נכנס לכל קובץ ולמה</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note hairline-top">
+        המחשבון עובד ביחידות טוקנים ובמחירים שמוגדרים בקובץ אחד, כדי שיהיה אפשר לעדכן אותם כשהמחירון משתנה.
+        אין בו נתון שמחושב מהראש.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== פערים ===== -->
+  <section class="section paper tight" id="gaps">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">05 / מה חסר</span>
+        <h2>הפערים, בגלוי</h2>
+        <p>אתר ידע שמסתיר את מה שלא נבדק גרוע מאתר ריק, כי אף אחד לא חושב לפקפק בו.</p>
+      </div>
+      <ol class="check">
+        <li>
+          <b>קישורי מקור חסרים</b>
+          <span>ל-39 מתוך 40 הכלים, ל-ARTEMIS, ל-Hermes Agent ול-nanoclaw יש שם ותיאור — לא כתובת. הרשימה המלאה של מה שחסר נמצאת ב<a href="sources.html#gaps">עמוד המקורות</a>, וההשלמה היא שורה אחת לכל פריט ב-<code>assets/site-data.js</code>.</span>
+        </li>
+        <li>
+          <b>מדדים שהם דיווח יצרן</b>
+          <span>כל המספרים של ARTEMIS הם דיווח של Google, לא מדידה עצמאית. הם מסומנים ככאלה בכל מקום שהם מופיעים.</span>
+        </li>
+        <li>
+          <b>מה הופעל אצלנו בפועל</b>
+          <span>עמוד <a href="capabilities.html">היכולות</a> מפריד בין מה שרץ אצלנו, מה שנבחן, ומה שרק נקרא. השורות שמסומנות שם כלא-מאומתות מחכות להשלמה שלך.</span>
+        </li>
+        <li>
+          <b>אנשי קשר וגבולות הרשאה</b>
+          <span>למי פונים בכל תחום, ומה מותר להוציא לצד שלישי — אלה שני הדברים שאתר חפיפה לא יכול לנחש.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section cta-end">
+    <div class="wrap">
+      <span class="label">06 / מכאן מתחילים</span>
+      <h2 style="max-width:24ch">הדרך הכי מהירה להיכנס: רמה 1, ואז לבנות משהו קטן.</h2>
+      <div class="flow" style="margin-top:2rem">
+        <a class="btn-pill" href="01-claude-md.html">רמה 1 · CLAUDE.md ו-plan mode →</a>
+        <a class="btn-ghost" href="glossary.html">מילון המונחים</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- חיפוש -->
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

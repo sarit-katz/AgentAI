@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>כלכלת קונטקסט — בסיס ידע AI</title>
+<meta name="description" content="איך החיוב של Claude Code עובד באמת, 21 מנופים להוזלה, ולמה חלון קונטקסט גדול אינו שם נרדף לתוצאה טובה. כולל מחשבון חי.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 01 · יסודות</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 02</span>
+      </nav>
+      <h1 style="max-width:18ch">כלכלת קונטקסט</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">tokens · prompt caching · context rot · /clear</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          שום דבר לא נשמר בצד השרת בין turns. כל turn שולח מחדש את כל השיחה שלפניו, ולכן turn 40
+          משלם על קריאה חוזרת של 39 ה-turns שלפניו. ההודעה שכתבת היא הדבר הקטן שם.
+        </p>
+        <p>
+          מכאן נגזרות שתי מסקנות שנראות סותרות ואינן: כדאי לאפס שיחות הרבה יותר מכפי שנוח,
+          וכדאי להשאיר בחלון פחות ממה שנכנס בו. האחת חוסכת כסף, השנייה משפרת את התוצאה.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>01 / Foundations</dd>
+        <dt>זמן קריאה</dt><dd>13 min</dd>
+        <dt>מה צריך לדעת קודם</dt><dd>01 / CLAUDE.md</dd>
+        <dt>הדגמה חיה</dt><dd>2 components</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            כמעט כל מי שעובד עם אייג'נט קודינג מניח בשקט שהשיחה "נשמרת" בצד השני, ושהודעה חדשה
+            היא בקשה קטנה. זה לא נכון. המודל חסר זיכרון בין בקשות, ולכן הכלי שולח לו מחדש את כל
+            ההיסטוריה בכל פעם. זה אומר שהעלות של שיחה אינה סכום ההודעות שלך, אלא <b>סכום מצטבר
+            של קריאות חוזרות</b> — וזה גדל ריבועית, לא לינארית.
+          </p>
+          <p>
+            החלק השני הוא לא כספי אלא איכותי. אפילו אם הטוקנים היו חינם, שיחה ארוכה מייצרת תוצאה
+            פחות טובה. הביצועים של המודל יורדים כשה-input מתארך, גם במשימות פשוטות, והירידה
+            מתחילה הרבה לפני הגבול המוצהר של חלון הקונטקסט. לכן הצעד שנראה כמו קמצנות —
+            <code>/clear</code> באמצע היום — הוא בעצם שיפור איכות.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>turn</dt>
+            <dd>סבב אחד של בקשה ותשובה. כל turn שולח מחדש את כל מה שקדם לו — שם נמצאת העלות.</dd>
+          </div>
+          <div>
+            <dt>context window · חלון קונטקסט</dt>
+            <dd>
+              כמות הטוקנים שהמודל קורא בבקשה אחת. גדול אינו שם נרדף לטוב: זה גבול היכולת,
+              לא יעד שצריך למלא.
+            </dd>
+          </div>
+          <div>
+            <dt>context rot · ריקבון קונטקסט</dt>
+            <dd>
+              ירידה בביצועי המודל כשה-input מתארך, גם במשימות פשוטות, ולפני שמגיעים לגבול המוצהר.
+            </dd>
+          </div>
+          <div>
+            <dt>prompt caching · מטמון פרומפט</dt>
+            <dd>
+              שמירת קידומת השיחה בצד הספק לזמן מוגבל, כדי לא לשלם מחיר מלא על קריאה חוזרת שלה.
+              המטמון ממופתח לפי <code>model</code> ולפי <code>effort</code> — שינוי של אחד מהם באמצע
+              שיחה מבטל אותו.
+            </dd>
+          </div>
+          <div>
+            <dt>compaction · צמצום</dt>
+            <dd>
+              החלפת ההיסטוריה בתקציר שלה. חוסך הרבה, אבל מאבד פרטים — ולכן חשוב להגדיר מראש
+              מה חייב לשרוד את הצמצום.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="how">איך זה עובד</h2>
+        <div class="prose">
+          <p>
+            שלוש עובדות שמסבירות כמעט כל שורה בחשבון:
+          </p>
+          <ol>
+            <li>אין מצב בצד השרת. כל turn הוא בקשה עומדת בפני עצמה שמכילה את כל השיחה.</li>
+            <li>מה שמצטבר זה לא רק ההודעות — זה פלט הכלים: קבצים שנקראו, תוצאות חיפוש, לוגים.
+              אלה בדרך כלל החלק הגדול.</li>
+            <li>המטמון מרכך את המחיר של הקידומת החוזרת, אבל לא מבטל אותו — ויש לו תוקף.</li>
+          </ol>
+          <p>
+            הפועל היוצא: אורך השיחה הוא הפרמטר הכי משמעותי, ולא גודל הבקשה. אותה משימה בדיוק,
+            ב-turn 5 מול turn 45, היא שתי עלויות שונות לגמרי.
+          </p>
+        </div>
+
+        <h2 id="demo">הדגמה חיה</h2>
+
+        <div class="demo" style="margin-top:1.75rem" id="demo-cost">
+          <div class="demo__head">
+            <div>
+              <span class="label">הדגמה 01</span>
+              <h3>מחשבון כלכלת קונטקסט</h3>
+            </div>
+            <span class="mono mono-dim" dir="ltr">tokens read</span>
+          </div>
+          <div class="demo__body" data-demo-cost>
+            <p class="muted">טוען…</p>
+          </div>
+          <div class="demo__foot">
+            המחשבון עובד ב<b>יחידות של טוקנים שנקראו</b>, לא בדולרים. סכום הטוקנים שנקראו הוא
+            המדד שמתנהג בדיוק כמו החשבון, בלי להצהיר על מחירון שלא אומת כאן.
+            הזיזו את <code>/clear</code> לטורן 20 וראו מה קורה לעמודות אחריו.
+          </div>
+        </div>
+
+        <div class="note note--gap" style="margin-top:1.5rem">
+          <span class="label">מידע חסר · מחירים</span>
+          <p>
+            אין באתר הזה אף מחיר בדולרים, ובכוונה: מחירון לא נכתב מהזיכרון. גם
+            <b>מקדם הקריאה מהמטמון</b> במחשבון הוא שדה שניתן לעריכה ולא קבוע מוצהר.
+            <b>מה צריך להשלים:</b> המחיר לטוקן לכל מודל שאתם מריצים, והיחס בין קריאה מהמטמון
+            לקריאה מלאה — מתוך תיעוד החיוב הרשמי. אחרי ההשלמה אפשר להכניס אותם לקובץ אחד
+            ולהצמיד אותם למחשבון.
+          </p>
+        </div>
+
+        <div class="demo" style="margin-top:2.5rem" id="demo-rot">
+          <div class="demo__head">
+            <div>
+              <span class="label">הדגמה 02</span>
+              <h3>למה חלון גדול לא מבטיח תוצאה טובה</h3>
+            </div>
+            <span class="claim">תרשים סכמטי · לא נתוני מדידה</span>
+          </div>
+          <div class="demo__body" data-demo-rot>
+            <p class="muted">טוען…</p>
+          </div>
+          <div class="demo__foot">
+            התרשים מראה <b>צורה</b>, לא מספרים: ביצועי המודל יורדים כשה-input גדל, והירידה מתחילה
+            הרבה לפני הגבול המוצהר של החלון. המקור:
+            <span class="lat" dir="ltr">Context Rot: How Increasing Input Tokens Impacts LLM Performance</span>,
+            מחקר Chroma מ-14.7.2025, שנמדד על 18 מודלים — ביניהם Claude 4, GPT-4.1 ו-Gemini 2.5.
+            <span class="claim">נתוני המחקר עצמם לא שוחזרו כאן</span>
+          </div>
+        </div>
+
+        <h2 id="do">מה עושים בפועל: 21 מנופים</h2>
+        <div class="prose">
+          <p>
+            הרשימה מחולקת לשניים לפי מה שהיא דורשת ממך: שתים-עשרה מהן הן פקודה בשיחה, ותשע
+            דורשות הגדרה חד-פעמית. ההגדרות משתלמות יותר, כי הן עובדות גם כשאת שוכחת.
+          </p>
+        </div>
+
+        <h3 style="margin-top:2.5rem">שתים-עשרה שהן רק פקודה</h3>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>פקודות, ומתי בדיוק להשתמש בכל אחת</caption>
+            <thead>
+              <tr><th>פקודה</th><th>מתי</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>/clear</code></td><td>בין משימות. מהרגע הזה הקונטקסט הקודם מפסיק להישלח. הפקודה הזולה ביותר שיש</td></tr>
+              <tr><td><code>/compact</code></td><td>לפני הפסקה, או כששלב נגמר — לא באמצע חשיבה</td></tr>
+              <tr><td><code>/rewind</code></td><td>לחתוך turns מהסוף. לא עולה כלום</td></tr>
+              <tr><td><code>/rename</code></td><td>לפני <code>/clear</code>, אם את רוצה למצוא את השיחה בחזרה</td></tr>
+              <tr><td><code>/loop</code></td><td>להריץ מ-session טרי, בטרמינל אחר — לא להעמיס על השיחה הנוכחית</td></tr>
+              <tr><td><code>/autocompact 200k</code></td><td>רשת הביטחון. חוזרת להיות רלוונטית על מודל עם חלון של מיליון</td></tr>
+              <tr><td><code>/context</code></td><td>להריץ בשיחה טרייה ולראות מה כבר נטען לפני שהתחלת</td></tr>
+              <tr><td><code>/mcp</code></td><td>לכבות כל server שלא צריך היום. server פתוח עולה גם בלי שימוש</td></tr>
+              <tr><td><code>@</code>-mention לקובץ</td><td>לצרף אותו, במקום להקליד את הנתיב ולתת לאייג'נט לחפש</td></tr>
+              <tr><td>להזכיר קובץ פעם אחת</td><td>אזכור שני מצרף עוד עותק של אותו קובץ</td></tr>
+              <tr><td><code>/model</code></td><td>לקבוע בהתחלה. לכל מודל cache נפרד</td></tr>
+              <tr><td><code>/effort</code></td><td>גם עליו ה-cache ממופתח — שינוי באמצע מבטל אותו</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:3rem">תשע שדורשות הגדרה</h3>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>הגדרות חד-פעמיות שממשיכות לעבוד לבד</caption>
+            <thead>
+              <tr><th>ההגדרה</th><th>מה היא עושה</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>CLAUDE.md</td><td>הוראות בלבד. workflows עוברים ל-skills, כדי שלא יישלחו בכל turn</td></tr>
+              <tr><td>Compact instructions</td><td>סעיף שמכריז מה לשמור כשמצמצמים — ובעיקר מה לזרוק</td></tr>
+              <tr><td>Quiet flags</td><td>לבקש את הגרסה השקטה של פקודה. פלט ארוך נשלח מחדש בכל turn</td></tr>
+              <tr><td>לשים אותן ב-CLAUDE.md</td><td>הפקודות שאת מריצה כל היום — כדי שלא יתגלו מחדש בכל שיחה</td></tr>
+              <tr><td>להריץ בסאב-אייג'נט</td><td>רק התשובה חוזרת. כל הדרך אליה לא נשארת בשיחה הראשית</td></tr>
+              <tr><td><code>model: haiku</code></td><td>שורה אחת בקובץ של הסאב-אייג'נט עצמו</td></tr>
+              <tr><td>Fast mode</td><td>להדליק בהתחלה, לא באמצע</td></tr>
+              <tr><td>Thinking off</td><td>ל-session של עבודה מכנית, בלי החלטות</td></tr>
+              <tr><td>מטמון לשעה</td><td>קיים על API key, לא על מנוי</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note" style="margin-top:2.5rem">
+          <span class="label">ההרגל היחיד שמשנה הכי הרבה</span>
+          <p>
+            להריץ <code>/context</code> פעם אחת בשיחה טרייה, לפני שכתבת מילה. רוב האנשים מגלים
+            שם שהם מתחילים כל שיחה עם קונטקסט נטען שהם לא ביקשו — MCP servers שפתוחים מאתמול,
+            קובץ הוראות שגדל, קבצים מצורפים מהפעם הקודמת. זו הבדיקה הזולה ביותר באתר הזה.
+          </p>
+        </div>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מה נשבר בפועל</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>להשתמש בשיחה אחת כל היום</td>
+                <td>העלות של turn 50 היא כמה מונים מזו של turn 5, והתוצאה גרועה יותר</td>
+                <td><code>/clear</code> בין משימות. שיחה לכל משימה, לא שיחה ליום</td>
+              </tr>
+              <tr>
+                <td><code>/compact</code> באמצע חשיבה</td>
+                <td>התקציר מאבד בדיוק את ההחלטות שטרם נכתבו לקובץ</td>
+                <td>לצמצם בסוף שלב, ולהגדיר compact instructions מראש</td>
+              </tr>
+              <tr>
+                <td>שינוי model או effort באמצע</td>
+                <td>המטמון ממופתח לפי שניהם — השינוי מבטל אותו והקידומת נקראת מחדש במחיר מלא</td>
+                <td>לקבוע בשורה הראשונה של השיחה</td>
+              </tr>
+              <tr>
+                <td>MCP servers פתוחים "ליתר ביטחון"</td>
+                <td>הגדרות הכלים נכנסות לקונטקסט בכל turn, גם אם אף כלי לא נקרא</td>
+                <td><code>/mcp</code> — לכבות את מה שלא צריך היום</td>
+              </tr>
+              <tr>
+                <td>להדביק לוג שלם לשיחה</td>
+                <td>הלוג יישלח שוב בכל turn עד סוף השיחה</td>
+                <td>לצרף קובץ ולבקש מהאייג'נט לחפש בו, או להעביר לסאב-אייג'נט</td>
+              </tr>
+              <tr>
+                <td>למלא חלון של מיליון כי הוא קיים</td>
+                <td>הדיוק יורד הרבה לפני הגבול. משלמים יותר ומקבלים פחות</td>
+                <td>להתייחס לחלון כגבול יכולת, לא כמכסה למימוש</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decide">מדריך החלטה</h2>
+        <div class="prose">
+          <p>ארבע שאלות. אם התשובה לשלוש הראשונות היא "לא יודעת" — תתחילי משם.</p>
+        </div>
+        <ol class="check">
+          <li>
+            <b>מה נטען אצלך בשיחה טרייה, לפני שכתבת מילה?</b>
+            <span><code>/context</code> עונה על זה בשנייה. כל מה שרשום שם משולם בכל turn של כל שיחה.</span>
+          </li>
+          <li>
+            <b>העבודה הזאת צריכה להישאר בשיחה הראשית?</b>
+            <span>מחקר, קריאת קבצים והרצת בדיקות — לא. הם עוברים לסאב-אייג'נט, ורק התשובה חוזרת.</span>
+          </li>
+          <li>
+            <b>מתי היה ה-<code>/clear</code> האחרון שלך?</b>
+            <span>אם התשובה היא "אתמול", זו הנקודה עם ההחזר הגבוה ביותר בכל הרשימה.</span>
+          </li>
+          <li>
+            <b>מה חייב לשרוד צמצום?</b>
+            <span>אם אין לך תשובה כתובה, ה-<code>/compact</code> יחליט במקומך. סעיף compact instructions פותר את זה פעם אחת.</span>
+          </li>
+        </ol>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אם יש מטמון, למה אורך השיחה עוד משנה?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              המטמון מוזיל את הקריאה החוזרת של הקידומת, הוא לא מבטל אותה. הקידומת גם ממשיכה לגדול,
+              וגם יש לתוקף שלה גבול. ומעל הכל: המטמון לא פותר את הצד האיכותי — קונטקסט ארוך שנקרא
+              מהמטמון עדיין קונטקסט ארוך, והדיוק עדיין יורד.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>מה ההבדל בין <code>/clear</code> ל-<code>/compact</code>?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              <code>/clear</code> מוחק — מה שהיה מפסיק להישלח לגמרי. <code>/compact</code> מחליף את
+              ההיסטוריה בתקציר שלה, כלומר משהו נשאר. הכלל המעשי: אם את עוברת למשימה אחרת —
+              <code>/clear</code>. אם את באמצע אותה משימה ארוכה וצריכה להמשיך — <code>/compact</code>.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>סאב-אייג'נט זה לא כפל עלות?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              יש לו עלות משלו, אבל היא חד-פעמית. מה שהוא מונע הוא הישנות: בלי סאב-אייג'נט,
+              כל פלט החיפוש נכנס לשיחה הראשית ונשלח מחדש בכל turn עד הסוף. הוסיפי לזה
+              <code>model: haiku</code> בקובץ שלו, וההפרש גדל.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>איפה המחירים באתר הזה?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              אין. המחשבון עובד ביחידות של טוקנים שנקראו, כי מחירון שנכתב מהזיכרון מסוכן יותר
+              מהיעדר מחירון: הוא נראה מדויק. כשהמחירים העדכניים יושלמו מתיעוד החיוב הרשמי,
+              אפשר להכניס אותם לקובץ אחד ולהצמיד אותם למחשבון — זה שינוי של כמה שורות.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">תיעוד החיוב של Claude Code · Anthropic</p>
+            <p class="source-note">המקור ל-21 המנופים ולעובדה שאין state בין turns. הקישור המדויק להשלמה.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">Context Rot · Chroma, 14.7.2025</p>
+            <p class="source-note">
+              <span class="lat" dir="ltr">Context Rot: How Increasing Input Tokens Impacts LLM Performance</span>
+              — 18 מודלים, כולל Claude 4, GPT-4.1 ו-Gemini 2.5. הקישור להשלמה.
+            </p>
+          </li>
+        </ul>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="01-claude-md.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>01 · תכנון, קונטקסט נקי ואימות</strong>
+        </a>
+        <a href="03-agent-architecture.html">
+          <span class="label label--dim">הנושא הבא · רמה 02</span>
+          <strong>03 · ארכיטקטורת multi-agent →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

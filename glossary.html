@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מילון מונחים — בסיס ידע AI</title>
+<meta name="description" content="כל המונחים שחוזרים באתר, עם תרגום והגדרה קצרה בעברית, וקישור לנושא שבו המונח נלמד לעומק.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html" aria-current="page">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">רוחבי · מילון מונחים</span>
+      </nav>
+      <h1 style="max-width:20ch">מילון מונחים</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">Glossary · one definition per term</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          כל מונח באתר מוגדר <b>במקום אחד</b>, וכל שאר העמודים מפנים לכאן. זה לא נספח נימוסין:
+          מרבית אי-ההבנות בנושא הזה הן ויכוח על מילה שלשני הצדדים יש לה משמעות אחרת —
+          <span dir="ltr" class="lat">context</span> ו-<span dir="ltr" class="lat">memory</span>
+          הם הדוגמאות הכי שכיחות.
+        </p>
+        <p>
+          לכל מונח יש הגדרה קצרה, המקבילה העברית כשיש כזאת שמישהו באמת משתמש בה, וקישור
+          לנושא שבו הוא נלמד לעומק. שדה הסינון עובד על שלושת השדות.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>מונחים</dt><dd>29</dd>
+        <dt>מקור</dt><dd><code class="lat">SITE.glossary</code></dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap">
+
+      <div class="sec-head">
+        <h2 id="terms">המונחים</h2>
+        <p>
+          מסודרים לפי הלטינית, כי כך הם מופיעים בפועל בקוד ובתיעוד. הקלדה בשדה מסננת מיד;
+          קישור מהחיפוש הכללי מדגיש את המונח שהגעת אליו.
+        </p>
+      </div>
+
+      <div data-glossary>
+        <p class="muted">
+          המילון נטען מ-<code class="lat">assets/site-data.js</code>. אם לא מופיע כאן דבר,
+          ה-JavaScript חסום בדפדפן.
+        </p>
+      </div>
+
+      <div class="note note--gap" style="margin-top:3rem">
+        <span class="label">מידע חסר</span>
+        <p>
+          <b>מה שאין:</b> חלק מהמונחים אין להם מקבילה עברית מקובלת, ולכן הם מופיעים באנגלית
+          עם הסבר בלבד — בכוונה, כדי לא להמציא מונח שאין לו שימוש.
+          <b>מה צריך להשלים:</b> (1) אם לארגון יש מילון מונחים רשמי, לאחד איתו במקום להחזיק שני
+          מילונים; (2) להוסיף מונחים שעולים בשיחות אצלנו ואינם כאן.
+        </p>
+      </div>
+
+      <div class="note" style="margin-top:1.5rem">
+        <span class="label">איך מוסיפים מונח</span>
+        <p>
+          רשומה אחת במערך <code class="lat">glossary</code> בקובץ
+          <code class="lat">assets/site-data.js</code> — <code class="lat">term</code>,
+          <code class="lat">he</code>, <code class="lat">def</code> ו-<code class="lat">topic</code>
+          (ה-<code class="lat">id</code> של הנושא). העמוד הזה והחיפוש מתעדכנים לבד, בלי לגעת
+          ב-HTML.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין עמודים">
+        <a href="capabilities.html">
+          <span class="label label--dim">← רוחבי</span>
+          <strong>מה הוכח בפועל</strong>
+        </a>
+        <a href="sources.html">
+          <span class="label label--dim">רוחבי</span>
+          <strong>כל המקורות →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>

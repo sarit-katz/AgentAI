@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent runtimes — בסיס ידע AI</title>
+<meta name="description" content="מה זה agent runtime, מה הוא מחליף בבנייה עצמית, ואיך בוחרים אחד: Hermes Agent ו-nanoclaw במעקב, עם מה שידוע ומה שלא.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito:wght@300..800&family=Rubik:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:,">
+<script src="assets/site-data.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header class="site-head">
+  <div class="site-head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">AI</span>
+      <span>
+        <span class="brand__name">בסיס ידע AI</span>
+        <span class="brand__sub">Handover &amp; Capabilities · 2026</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <a href="index.html">שער</a>
+      <a href="01-claude-md.html">01 יסודות</a>
+      <a href="03-agent-architecture.html">02 מערכות</a>
+      <a href="07-company-brain.html">03 ארגוני</a>
+      <a href="capabilities.html">יכולות</a>
+      <a href="glossary.html">מילון</a>
+      <a href="sources.html">מקורות</a>
+    </nav>
+    <div class="head-tools">
+      <button class="icon-btn" data-search-open aria-label="חיפוש באתר">חיפוש <kbd>/</kbd></button>
+      <button class="icon-btn" data-theme-toggle>כהה</button>
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-expanded="false" aria-label="תפריט">תפריט</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumbs label label--dim" aria-label="מיקום בעמוד">
+        <a href="index.html">שער</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html#map">רמה 02 · בונים מערכות</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">נושא 04</span>
+      </nav>
+      <h1 style="max-width:22ch">מי מריץ את האייג'נט בפועל</h1>
+      <p class="mono mono-dim" dir="ltr" style="margin:1rem 0 0">agent runtime · Hermes Agent · nanoclaw · lock-in</p>
+      <div class="answer" style="margin-top:2rem">
+        <p>
+          Runtime הוא השכבה שמריצה את האייג'נט: לופ ההרצה, הזיכרון, חיבור הכלים, הסאב-אייג'נטים
+          והדפדפן. אפשר להרכיב את כל אלה לבד — זה מה שעשינו בנושא 03 — ואפשר לקחת runtime שכבר
+          מחזיק אותם ביחד.
+        </p>
+        <p>
+          זו החלטה ארכיטקטונית ולא בחירת ספרייה, כי היא קובעת איפה יושב הזיכרון ואיך מוגדרים
+          האייג'נטים. החלפה בדיעבד היא כתיבה מחדש. לכן העמוד הזה הוא בעיקר <b>איך בוחנים</b>,
+          ולא המלצה.
+        </p>
+      </div>
+      <dl class="facts">
+        <dt>רמה</dt><dd>02 / Systems</dd>
+        <dt>זמן קריאה</dt><dd>10 min</dd>
+        <dt>מה צריך לדעת קודם</dt><dd><a href="03-agent-architecture.html">נושא 03</a></dd>
+        <dt>מצב</dt><dd>Assessing</dd>
+        <dt>עודכן</dt><dd>22.09.2026</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section hairline-top">
+    <div class="wrap doc">
+      <div>
+
+        <h2 id="why">למה זה חשוב</h2>
+        <div class="prose">
+          <p>
+            כל מערכת אייג'נטים שנבנית ידנית מגיעה לאותה נקודה: הלופ עובד, אבל עכשיו צריך זיכרון
+            שנשמר בין הרצות, עשרה חיבורי כלים שלא דורשים קוד גלוי לכל אחד, סאב-אייג'נטים שרצים
+            במקביל בלי לדרוך זה על זה, ודפדפן כדי להגיע למה שאין לו API. בשלב הזה כבר לא בונים
+            אייג'נט — בונים runtime. השאלה היא רק אם בכוונה.
+          </p>
+          <p>
+            הסיכון ההפוך אמיתי לא פחות. runtime צעיר קובע לך את מבנה הקבצים, את פורמט הזיכרון ואת
+            הדרך שבה מוגדר אייג'נט. אם הפרויקט נעזב בעוד שנה, החלק שנשאר לך הוא מה שכתבת בעצמך:
+            הפרומפטים, ה-constitution והכללים. לכן העיקר בבחירה הוא <b>עד כמה קל לצאת</b>.
+          </p>
+        </div>
+
+        <h2 id="terms">מושגי יסוד</h2>
+        <dl class="terms">
+          <div>
+            <dt>agent runtime</dt>
+            <dd>
+              השכבה שמריצה את האייג'נט: לופ ההרצה, ניהול ההיסטוריה, קריאות לכלים, החזרת שגיאות
+              לאייג'נט, והרצת סאב-אייג'נטים. לא המודל, ולא הפרומפט.
+            </dd>
+          </div>
+          <div>
+            <dt>memory layer · שכבת זיכרון</dt>
+            <dd>
+              איפה נשמר מה שהאייג'נט למד בין הרצות. קבצים, DB, או גרף — ראי
+              <a href="08-memory-graphs.html">נושא 08</a>. זה הרכיב שהכי קשה להעביר בין runtimes.
+            </dd>
+          </div>
+          <div>
+            <dt>browser tool · כלי דפדפן</dt>
+            <dd>
+              היכולת לפתוח דף, ללחוץ ולקרוא. מה שמאפשר להגיע למקומות בלי API — ובדיוק בגלל זה גם
+              הכלי שהכי כדאי להשאיר תחת אישור.
+            </dd>
+          </div>
+          <div>
+            <dt>lock-in · כבילה</dt>
+            <dd>
+              מה שנשאר תקוע ב-runtime אם עוברים ממנו. הפרומפטים וה-markdown עוברים בקלות; פורמט
+              הזיכרון והגדרות האייג'נטים — פחות.
+            </dd>
+          </div>
+        </dl>
+
+        <h2 id="watch">מה במעקב</h2>
+        <div class="prose">
+          <p>
+            שני ה-runtimes שנכנסו לרשימת המעקב שלנו. שניהם מסומנים לפי המצב האמיתי שלהם אצלנו,
+            ולא לפי כמה עניין יש סביבם.
+          </p>
+        </div>
+        <div id="radar" data-radar="04-runtimes.html" style="margin-top:1.75rem"></div>
+
+        <div class="note note--gap" style="margin-top:2rem">
+          <span class="label">מידע חסר · לפני כל החלטה</span>
+          <p>
+            על שני הפרויקטים האלה יש לנו תיאור יכולות ותחושת מומנטום — ולא יותר. <b>מה שחייב
+            להיות מלא לפני שמישהו בונה עליהם:</b> כתובת ה-repo, הרישיון, מי מתחזק, קצב הקומיטים,
+            האם יש גרסה מתויגת, מה מודל האבטחה של כלי הדפדפן, ובאיזה פורמט נשמר הזיכרון. על
+            nanoclaw אין לנו כרגע גם את זה. לא כתבתי כאן כתובות או מספרי גרסה מהזיכרון, וזו הסיבה
+            שהשורות האלה חסרות.
+          </p>
+        </div>
+
+        <h2 id="decide">איך בוחרים: ארבע שאלות</h2>
+        <ol class="check">
+          <li>
+            <b>מה הרכיב שאת באמת קונה?</b>
+            <span>אם התשובה היא "לופ ההרצה" — זה החלק הקל לכתוב לבד. אם התשובה היא זיכרון, orchestration של סאב-אייג'נטים או שכבת דפדפן — שם יש ערך אמיתי.</span>
+          </li>
+          <li>
+            <b>מה קורה אם הפרויקט נעזב?</b>
+            <span>לכתוב את התשובה במשפט אחד. אם המשפט הוא "נכתוב מחדש את כל הגדרות האייג'נטים", זו לא בחירה — זו הימור.</span>
+          </li>
+          <li>
+            <b>הזיכרון שלך שלך?</b>
+            <span>markdown ו-JSON בתיקייה שאת שולטת עליה עוברים לכל מקום. פורמט פנימי לא מתועד לא עובר.</span>
+          </li>
+          <li>
+            <b>מי מאשר פעולה שיוצאת לעולם?</b>
+            <span>runtime עם דפדפן וכלים יכול לפעול בשמך. הדיאל מ<a href="03-agent-architecture.html">נושא 03</a> צריך להיות נתמך בכלי עצמו, לא רק בכוונות שלך.</span>
+          </li>
+        </ol>
+
+        <h2 id="how">שלוש דרכים, ומה מתאים למה</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>לבנות, לקחת runtime, או להישאר בכלי הקודינג</caption>
+            <thead>
+              <tr><th>הגישה</th><th>מתאימה כש…</th><th>המחיר</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>להישאר ב-Claude Code עם skills ו-MCP</td>
+                <td>העבודה יוזמת על ידך, בשיחה, וההרצה המתוזמנת היא בונוס</td>
+                <td>אין orchestration אמיתי של אייג'נטים שרצים בלי אדם בלופ</td>
+              </tr>
+              <tr>
+                <td>להרכיב לבד: תיקייה, skills, סאב-אייג'נטים, cron</td>
+                <td>המערכת מוגדרת היטב ומעט משתנה — כמו ה-chief-of-staff מנושא 03</td>
+                <td>הזיכרון וההרצה הם עכשיו באחריותך. כל תקלה היא שלך</td>
+              </tr>
+              <tr>
+                <td>לאמץ agent runtime</td>
+                <td>צריך זיכרון מתמשך, הרבה כלים, ואייג'נטים שרצים במקביל בלי אדם</td>
+                <td>כבילה למבנה ולקצב הפיתוח של פרויקט חיצוני</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="traps">מלכודות</h2>
+        <div class="table-scroll">
+          <table class="decide">
+            <caption>מה נשבר בבחירת runtime</caption>
+            <thead>
+              <tr><th>המלכודת</th><th>מה קורה</th><th>מה לעשות</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>לבחור לפי כוכבים ב-GitHub</td>
+                <td>מומנטום הוא סיגנל על עניין, לא על יציבות או על התאמה למה שאת צריכה</td>
+                <td>לבדוק קומיטים בחודש האחרון, issues פתוחים, ומי עונה בהם</td>
+              </tr>
+              <tr>
+                <td>להעביר את המערכת כולה בבת אחת</td>
+                <td>אין דרך לדעת מה נשבר מהמעבר ומה היה שבור מקודם</td>
+                <td>סאב-אייג'נט אחד, שבוע, בהשוואה לגרסה הקיימת</td>
+              </tr>
+              <tr>
+                <td>לתת ל-runtime גם את הזיכרון הארגוני</td>
+                <td>הידע נכבל לכלי, וכשמחליפים כלי מאבדים אותו</td>
+                <td>הזיכרון הארגוני בקבצים תחת git — <a href="07-company-brain.html">נושא 07</a></td>
+              </tr>
+              <tr>
+                <td>דפדפן פתוח בלי אישורים</td>
+                <td>אייג'נט יכול למלא טופס, לשלוח, או לקנות בשמך</td>
+                <td>כלי דפדפן במצב קריאה בלבד עד שיש סיבה מוכחת לשנות</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="do">מה עושים בפועל</h2>
+        <div class="prose">
+          <p>
+            הבדיקה שאני ממליצה עליה היא לא POC ולא השוואת תכונות, אלא אותה משימה בשתי סביבות:
+            סאב-אייג'נט אחד קיים, אותו מקור, אותו פלט, שבוע. מה שמכריע הוא לא כמה מהר זה קם,
+            אלא כמה זמן לקח לתקן את התקלה הראשונה.
+          </p>
+        </div>
+
+        <div class="code" style="margin-top:1.75rem">
+          <div class="code__head">
+            <span class="code__label">runtime-eval.md — טופס הערכה</span>
+            <button class="copy" type="button">העתקה</button>
+          </div>
+<pre><code># Runtime evaluation: &lt;name&gt;
+
+repo:            &lt;url&gt;
+license:         &lt;spdx&gt;
+maintainers:     &lt;who, how many&gt;
+last release:    &lt;tag, date&gt;
+commits 30d:     &lt;n&gt;
+open issues:     &lt;n&gt; / answered: &lt;n&gt;
+
+## What it replaces for us
+- [ ] run loop
+- [ ] persistent memory
+- [ ] MCP / tool wiring
+- [ ] sub-agent orchestration
+- [ ] browser
+
+## Exit cost
+Memory format:   &lt;portable? documented?&gt;
+Agent defs:      &lt;markdown? proprietary?&gt;
+Rewrite if abandoned: &lt;one sentence&gt;
+
+## One-week test
+Task:            &lt;the existing sub-agent we ported&gt;
+Time to first run:   &lt;h&gt;
+Time to fix first bug: &lt;h&gt;   &lt;-- the number that matters
+Verdict:         adopt / keep watching / no</code></pre>
+        </div>
+
+        <h2 id="faq">שאלות שחוזרות</h2>
+        <div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אנחנו צריכים runtime עכשיו?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              לפי מה שנבנה עד כה — לא. המערכות שלנו יוזמות על ידי אדם או מתוזמנות ב-cron, ושתי
+              אלה עובדות בתיקייה עם skills. הסימן שיגיד שהגיע הזמן הוא אייג'נטים שצריכים לרוץ
+              במקביל, לאורך זמן, ולזכור אחד את השני בלי שאדם קורא ביניהם.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>Hermes Agent או nanoclaw?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              אין לי בסיס לענות על זה, ולא אנחש. על Hermes Agent יש תיאור יכולות ומומנטום; על
+              nanoclaw יש שם ברשימת המעקב. שניהם דורשים את הבדיקה שבטופס למעלה לפני שמישהו
+              מחליט.
+            </div></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>אם נאמץ runtime, מה קורה ל-CLAUDE.md ול-skills?</span>
+              <span class="faq-x" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><div>
+              הם החלק הנייד. הוראות, כללים ו-markdown עוברים כמעט כמו שהם, כי הם טקסט. זו סיבה
+              טובה להשקיע בהם דווקא — הם שורדים את החלפת הכלים, בניגוד לקוד הדבק.
+            </div></div></div>
+          </div>
+        </div>
+
+        <h2 id="sources">מקורות</h2>
+        <ul class="stack" style="list-style:none;padding:0;margin-top:1.5rem">
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">Hermes Agent</p>
+            <p class="source-note">כפי שנמסר: agent runtime עם זיכרון, MCP, סאב-אייג'נטים, דפדפן והתנהגות multi-agent. כתובת, רישיון ותיעוד להשלמה.</p>
+          </li>
+          <li class="hairline-top" style="padding-top:1rem">
+            <p class="label">nanoclaw</p>
+            <p class="source-note">נכנס למעקב, טרם נבדק. כל הפרטים להשלמה.</p>
+          </li>
+        </ul>
+
+      </div>
+
+      <aside class="toc" data-toc aria-label="תוכן העמוד">
+        <span class="label">בעמוד הזה</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <nav class="pager" aria-label="ניווט בין נושאים">
+        <a href="03-agent-architecture.html">
+          <span class="label label--dim">← הנושא הקודם</span>
+          <strong>03 · ארכיטקטורת multi-agent</strong>
+        </a>
+        <a href="05-toolbox.html">
+          <span class="label label--dim">הנושא הבא · רמה 02</span>
+          <strong>05 · ארגז הכלים →</strong>
+        </a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בסיס ידע AI</h3>
+      <p class="label label--dim" style="line-height:1.85">
+        תיעוד חפיפה ותיעוד יכולות. נבנה כאתר סטטי בלי build step,
+        כדי שיפתח מכל מקום — גם ישירות מהדיסק.
+      </p>
+    </div>
+    <div>
+      <p class="label">נושאים</p>
+      <ul>
+        <li><a href="01-claude-md.html">רמה 1 · יסודות</a></li>
+        <li><a href="03-agent-architecture.html">רמה 2 · מערכות</a></li>
+        <li><a href="07-company-brain.html">רמה 3 · ארגוני</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">רוחביים</p>
+      <ul>
+        <li><a href="capabilities.html">יכולות</a></li>
+        <li><a href="glossary.html">מילון מונחים</a></li>
+        <li><a href="sources.html">מקורות</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="search" data-search role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+  <div class="search__veil"></div>
+  <div class="search__panel">
+    <input class="search__input" id="site-search" name="q" type="search" placeholder="חיפוש בכל האתר, במילון ובארגז הכלים…" aria-label="שדה חיפוש">
+    <div class="search__results"></div>
+    <div class="search__foot">
+      <span class="label label--dim"><kbd>↑</kbd> <kbd>↓</kbd> מעבר</span>
+      <span class="label label--dim"><kbd>Enter</kbd> פתיחה</span>
+      <span class="label label--dim"><kbd>Esc</kbd> סגירה</span>
+    </div>
+  </div>
+</div>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>
