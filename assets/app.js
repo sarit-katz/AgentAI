@@ -1,7 +1,7 @@
 /* ============================================================
-   app.js — התנהגות גלובלית: theme, ניווט, חיפוש, אקורדיונים,
+   app.js - התנהגות גלובלית: theme, ניווט, חיפוש, אקורדיונים,
    העתקה, תוכן עניינים, checklist עם התקדמות.
-   בלי תלויות. בלי fetch — הכל עובד גם ב-file://
+   בלי תלויות. בלי fetch - הכל עובד גם ב-file://
    ============================================================ */
 (function () {
   'use strict';
@@ -13,7 +13,7 @@
 
   /* ---------- 1. Theme ---------- */
   function initTheme() {
-    // בהיר הוא ברירת המחדל של האתר, גם כשהמערכת מוגדרת כהה — הערכה הבהירה היא
+    // בהיר הוא ברירת המחדל של האתר, גם כשהמערכת מוגדרת כהה - הערכה הבהירה היא
     // השפה החזותית של האתר. כהה נכנס רק אם נבחר מפורשות. שתיהן נבדקו לניגודיות.
     var saved = LS.get('kb-theme', null);
     apply(saved === 'dark');
@@ -197,7 +197,7 @@
       var S = window.SITE;
       if (S) {
         (S.glossary || []).forEach(function (g) {
-          out.push({ title: g.term + (g.he ? ' — ' + g.he : ''), page: 'glossary.html', hash: '#g-' + slug(g.term), kind: 'מילון', text: g.def });
+          out.push({ title: g.term + (g.he ? ' - ' + g.he : ''), page: 'glossary.html', hash: '#g-' + slug(g.term), kind: 'מילון', text: g.def });
         });
         (S.radar || []).forEach(function (r) {
           out.push({ title: r.name, page: r.page, hash: '#radar', kind: 'במעקב', text: r.what + ' ' + r.why });

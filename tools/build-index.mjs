@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* ============================================================
-   build-index.mjs — מרענן את assets/search-index.js מתוך ה-HTML.
+   build-index.mjs - מרענן את assets/search-index.js מתוך ה-HTML.
 
    למה סקריפט ולא כתיבה ידנית: אינדקס חיפוש שמתחזקים ביד
    מתיישן בשקט. אחרי כל עריכת תוכן מריצים:
@@ -39,7 +39,7 @@ function toText(html) {
     .replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'")
     .replace(/&hellip;/g, '…')
-    .replace(/&mdash;/g, '—')
+    .replace(/&mdash;/g, '-')
     .replace(/&amp;/g, '&')
     .replace(/\s+/g, ' ')
     .trim();
@@ -117,7 +117,7 @@ for (const f of files) {
 const body = rows.map((r) => '  ' + JSON.stringify(r)).join(',\n');
 const out =
   '/* ============================================================\n' +
-  '   search-index.js — נוצר אוטומטית. אל תערכו ביד.\n' +
+  '   search-index.js - נוצר אוטומטית. אל תערכו ביד.\n' +
   '   מחדשים עם: node tools/build-index.mjs\n' +
   '   מונחי המילון, הרדאר וארגז הכלים נוספים בזמן ריצה\n' +
   '   מ-window.SITE (ראו app.js), ולכן אינם כאן.\n' +

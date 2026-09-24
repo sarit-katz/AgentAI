@@ -1,5 +1,5 @@
 /* ============================================================
-   site-data.js — נקודת ההרחבה של האתר.
+   site-data.js - נקודת ההרחבה של האתר.
    נטען כ-<script> רגיל (ולא ב-fetch) כדי שהאתר יעבוד גם ב-file://
    נושא חדש = עמוד HTML מהתבנית + רשומה אחת ב-SITE.topics.
    שדה url ריק = קישור שצריך להשלים. אין כאן כתובות מנוחשות.
@@ -53,7 +53,7 @@ window.SITE = {
     {
       id: 'runtimes', file: '04-runtimes.html', level: 'l2', num: '04',
       title: 'Agent runtimes: Hermes Agent ו-nanoclaw',
-      answer: 'Runtime הוא מה שמריץ את האייג\'נט בפועל: זיכרון, MCP, סאב-אייג\'נטים, דפדפן והתנהגות multi-agent במקום אחד. במקום להרכיב את כל אלה לבד, בוחרים runtime — וזו החלטה ארכיטקטונית שקשה להחליף אחר כך.',
+      answer: 'Runtime הוא מה שמריץ את האייג\'נט בפועל: זיכרון, MCP, סאב-אייג\'נטים, דפדפן והתנהגות multi-agent במקום אחד. במקום להרכיב את כל אלה לבד, בוחרים runtime - וזו החלטה ארכיטקטונית שקשה להחליף אחר כך.',
       read: '10 דקות', needs: 'agent-architecture',
       tags: ['runtime', 'Hermes Agent', 'nanoclaw', 'multi-agent']
     },
@@ -81,14 +81,14 @@ window.SITE = {
     {
       id: 'memory-graphs', file: '08-memory-graphs.html', level: 'l3', num: '08',
       title: 'זיכרון ארגוני וגרפי ידע: Cognee, Graphiti ו-Graphify',
-      answer: 'מוח ארגוני בקבצים נותן דטרמיניזם. גרף ידע נותן קשרים ותנועה בזמן. Cognee בונה זיכרון וגרף ומחבר דרך MCP; Graphiti מוסיף את ציר הזמן — מה היה נכון מתי; Graphify עושה את אותו דבר על הקוד והמסמכים, בפרסינג AST מקומי. שלושתם משלימים את ה-brain, לא מחליפים אותו.',
+      answer: 'מוח ארגוני בקבצים נותן דטרמיניזם. גרף ידע נותן קשרים ותנועה בזמן. Cognee בונה זיכרון וגרף ומחבר דרך MCP; Graphiti מוסיף את ציר הזמן - מה היה נכון מתי; Graphify עושה את אותו דבר על הקוד והמסמכים, בפרסינג AST מקומי. שלושתם משלימים את ה-brain, לא מחליפים אותו.',
       read: '13 דקות', needs: 'company-brain',
       tags: ['Cognee', 'Graphiti', 'Graphify', 'knowledge graph', 'MCP']
     },
     {
       id: 'ontology', file: '09-ontology.html', level: 'l3', num: '09',
       title: 'Fabric Ontology: הארגון כגרף שאייג\'נט מבין',
-      answer: 'רכיב ב-Microsoft Fabric שממפה ישויות וקשרים בעסק — מי מדבר עם מי, מי אחראי על מה, איך מתקבלות החלטות. לא רק מה יש בטבלאות, אלא איך המידע קשור.',
+      answer: 'רכיב ב-Microsoft Fabric שממפה ישויות וקשרים בעסק - מי מדבר עם מי, מי אחראי על מה, איך מתקבלות החלטות. לא רק מה יש בטבלאות, אלא איך המידע קשור.',
       read: '7 דקות', needs: 'company-brain',
       tags: ['Fabric', 'Ontology', 'IQ layer', 'Rayfin']
     }
@@ -103,12 +103,12 @@ window.SITE = {
     },
     {
       name: 'Graphiti', page: '08-memory-graphs.html', status: 'assessing',
-      what: 'Temporal Knowledge Graph לאייג\'נטים — גרף שמחזיק גם את ציר הזמן: מה היה נכון, מתי, ומה השתנה.',
-      why: 'חזק במיוחד לזיכרון ארגוני, כי עובדות בארגון לא נכונות לנצח — הן נכונות עד שמשהו השתנה.'
+      what: 'Temporal Knowledge Graph לאייג\'נטים - גרף שמחזיק גם את ציר הזמן: מה היה נכון, מתי, ומה השתנה.',
+      why: 'חזק במיוחד לזיכרון ארגוני, כי עובדות בארגון לא נכונות לנצח - הן נכונות עד שמשהו השתנה.'
     },
     {
       name: 'Graphify', page: '08-memory-graphs.html', status: 'assessing',
-      what: 'Skill שהופך codebase שלם — כולל docs, סכמות SQL, קונפיגים ו-PDF — לגרף ידע שאפשר לתחקר, בפרסינג AST מקומי ובלי vector store.',
+      what: 'Skill שהופך codebase שלם - כולל docs, סכמות SQL, קונפיגים ו-PDF - לגרף ידע שאפשר לתחקר, בפרסינג AST מקומי ובלי vector store.',
       why: 'זו השכבה שעונה על «מה יש בקוד ובמסמכים שלנו ואיך זה מחובר». פרויקט נפרד מ-Graphiti, למרות דמיון השם.'
     },
     {
@@ -123,14 +123,14 @@ window.SITE = {
     }
   ],
 
-  /* checklist לפי רמה — נשמר ב-localStorage */
+  /* checklist לפי רמה - נשמר ב-localStorage */
   checklists: {
     l1: [
       'הגדרתי CLAUDE.md עם הוראות בלבד, בלי workflows',
       'נכנסתי ל-plan mode בכל משימה של שלושה צעדים ומעלה',
       'העברתי מחקר ובדיקות לסאב-אייג\'נט נפרד',
       'הרצתי /context בשיחה טרייה כדי לראות מה נטען בכלל',
-      'הגדרתי compact instructions — מה לשמור כשמצמצמים',
+      'הגדרתי compact instructions - מה לשמור כשמצמצמים',
       'קבעתי model ו-effort בתחילת השיחה ולא באמצע'
     ],
     l2: [
@@ -138,7 +138,7 @@ window.SITE = {
       'כתבתי constitution.md עם תפקיד, עדיפויות ומה להתעלם ממנו',
       'חיברתי לפחות שני מקורות אמיתיים דרך MCP',
       'קראתי את הטיוטה הראשונה לפני שמשהו יצא לדרך',
-      'הגדרתי מה רץ לבד ומה מחכה לאישור — קטגוריה בכל פעם',
+      'הגדרתי מה רץ לבד ומה מחכה לאישור - קטגוריה בכל פעם',
       'תזמנתי הרצה אוטומטית רק אחרי שההרצות הידניות הוכיחו את עצמן'
     ],
     l3: [
@@ -169,7 +169,7 @@ window.SITE = {
     },
     {
       id: 'skills', title: 'הוספת skills', mono: 'ADD SKILLS',
-      note: 'ספריות skills ואייג\'נטים מתמחים — כולל הרשמיות של Anthropic.',
+      note: 'ספריות skills ואייג\'נטים מתמחים - כולל הרשמיות של Anthropic.',
       items: [
         { n: 9, name: 'taste-skill', what: 'לשפר את העיצוב', url: '' },
         { n: 10, name: 'anthropics skills', what: 'לעיין ב-skills הרשמיים', url: '' },
@@ -183,7 +183,7 @@ window.SITE = {
     },
     {
       id: 'context', title: 'שמירת קונטקסט', mono: 'KEEP THE CONTEXT',
-      note: 'זיכרון, מיפוי קוד, והעברת הקשר בין sessions — הקטגוריה שמשפיעה ישירות על עלות ואיכות.',
+      note: 'זיכרון, מיפוי קוד, והעברת הקשר בין sessions - הקטגוריה שמשפיעה ישירות על עלות ואיכות.',
       items: [
         { n: 17, name: 'planning-with-files', what: 'לשמור תכניות בקבצים', url: '' },
         { n: 18, name: 'claude-mem', what: 'להעביר קונטקסט בין sessions', url: '' },
@@ -226,7 +226,7 @@ window.SITE = {
   ],
 
   /* ספריות מומלצות. כל שורה כאן אומתה מול ה-README של ה-repo ב-22.09.2026:
-     כתובת, רישיון ופקודות ההתקנה הן ציטוט, לא זיכרון. מה שלא אומת — לא נכתב. */
+     כתובת, רישיון ופקודות ההתקנה הן ציטוט, לא זיכרון. מה שלא אומת - לא נכתב. */
   libraries: [
     {
       name: "ui-ux-pro-max",
@@ -242,7 +242,7 @@ window.SITE = {
         { label: "CLI", cmd: ["npm install -g ui-ux-pro-max-cli", "uipro init --ai claude"] }
       ],
       tags: ["skill", "design system", "a11y"],
-      note: "סקריפטי החיפוש דורשים Python 3, שאינו מותקן על המכונה הזאת — ולכן עבדתי לפי הכללים ולא לפי הסקריפטים. המספרים הם דיווח ה-repo, לא מדידה שלנו."
+      note: "סקריפטי החיפוש דורשים Python 3, שאינו מותקן על המכונה הזאת - ולכן עבדתי לפי הכללים ולא לפי הסקריפטים. המספרים הם דיווח ה-repo, לא מדידה שלנו."
     },
     {
       name: "planning-with-files",
@@ -251,7 +251,7 @@ window.SITE = {
       license: "MIT",
       cat: "תכנון וקונטקסט",
       state: "לא הורץ אצלנו",
-      what: "Skill שמחזיק את התכנון בקבצים על הדיסק — task_plan.md, findings.md ו-progress.md — במקום בתוך השיחה.",
+      what: "Skill שמחזיק את התכנון בקבצים על הדיסק - task_plan.md, findings.md ו-progress.md - במקום בתוך השיחה.",
       why: "זו התשובה המעשית ל-context rot ול-/clear: התכנית שורדת איפוס קונטקסט, compaction, קריסה וסגירת טרמינל. משימות מקבילות מקבלות תיקייה מבודדת בצורה .planning/YYYY-MM-DD-slug/ עם אותם שלושה קבצים, כך ששתי משימות לא דורכות זו על זו.",
       install: [
         { label: "Claude Code", cmd: ["/plugin marketplace add OthmanAdi/planning-with-files", "/plugin install planning-with-files@planning-with-files"] },
@@ -283,7 +283,7 @@ window.SITE = {
       cat: "זיכרון וגרף ידע",
       state: "בהערכה",
       what: "Framework לגרפי קונטקסט טמפורליים לאייג'נטים: כל עובדה מוחזקת עם חלון תוקף דו-זמני, ועם provenance שמחזיר אותה לאפיזודת המקור.",
-      why: "עובדות בארגון לא נכונות לנצח — הן נכונות עד שמשהו משתנה. זה הרכיב היחיד ברשימה שמודל הנתונים שלו מכיר בזה, וזה בדיוק מה שחסר בזיכרון ארגוני. תמיכה ב-Neo4j, FalkorDB ו-Amazon Neptune.",
+      why: "עובדות בארגון לא נכונות לנצח - הן נכונות עד שמשהו משתנה. זה הרכיב היחיד ברשימה שמודל הנתונים שלו מכיר בזה, וזה בדיוק מה שחסר בזיכרון ארגוני. תמיכה ב-Neo4j, FalkorDB ו-Amazon Neptune.",
       install: [
         { label: "Python", cmd: ["pip install graphiti-core"] }
       ],
@@ -297,29 +297,29 @@ window.SITE = {
       license: "Apache-2.0",
       cat: "זיכרון וגרף ידע",
       state: "לא הורץ אצלנו",
-      what: "Skill שממפה codebase שלם — קוד, docs, סכמות SQL, קונפיגים, PDF ותמונות — לגרף ידע שאפשר לתחקר. הפרסינג הוא AST מקומי ודטרמיניסטי, כל קשת בגרף מגיעה עם הסבר, ואין vector store.",
+      what: "Skill שממפה codebase שלם - קוד, docs, סכמות SQL, קונפיגים, PDF ותמונות - לגרף ידע שאפשר לתחקר. הפרסינג הוא AST מקומי ודטרמיניסטי, כל קשת בגרף מגיעה עם הסבר, ואין vector store.",
       why: "זה ההפך מאחזור וקטורי על הקוד: לא «מה דומה» אלא «מה קורא למה, ומה יישבר אם אשנה את זה». בחפיפה זו בדיוק השאלה של מי שמקבל repo שלא הוא כתב. עובד כ-skill ב-Claude Code, Cursor, Codex ו-Gemini CLI, וגם כ-MCP server.",
       install: [
         { label: "Python", cmd: ["pip install graphifyy", "graphify install"] },
         { label: "MCP · stdio", cmd: ["graphify ./raw --mcp"] }
       ],
       tags: ["skill", "knowledge graph", "AST", "MCP"],
-      note: "דורש Claude Code ו-Python 3.10+. פרויקט נפרד מ-graphiti של getzep, למרות דמיון השם. בהתקנה הידנית שב-README מופיעה כתובת אחרת (safishamsi/graphify) — כנראה הבעלים הקודם."
+      note: "דורש Claude Code ו-Python 3.10+. פרויקט נפרד מ-graphiti של getzep, למרות דמיון השם. בהתקנה הידנית שב-README מופיעה כתובת אחרת (safishamsi/graphify) - כנראה הבעלים הקודם."
     }
   ],
 
   glossary: [
     { term: 'plan mode', he: 'מצב תכנון', def: 'מצב שבו האייג\'נט חוקר וכותב תכנית בלי לגעת בקבצים. ברירת המחדל לכל משימה של שלושה צעדים ומעלה.', topic: 'claude-md' },
-    { term: 'CLAUDE.md', he: '', def: 'קובץ ההוראות שנטען לכל session בפרויקט. הוראות בלבד — workflows שייכים ל-skills.', topic: 'claude-md' },
-    { term: 'subagent', he: 'סאב-אייג\'נט', def: 'אייג\'נט משני עם משימה אחת צרה. הערך העיקרי שלו אינו חלוקת עבודה אלא שמירת הקונטקסט הראשי נקי — רק התשובה חוזרת.', topic: 'claude-md' },
+    { term: 'CLAUDE.md', he: '', def: 'קובץ ההוראות שנטען לכל session בפרויקט. הוראות בלבד - workflows שייכים ל-skills.', topic: 'claude-md' },
+    { term: 'subagent', he: 'סאב-אייג\'נט', def: 'אייג\'נט משני עם משימה אחת צרה. הערך העיקרי שלו אינו חלוקת עבודה אלא שמירת הקונטקסט הראשי נקי - רק התשובה חוזרת.', topic: 'claude-md' },
     { term: 'verification', he: 'אימות', def: 'בדיקה של התוצר בידי אייג\'נט אחר, שלא ראה את השיחה המלאה אלא קונטקסט נקודתי. לפי בוריס צ\'רני, הדבר שהכי לא עושים נכון.', topic: 'claude-md' },
-    { term: 'turn', he: 'תור', def: 'סבב אחד של בקשה ותשובה. כל turn שולח מחדש את כל השיחה שלפניו — שם נמצאת העלות.', topic: 'context-economy' },
+    { term: 'turn', he: 'תור', def: 'סבב אחד של בקשה ותשובה. כל turn שולח מחדש את כל השיחה שלפניו - שם נמצאת העלות.', topic: 'context-economy' },
     { term: 'context window', he: 'חלון קונטקסט', def: 'כמות הטוקנים שהמודל קורא בבקשה אחת. גדול אינו שם נרדף לטוב.', topic: 'context-economy' },
     { term: 'context rot', he: 'ריקבון קונטקסט', def: 'ירידה בביצועי המודל כשה-input מתארך, גם במשימות פשוטות, ולפני שמגיעים לגבול המוצהר של החלון.', topic: 'context-economy' },
     { term: 'prompt caching', he: 'מטמון פרומפט', def: 'שמירת קידומת השיחה בצד הספק לזמן מוגבל, כדי לא לשלם מחיר מלא על קריאה חוזרת. המטמון מוקצה לפי מודל ולפי effort.', topic: 'context-economy' },
     { term: '/clear', he: '', def: 'איפוס השיחה. מה שהיה לפניו מפסיק להישלח. הפקודה הזולה ביותר שיש.', topic: 'context-economy' },
     { term: '/compact', he: '', def: 'צמצום השיחה לתקציר. הזמן הנכון: סוף שלב, או לפני הפסקה.', topic: 'context-economy' },
-    { term: 'effort', he: 'רמת מאמץ', def: 'כמה המודל חושב לפני שהוא עונה. מוגדר בתחילת השיחה — המטמון מוקצה גם לפיו.', topic: 'context-economy' },
+    { term: 'effort', he: 'רמת מאמץ', def: 'כמה המודל חושב לפני שהוא עונה. מוגדר בתחילת השיחה - המטמון מוקצה גם לפיו.', topic: 'context-economy' },
     { term: 'MCP', he: 'Model Context Protocol', def: 'פרוטוקול שמחבר אייג\'נט לכלים ומקורות חיצוניים. כל server פתוח צורך קונטקסט, גם כשלא משתמשים בו.', topic: 'agent-architecture' },
     { term: 'synthesizer agent', he: 'אייג\'נט מאחד', def: 'האייג\'נט שמקבל את הפלט של כל הסאב-אייג\'נטים ומייצר ממנו תדריך אחד מתועדף.', topic: 'agent-architecture' },
     { term: 'autonomy dial', he: 'דיאל אוטונומיה', def: 'התפיסה שאוטונומיה אינה מפסק אלא דיאל: בשבוע הראשון כמעט הכל מחכה לאישור, ואחר כך משתחררת קטגוריה אחת בכל פעם.', topic: 'agent-architecture' },
@@ -336,7 +336,7 @@ window.SITE = {
     { term: 'agent runtime', he: 'סביבת ריצה לאייג\'נט', def: 'השכבה שמריצה את האייג\'נט בפועל: לופ ההרצה, זיכרון, חיבור כלים, סאב-אייג\'נטים ודפדפן. בחירת runtime היא החלטה ארכיטקטונית, לא בחירת ספרייה.', topic: 'runtimes' },
     { term: 'knowledge graph', he: 'גרף ידע', def: 'ייצוג של ישויות והקשרים ביניהן, במקום טקסט חופשי או טבלאות. מאפשר לשאול "מה מחובר למה" ולא רק "מה דומה למה".', topic: 'memory-graphs' },
     { term: 'temporal knowledge graph', he: 'גרף ידע עם ציר זמן', def: 'גרף ידע שמחזיק גם מתי כל עובדה הייתה נכונה. מאפשר להבדיל בין "זה השתנה" לבין "זה היה לא נכון מהתחלה".', topic: 'memory-graphs' },
-    { term: 'AST', he: 'עץ תחביר מופשט', def: 'הייצוג המבני של קוד אחרי פרסינג — פונקציות, קריאות, ייבואים — במקום טקסט חופשי. פרסינג AST הוא דטרמיניסטי: אותו קובץ מחזיר אותו גרף, בלי מודל באמצע שמנחש.', topic: 'memory-graphs' },
+    { term: 'AST', he: 'עץ תחביר מופשט', def: 'הייצוג המבני של קוד אחרי פרסינג - פונקציות, קריאות, ייבואים - במקום טקסט חופשי. פרסינג AST הוא דטרמיניסטי: אותו קובץ מחזיר אותו גרף, בלי מודל באמצע שמנחש.', topic: 'memory-graphs' },
     { term: 'organizational memory', he: 'זיכרון ארגוני', def: 'הידע שהארגון מחזיק מעבר לראש של אדם אחד: החלטות, הקשרים, ומה שנוסה ולא עבד. זה מה שנשבר כשאדם עובר תפקיד.', topic: 'memory-graphs' }
   ],
 
@@ -347,10 +347,10 @@ window.SITE = {
     { title: 'תיעוד החיוב של Claude Code', who: 'Anthropic', url: '', note: 'המקור ל-21 המנופים. קישור מדויק להשלמה.' },
     { title: 'ראיון עם בוריס צ\'רני, אוגוסט', who: 'Boris Cherny', url: '', note: 'המשפט על verification. קישור להשלמה.' },
     { title: 'ARTEMIS', who: 'Google', url: '', note: 'הכלי בקוד פתוח והמדדים המדווחים. כתובת ה-repo להשלמה.' },
-    { title: 'Microsoft Fabric — Ontology ושכבת IQ', who: 'Microsoft', url: '', note: 'תיעוד הרכיב. קישור להשלמה.' },
+    { title: 'Microsoft Fabric - Ontology ושכבת IQ', who: 'Microsoft', url: '', note: 'תיעוד הרכיב. קישור להשלמה.' },
     { title: 'הקלטת בנייה של Company Brain ב-Fabric', who: 'עם Aleksi Partanen', url: '', note: 'סרטון YouTube. קישור להשלמה.' },
     { title: 'cognee', who: 'topoteretes · Apache-2.0', url: 'https://github.com/topoteretes/cognee', note: 'פלטפורמת זיכרון וגרף ידע self-hosted, חושפת MCP server. אומת מול ה-README.' },
-    { title: 'graphiti', who: 'getzep · Apache-2.0', url: 'https://github.com/getzep/graphiti', note: 'גרף קונטקסט טמפורלי עם חלונות תוקף דו-זמניים; כולל mcp_server. 31,076 כוכבים לפי GitHub API ב-22.09.2026 — כלומר 31.1K שנמסר, אומת.' },
+    { title: 'graphiti', who: 'getzep · Apache-2.0', url: 'https://github.com/getzep/graphiti', note: 'גרף קונטקסט טמפורלי עם חלונות תוקף דו-זמניים; כולל mcp_server. 31,076 כוכבים לפי GitHub API ב-22.09.2026 - כלומר 31.1K שנמסר, אומת.' },
     { title: 'graphify', who: 'Graphify-Labs · Apache-2.0', url: 'https://github.com/Graphify-Labs/graphify', note: 'גרף ידע מקוד וממסמכים בפרסינג AST מקומי, בלי vector store; skill ו-MCP server. פרויקט נפרד מ-graphiti. 120,433 כוכבים לפי GitHub API ב-22.09.2026.' },
     { title: 'ui-ux-pro-max-skill', who: 'nextlevelbuilder · MIT', url: 'https://github.com/nextlevelbuilder/ui-ux-pro-max-skill', note: 'ה-checklist שלו הוא הבסיס לבדיקות העיצוב לפני מסירה באתר הזה: טוקנים, ניגודיות, focus states וארבעה רוחבי מסך. אתר הפרויקט: uupm.cc' },
     { title: 'planning-with-files', who: 'OthmanAdi · MIT', url: 'https://github.com/OthmanAdi/planning-with-files', note: 'תכנון מתמשך בקבצים: task_plan.md, findings.md, progress.md.' },
