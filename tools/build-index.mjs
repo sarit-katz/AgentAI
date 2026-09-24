@@ -56,7 +56,7 @@ function clip(s, n) {
 function kindOf(file) {
   const num = file.match(/^(\d\d)-/);
   if (num) return 'נושא ' + num[1];
-  if (file === 'index.html') return 'שער';
+  if (file === 'index.html') return 'דף הבית';
   return 'רוחבי';
 }
 
